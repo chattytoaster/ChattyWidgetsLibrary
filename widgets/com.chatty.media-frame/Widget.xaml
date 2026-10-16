@@ -10,7 +10,7 @@
     </Border.Effect>
     <Grid>
         <!-- Image View -->
-        <Image Source="{Binding CurrentImage}" Stretch="UniformToFill" Visibility="{Binding ImageVisibility}"/>
+        <Image Source="{Binding CurrentImage}" Stretch="{Binding StretchMode}" Visibility="{Binding ImageVisibility}"/>
 
         <!-- Placeholder when empty -->
         <Border Background="#C0101420" Padding="16"
@@ -21,9 +21,9 @@
                         <DropShadowEffect BlurRadius="12" Color="#38BDF8" Opacity="0.4"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <TextBlock Text="Перетащите сюда фото или видео" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"
+                <TextBlock Text="{Binding DragDropHintText, FallbackValue='Перетащите сюда фото или папку'}" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"
                            HorizontalAlignment="Center" Margin="0,0,0,2"/>
-                <TextBlock Text="или нажмите ПКМ для выбора файла" FontSize="11" Foreground="#94A3B8"
+                <TextBlock Text="{Binding DragDropSubText, FallbackValue='или укажите папку в настройках (ПКМ)'}" FontSize="11" Foreground="#94A3B8"
                            HorizontalAlignment="Center" Margin="0,0,0,10"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Border Background="#14FFFFFF" CornerRadius="6" Padding="6,2" Margin="2,0">
@@ -33,10 +33,13 @@
                         <TextBlock Text="PNG" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
                     </Border>
                     <Border Background="#14FFFFFF" CornerRadius="6" Padding="6,2" Margin="2,0">
-                        <TextBlock Text="GIF" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                        <TextBlock Text="WEBP" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
                     </Border>
                     <Border Background="#14FFFFFF" CornerRadius="6" Padding="6,2" Margin="2,0">
-                        <TextBlock Text="MP4" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                        <TextBlock Text="BMP" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                    </Border>
+                    <Border Background="#14FFFFFF" CornerRadius="6" Padding="6,2" Margin="2,0">
+                        <TextBlock Text="GIF" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
                     </Border>
                 </StackPanel>
             </StackPanel>
@@ -48,7 +51,7 @@
                 <TextBlock Text="{Binding Caption}" FontSize="10.5" Foreground="#CBD5E1" TextTrimming="CharacterEllipsis"
                            VerticalAlignment="Center" DockPanel.Dock="Left"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                    <Button Command="{Binding PrevCommand}" Content="◀" Width="22" Height="22" Background="#20FFFFFF"
+                    <Button Command="{Binding PrevCommand}" ToolTip="{Binding PrevTooltip}" Content="◀" Width="22" Height="22" Background="#20FFFFFF"
                             Foreground="#FFFFFF" FontSize="9" BorderThickness="0" Margin="0,0,4,0" Cursor="Hand">
                         <Button.Resources>
                             <Style TargetType="Border">
@@ -56,7 +59,7 @@
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <Button Command="{Binding NextCommand}" Content="▶" Width="22" Height="22" Background="#20FFFFFF"
+                    <Button Command="{Binding NextCommand}" ToolTip="{Binding NextTooltip}" Content="▶" Width="22" Height="22" Background="#20FFFFFF"
                             Foreground="#FFFFFF" FontSize="9" BorderThickness="0" Cursor="Hand">
                         <Button.Resources>
                             <Style TargetType="Border">

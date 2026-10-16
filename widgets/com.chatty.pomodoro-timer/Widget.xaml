@@ -19,7 +19,7 @@
         <!-- Top Nav Switcher Pill -->
         <Border Grid.Row="0" HorizontalAlignment="Center" Background="#10FFFFFF" CornerRadius="16" Padding="3" Margin="0,0,0,8">
             <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding SwitchModeCommand}" Content="🍅 Фокус (25м)" Background="#25FFFFFF" Foreground="#FFFFFF"
+                <Button Command="{Binding SetFocusModeCommand}" Content="{Binding FocusTabTitle}" Background="{Binding FocusTabBackground}" Foreground="{Binding FocusTabForeground}"
                         FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="10,4" Cursor="Hand">
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -27,7 +27,7 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Command="{Binding SwitchModeCommand}" Content="☕ Отдых (5м)" Background="Transparent" Foreground="#94A3B8"
+                <Button Command="{Binding SetBreakModeCommand}" Content="{Binding BreakTabTitle}" Background="{Binding BreakTabBackground}" Foreground="{Binding BreakTabForeground}"
                         FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="10,4" Cursor="Hand">
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -53,7 +53,7 @@
             </TextBlock>
             <ProgressBar Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="4" Width="180"
                          Foreground="{Binding AccentColor}" Background="#14FFFFFF" BorderThickness="0" Margin="0,6,0,4"/>
-            <TextBlock Text="🍅 Сессия активна" FontSize="10.5" Foreground="#64748B" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding StatusText}" FontSize="10.5" Foreground="#64748B" HorizontalAlignment="Center"/>
         </StackPanel>
 
         <!-- Controls -->
@@ -78,7 +78,7 @@
             </Button>
 
             <!-- Reset Button -->
-            <Button Grid.Column="2" Command="{Binding ResetCommand}" Content="Сброс"
+            <Button Grid.Column="2" Command="{Binding ResetCommand}" Content="{Binding ResetButtonText}"
                     Background="#14FFFFFF" Foreground="#94A3B8" FontSize="12" FontWeight="SemiBold" Height="32" BorderThickness="0" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="Border">

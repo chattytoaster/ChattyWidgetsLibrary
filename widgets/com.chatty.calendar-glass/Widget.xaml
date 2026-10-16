@@ -29,7 +29,7 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Command="{Binding TodayCommand}" Content="Сегодня" Background="#266366F1" BorderBrush="#506366F1"
+                <Button Command="{Binding TodayCommand}" Content="{Binding TodayButtonText}" Background="#266366F1" BorderBrush="#506366F1"
                         BorderThickness="1" Foreground="#818CF8" FontSize="10.5" FontWeight="SemiBold" Padding="8,3"
                         Margin="4,0" Cursor="Hand">
                     <Button.Resources>
@@ -50,21 +50,25 @@
         </DockPanel>
 
         <!-- Weekdays Header Row -->
-        <UniformGrid Grid.Row="1" Columns="7" Margin="0,0,0,6">
-            <TextBlock Text="Пн" FontSize="11" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
-            <TextBlock Text="Вт" FontSize="11" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
-            <TextBlock Text="Ср" FontSize="11" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
-            <TextBlock Text="Чт" FontSize="11" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
-            <TextBlock Text="Пт" FontSize="11" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
-            <TextBlock Text="Сб" FontSize="11" FontWeight="SemiBold" Foreground="#FDA4AF" HorizontalAlignment="Center"/>
-            <TextBlock Text="Вс" FontSize="11" FontWeight="SemiBold" Foreground="#FDA4AF" HorizontalAlignment="Center"/>
-        </UniformGrid>
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding WeekHeaders}" Margin="0,0,0,6">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding ColumnCount}"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Text}" FontSize="11" FontWeight="SemiBold"
+                               Foreground="{Binding FgColor}" HorizontalAlignment="Center"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <!-- Days Grid -->
         <ItemsControl Grid.Row="2" ItemsSource="{Binding Days}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="7"/>
+                    <UniformGrid Columns="{Binding ColumnCount}"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -80,7 +84,7 @@
         <!-- Footer / Today Status -->
         <Border Grid.Row="3" BorderBrush="#14FFFFFF" BorderThickness="0,1,0,0" Padding="0,6,0,0" Margin="0,6,0,0">
             <DockPanel>
-                <TextBlock Text="📅 Сегодня:" FontSize="10.5" Foreground="#64748B" DockPanel.Dock="Left"/>
+                <TextBlock Text="{Binding TodayLabel}" FontSize="10.5" Foreground="#64748B" DockPanel.Dock="Left"/>
                 <TextBlock Text="{Binding TodayFull}" FontSize="11" FontWeight="SemiBold" Foreground="#38BDF8"
                            HorizontalAlignment="Right" DockPanel.Dock="Right"/>
             </DockPanel>

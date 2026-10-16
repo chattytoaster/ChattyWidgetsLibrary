@@ -25,19 +25,19 @@
                     </TextBlock.Effect>
                 </TextBlock>
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="GPU ENGINE" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                    <TextBlock Text="{Binding WidgetTitle, FallbackValue='GPU ENGINE'}" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
                     <TextBlock Text="{Binding GpuName}" FontSize="10" Foreground="#94A3B8" MaxWidth="170"
                                TextTrimming="CharacterEllipsis"/>
                 </StackPanel>
             </StackPanel>
 
             <!-- Right: Temp Badge -->
-            <Border HorizontalAlignment="Right" DockPanel.Dock="Right" Background="#26EF4444" BorderBrush="#40EF4444"
+            <Border HorizontalAlignment="Right" DockPanel.Dock="Right" Background="{Binding AlertBadgeBackground, FallbackValue='#26EF4444'}" BorderBrush="{Binding AlertBadgeBorderBrush, FallbackValue='#40EF4444'}"
                     BorderThickness="1" CornerRadius="8" Padding="7,3" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="🔥 " FontSize="11" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding GpuTemp, StringFormat='{}{0:0}°C'}" FontSize="11" FontWeight="SemiBold"
-                               Foreground="#F87171" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding AlertIcon, FallbackValue='🔥 '}" FontSize="11" VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding FormattedTemp, FallbackValue='0°C'}" FontSize="11" FontWeight="SemiBold"
+                               Foreground="{Binding AlertTextColor, FallbackValue='#F87171'}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Border>
         </DockPanel>
@@ -59,11 +59,11 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <DockPanel Grid.Row="0">
-                        <TextBlock Text="ЗАГРУЗКА" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
+                        <TextBlock Text="{Binding CoreLoadLabel, FallbackValue='ЗАГРУЗКА'}" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
                         <TextBlock Text="%" FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
                     </DockPanel>
-                    <TextBlock Grid.Row="1" Text="{Binding GpuPercent, StringFormat='{}{0:0}%'}" FontSize="18" FontWeight="Bold"
-                               Foreground="#10B981" Margin="0,4,0,6"/>
+                    <TextBlock Grid.Row="1" Text="{Binding FormattedCoreLoad, FallbackValue='0%'}" FontSize="18" FontWeight="Bold"
+                               Foreground="{Binding CoreLoadBrush, FallbackValue='#10B981'}" Margin="0,4,0,6"/>
                     <ProgressBar Grid.Row="2" Value="{Binding GpuPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="5"
                                  Background="#14FFFFFF" BorderThickness="0">
                         <ProgressBar.Foreground>
@@ -85,11 +85,11 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <DockPanel Grid.Row="0">
-                        <TextBlock Text="ВИДЕОПАМЯТЬ" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
-                        <TextBlock Text="{Binding GpuMemoryPercent, StringFormat='{}{0:0}%'}" FontSize="10" Foreground="#94A3B8" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+                        <TextBlock Text="{Binding VideoRamLabel, FallbackValue='ВИДЕОПАМЯТЬ'}" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
+                        <TextBlock Text="{Binding VramSubText}" FontSize="10" Foreground="#94A3B8" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
                     </DockPanel>
-                    <TextBlock Grid.Row="1" Text="{Binding GpuMemoryPercent, StringFormat='{}{0:0}%'}" FontSize="18" FontWeight="Bold"
-                               Foreground="#38BDF8" Margin="0,4,0,6"/>
+                    <TextBlock Grid.Row="1" Text="{Binding VramDisplayText, FallbackValue='0 GB'}" FontSize="17" FontWeight="Bold"
+                               Foreground="{Binding VramBrush, FallbackValue='#38BDF8'}" Margin="0,4,0,6"/>
                     <ProgressBar Grid.Row="2" Value="{Binding GpuMemoryPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="5"
                                  Background="#14FFFFFF" BorderThickness="0">
                         <ProgressBar.Foreground>
@@ -106,8 +106,8 @@
         <!-- Footer Info -->
         <Border Grid.Row="2" BorderBrush="#14FFFFFF" BorderThickness="0,1,0,0" Padding="0,8,0,0">
             <DockPanel>
-                <TextBlock Text="DirectX / DWM Hardware" FontSize="10" Foreground="#64748B" DockPanel.Dock="Left"/>
-                <TextBlock Text="Память активна" FontSize="10" Foreground="#64748B" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+                <TextBlock Text="{Binding HardwareDwmLabel, FallbackValue='DirectX / DWM Hardware'}" FontSize="10" Foreground="#64748B" DockPanel.Dock="Left"/>
+                <TextBlock Text="{Binding AlertStatusText, FallbackValue='Память активна'}" FontSize="10" Foreground="#64748B" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
             </DockPanel>
         </Border>
     </Grid>

@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ChattyWidgets Weather Card International & Settings Specification",
+  "widgetId": "com.chatty.weather-card",
+  "version": "1.2.0",
+  "customSettings": {
+    "weatherCity": {
+      "type": "string",
+      "defaultRu": "Москва",
+      "defaultEn": "London",
+      "description": "User-selected or searched city name displayed in the widget header pill."
+    },
+    "weatherLat": {
+      "type": "number",
+      "defaultRu": "55.7558",
+      "defaultEn": "51.5074",
+      "description": "Geographical latitude (-90.0 to 90.0) formatted with invariant culture."
+    },
+    "weatherLon": {
+      "type": "number",
+      "defaultRu": "37.6173",
+      "defaultEn": "-0.1278",
+      "description": "Geographical longitude (-180.0 to 180.0) formatted with invariant culture."
+    },
+    "weatherCountry": {
+      "type": "string",
+      "defaultRu": "RU",
+      "defaultEn": "GB",
+      "description": "ISO 3166-1 alpha-2 country code."
+    },
+    "weatherTimezone": {
+      "type": "string",
+      "defaultRu": "Europe/Moscow",
+      "defaultEn": "Europe/London",
+      "description": "IANA timezone string for the location, or 'auto' for Open-Meteo auto-detection."
+    },
+    "weatherUnitTemp": {
+      "type": "string",
+      "enum": ["C", "F"],
+      "default": "C",
+      "description": "Temperature display unit: Celsius ('C') or Fahrenheit ('F')."
+    },
+    "weatherUnitWind": {
+      "type": "string",
+      "enum": ["ms", "kmh", "mph"],
+      "defaultRu": "ms",
+      "defaultEn": "kmh",
+      "description": "Wind speed unit: meters per second ('ms'), kilometers per hour ('kmh'), or miles per hour ('mph')."
+    },
+    "weatherUnitPressure": {
+      "type": "string",
+      "enum": ["mmhg", "hpa"],
+      "defaultRu": "mmhg",
+      "defaultEn": "hpa",
+      "description": "Atmospheric pressure unit: millimeters of mercury ('mmhg') or hectopascals ('hpa')."
+    },
+    "weatherRefreshInterval": {
+      "type": "integer",
+      "enum": [5, 10, 15, 30, 60],
+      "default": 15,
+      "description": "Background auto-refresh interval in minutes."
+    },
+    "weatherIsManual": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if coordinates were entered manually rather than selected from city presets/search."
+    }
+  },
+  "geocodingApi": {
+    "provider": "Open-Meteo Free Geocoding API",
+    "endpoint": "https://geocoding-api.open-meteo.com/v1/search",
+    "queryParams": {
+      "name": "{query}",
+      "count": 6,
+      "language": "{ru|en}",
+      "format": "json"
+    },
+    "requiresApiKey": false,
+    "rateLimit": "Unlimited for non-commercial desktop widgets"
+  },
+  "forecastApi": {
+    "provider": "Open-Meteo Forecast API",
+    "endpoint": "https://api.open-meteo.com/v1/forecast",
+    "queryParams": {
+      "latitude": "{weatherLat}",
+      "longitude": "{weatherLon}",
+      "current": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,surface_pressure,wind_speed_10m",
+      "daily": "weather_code,temperature_2m_max,temperature_2m_min",
+      "timezone": "auto"
+    }
+  }
+}

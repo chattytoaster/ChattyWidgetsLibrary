@@ -16,11 +16,18 @@
 
         <!-- Header -->
         <DockPanel Grid.Row="0" Margin="0,0,0,10">
-            <TextBlock Text="💎 КОТИРОВКИ &amp; ВАЛЮТЫ" FontSize="11.5" FontWeight="ExtraBold" Foreground="#38BDF8"
-                       DockPanel.Dock="Left" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
+                <TextBlock Text="{Binding HeaderTitle, FallbackValue='💎 КОТИРОВКИ &amp; ВАЛЮТЫ'}" FontSize="11.5" FontWeight="ExtraBold" Foreground="#38BDF8" VerticalAlignment="Center"/>
+                <Border Background="#1CFFFFFF" CornerRadius="4" Padding="5,1" Margin="6,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding BaseCurrencyBadge, FallbackValue='USD'}" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                </Border>
+            </StackPanel>
             <Border HorizontalAlignment="Right" DockPanel.Dock="Right" Background="#14FFFFFF" BorderBrush="#18FFFFFF"
-                    BorderThickness="1" CornerRadius="6" Padding="8,3" Cursor="Hand">
-                <TextBlock Text="Обновить ↻" FontSize="11" Foreground="#94A3B8"/>
+                    BorderThickness="1" CornerRadius="6" Padding="8,3" Cursor="Hand" ToolTip="{Binding LastUpdatedText}">
+                <Border.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding RefreshCommand}"/>
+                </Border.InputBindings>
+                <TextBlock Text="{Binding RefreshButtonText, FallbackValue='Обновить ↻'}" FontSize="11" Foreground="#94A3B8"/>
             </Border>
         </DockPanel>
 
