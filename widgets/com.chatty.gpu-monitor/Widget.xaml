@@ -25,7 +25,7 @@
                     </TextBlock.Effect>
                 </TextBlock>
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="GPU ENGINE" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC" LetterSpacing="0.5"/>
+                    <TextBlock Text="GPU ENGINE" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
                     <TextBlock Text="{Binding GpuName}" FontSize="10" Foreground="#94A3B8" MaxWidth="170"
                                TextTrimming="CharacterEllipsis"/>
                 </StackPanel>

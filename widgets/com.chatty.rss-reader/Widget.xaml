@@ -22,7 +22,7 @@
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
                 <TextBlock Text="📰 " FontSize="13" VerticalAlignment="Center"/>
                 <TextBlock Text="{Binding FeedTitle}" FontSize="11.5" FontWeight="ExtraBold" Foreground="#F8FAFC"
-                           LetterSpacing="0.6" VerticalAlignment="Center"/>
+                           VerticalAlignment="Center"/>
             </StackPanel>
 
             <!-- Pager Controls -->

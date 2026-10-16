@@ -17,7 +17,7 @@
         <!-- Header -->
         <DockPanel Grid.Row="0" Margin="0,0,0,10">
             <TextBlock Text="💎 КОТИРОВКИ &amp; ВАЛЮТЫ" FontSize="11.5" FontWeight="ExtraBold" Foreground="#38BDF8"
-                       LetterSpacing="0.6" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                       DockPanel.Dock="Left" VerticalAlignment="Center"/>
             <Border HorizontalAlignment="Right" DockPanel.Dock="Right" Background="#14FFFFFF" BorderBrush="#18FFFFFF"
                     BorderThickness="1" CornerRadius="6" Padding="8,3" Cursor="Hand">
                 <TextBlock Text="Обновить ↻" FontSize="11" Foreground="#94A3B8"/>

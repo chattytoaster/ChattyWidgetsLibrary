@@ -19,7 +19,7 @@
         <!-- Header -->
         <DockPanel Grid.Row="0" Margin="0,0,0,10">
             <TextBlock Text="{Binding MonthYear}" FontSize="14.5" FontWeight="Bold" Foreground="#F8FAFC"
-                       LetterSpacing="0.3" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                       DockPanel.Dock="Left" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center">
                 <Button Command="{Binding PrevMonthCommand}" Content="◀" Width="26" Height="26" Background="#14FFFFFF"
                         BorderBrush="#18FFFFFF" BorderThickness="1" Foreground="#E2E8F0" FontSize="10" Cursor="Hand">

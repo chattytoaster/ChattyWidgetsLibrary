@@ -18,7 +18,7 @@
         <!-- Header -->
         <DockPanel Grid.Row="0" Margin="0,0,0,12">
             <TextBlock Text="📌 ЗАМЕТКИ И ЗАДАЧИ" FontSize="13" FontWeight="Bold" Foreground="#FBBF24"
-                       LetterSpacing="0.5" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                       DockPanel.Dock="Left" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding ActiveCountText}" FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Right"
                        DockPanel.Dock="Right" VerticalAlignment="Center"/>
         </DockPanel>
