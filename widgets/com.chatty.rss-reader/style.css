@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background: transparent;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.rss-card {
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 18, 30, 0.85);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 14px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.1);
+    color: #F8FAFC;
+    position: relative;
+}
+
+/* Header */
+.rss-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-right: 20px; /* Space for anchor dot */
+}
+
+.rss-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    color: #F8FAFC;
+}
+
+.rss-icon {
+    font-size: 14px;
+}
+
+/* Листалка Controls */
+.pager-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 2px 6px;
+}
+
+.pager-btn {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    transition: all 0.15s ease;
+    outline: none;
+}
+
+.pager-btn:hover {
+    background: rgba(56, 189, 248, 0.2);
+    color: #38BDF8;
+    transform: scale(1.15);
+}
+
+.pager-btn:active {
+    transform: scale(0.92);
+}
+
+.pager-counter {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #CBD5E1;
+    min-width: 32px;
+    text-align: center;
+}
+
+.refresh-btn {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.refresh-btn:hover {
+    color: #38BDF8;
+    transform: rotate(90deg);
+}
+
+/* Featured Листалка Slide Card */
+.carousel-slide {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 14px;
+    padding: 12px 14px 10px 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slide:hover {
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.slide-badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.category-badge {
+    background: linear-gradient(135deg, #0284C7, #2563EB);
+    color: #FFFFFF;
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.time-badge {
+    font-size: 10.5px;
+    color: #94A3B8;
+}
+
+.live-dot {
+    width: 6px;
+    height: 6px;
+    background: #10B981;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #10B981;
+    animation: pulseLive 2s infinite;
+}
+
+@keyframes pulseLive {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Marquee Running Line */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.marquee-container.faded {
+    mask-image: linear-gradient(to right, transparent 0, black 14px, black calc(100% - 14px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 14px, black calc(100% - 14px), transparent 100%);
+}
+
+.headline-track {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #F8FAFC;
+    letter-spacing: -0.2px;
+}
+
+@keyframes marqueeScroll {
+    0%, 18% {
+        transform: translateX(0);
+    }
+    65%, 82% {
+        transform: translateX(var(--marquee-dist, 0px));
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.is-scrolling {
+    animation: marqueeScroll var(--marquee-dur, 8s) ease-in-out infinite !important;
+    will-change: transform;
+}
+
+/* Navigation dots */
+.dots-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 4px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.dot.active {
+    width: 16px;
+    background: #38BDF8;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+}
+
+/* Feed list */
+.feed-header-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.feed-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 2px;
+}
+
+.feed-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.feed-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+.news-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 9px;
+    padding: 7px 10px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+}
+
+.news-item:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateX(2px);
+}
+
+.news-item.active-item {
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(56, 189, 248, 0.08);
+}
+
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5px;
+    color: #64748B;
+    margin-bottom: 3px;
+}
+
+.news-category {
+    color: #38BDF8;
+    font-weight: 700;
+}
+
+.news-item-headline {
+    font-size: 11px;
+    font-weight: 500;
+    color: #E2E8F0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

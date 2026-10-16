@@ -1,0 +1,15 @@
+{
+  "id": "com.chatty.quick-dock",
+  "name": "Быстрый Док / Лаунчер",
+  "version": "1.0.0",
+  "author": "ChattyWidgets",
+  "description": "Плавающая панель быстрого запуска любимых программ, сайтов, проводника и терминала в стиле macOS.",
+  "type": "web",
+  "entry": "index.html",
+  "defaultWidth": 380,
+  "defaultHeight": 76,
+  "minWidth": 240,
+  "minHeight": 65,
+  "defaultLayer": "desktop",
+  "permissions": ["system"]
+}

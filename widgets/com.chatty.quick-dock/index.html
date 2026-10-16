@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Dock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dock-container" id="dock">
+        <div class="dock-item" onclick="launch('explorer.exe')">
+            <span>📁</span>
+            <div class="dock-tooltip">Проводник</div>
+        </div>
+
+        <div class="dock-item" onclick="launch('https://google.com')">
+            <span>🌐</span>
+            <div class="dock-tooltip">Браузер</div>
+        </div>
+
+        <div class="dock-item" onclick="launch('cmd.exe')">
+            <span>💻</span>
+            <div class="dock-tooltip">Терминал</div>
+        </div>
+
+        <div class="dock-item" onclick="launch('notepad.exe')">
+            <span>📝</span>
+            <div class="dock-tooltip">Блокнот</div>
+        </div>
+
+        <div class="dock-separator"></div>
+
+        <div class="dock-item" onclick="launch('ms-settings:')">
+            <span>⚙️</span>
+            <div class="dock-tooltip">Параметры</div>
+        </div>
+
+        <div class="dock-item" onclick="launch('calc.exe')">
+            <span>🧮</span>
+            <div class="dock-tooltip">Калькулятор</div>
+        </div>
+    </div>
+
+    <script>
+        function launch(target) {
+            try {
+                if (window.chatty && window.chatty.launchApp) {
+                    window.chatty.launchApp(target);
+                } else {
+                    window.open(target, '_blank');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    </script>
+</body>
+</html>

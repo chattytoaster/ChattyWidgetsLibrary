@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    user-select: none;
+}
+
+body {
+    background: transparent;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.gpu-card {
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 22, 34, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    color: #F8FAFC;
+    transition: background 0.3s ease;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gpu-icon {
+    font-size: 20px;
+    filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5));
+}
+
+.title-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.gpu-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #F8FAFC;
+}
+
+.gpu-model {
+    font-size: 10px;
+    color: #94A3B8;
+    max-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.temp-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(239, 68, 68, 0.15);
+    color: #F87171;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    padding: 3px 8px;
+    border-radius: 8px;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 8px 0;
+}
+
+.metric-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #94A3B8;
+}
+
+.metric-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #10B981;
+}
+
+.vram-val {
+    color: #38BDF8;
+}
+
+.progress-track {
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #10B981, #34D399);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.progress-fill.vram {
+    background: linear-gradient(90deg, #38BDF8, #818CF8);
+}
+
+.footer-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #64748B;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 8px;
+}

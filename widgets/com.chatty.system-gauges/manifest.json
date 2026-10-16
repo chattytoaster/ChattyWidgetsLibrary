@@ -1,9 +1,9 @@
 {
   "id": "com.chatty.system-gauges",
   "name": "Датчики Ресурсов",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "ChattyWidgets",
-  "description": "Ультра-легковесный нативный монитор CPU, RAM, SSD и сетевой активности с мгновенным откликом.",
+  "description": "Ультра-легковесный нативный монитор CPU, RAM, SSD, GPU и сетевой активности с визуальным конструктором формата (полоски/круги).",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

@@ -27,21 +27,23 @@
     .player-card {
       width: 100%;
       height: 100%;
-      background: rgba(18, 22, 34, 0.82);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(14, 18, 30, 0.85);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 20px;
       padding: 14px 22px 14px 16px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 8px 32px rgba(0, 0, 0, 0.35);
+      gap: 16px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.12);
       position: relative;
     }
+
+    /* Art Container with realistic grooved vinyl effect */
     .art-container {
-      width: 58px;
-      height: 58px;
+      width: 60px;
+      height: 60px;
       position: relative;
       flex-shrink: 0;
     }
@@ -49,38 +51,45 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: conic-gradient(from 180deg at 50% 50%, #EC4899 0deg, #8B5CF6 180deg, #3B82F6 360deg);
+      background: radial-gradient(circle at center, #1E1B4B 0%, #0F172A 70%, #020617 100%);
+      border: 2px solid rgba(255, 255, 255, 0.18);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 16px rgba(139, 92, 246, 0.4);
-      animation: spin 14s linear infinite;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.45);
+      animation: spin 12s linear infinite;
       overflow: hidden;
-      transition: border-radius 0.3s ease;
+      transition: border-radius 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    .art-ring.playing {
+      box-shadow: 0 0 24px rgba(236, 72, 153, 0.45), 0 0 10px rgba(59, 130, 246, 0.4);
     }
     .art-ring.paused {
       animation-play-state: paused;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     }
     .art-ring.square-mode {
-      border-radius: 12px;
+      border-radius: 14px;
       animation: none !important;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
     }
     @keyframes spin {
       100% { transform: rotate(360deg); }
     }
     .art-center {
-      width: 22px;
-      height: 22px;
-      background: #111420;
+      width: 20px;
+      height: 20px;
+      background: #0B0E17;
       border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.45);
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
-      z-index: 2;
+      z-index: 3;
+      box-shadow: 0 0 8px rgba(0,0,0,0.8);
     }
     .art-ring.square-mode .art-center {
       display: none;
@@ -90,39 +99,118 @@
       height: 100%;
       object-fit: cover;
       display: none;
-      z-index: 1;
+      z-index: 2;
     }
+
+    /* Track details */
     .track-info {
       flex: 1;
       min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
+
+    /* Marquee container with smooth edge masking */
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+    .marquee-container.faded {
+      mask-image: linear-gradient(to right, transparent 0, black 12px, black calc(100% - 14px), transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0, black 12px, black calc(100% - 14px), transparent 100%);
+    }
+
     .track-title {
       font-size: 13.5px;
-      font-weight: 600;
+      font-weight: 700;
       color: #F8FAFC;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 2px;
       letter-spacing: -0.2px;
+      display: inline-block;
+      white-space: nowrap;
+      margin-bottom: 2px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
     }
+
+    .artist-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
     .track-artist {
       font-size: 11.5px;
       color: #94A3B8;
+      font-weight: 500;
+      display: inline-block;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 8px;
     }
-    .controls {
-      display: flex;
+
+    /* Equalizer wave bars */
+    .eq-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 10px;
+      margin-left: 2px;
+      opacity: 0.7;
+    }
+    .eq-bar {
+      width: 2.5px;
+      background: #38BDF8;
+      border-radius: 2px;
+      height: 3px;
+    }
+    .art-ring.playing ~ .track-info .eq-bar:nth-child(1) {
+      animation: eqBounce 0.8s ease-in-out infinite alternate;
+    }
+    .art-ring.playing ~ .track-info .eq-bar:nth-child(2) {
+      animation: eqBounce 0.6s ease-in-out infinite 0.2s alternate;
+    }
+    .art-ring.playing ~ .track-info .eq-bar:nth-child(3) {
+      animation: eqBounce 1.0s ease-in-out infinite 0.4s alternate;
+    }
+    @keyframes eqBounce {
+      0% { height: 3px; background: #38BDF8; }
+      100% { height: 10px; background: #EC4899; }
+    }
+
+    /* Marquee animation */
+    @keyframes marqueeScroll {
+      0%, 18% {
+        transform: translateX(0);
+      }
+      65%, 82% {
+        transform: translateX(var(--marquee-dist, 0px));
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+    .is-scrolling {
+      animation: marqueeScroll var(--marquee-dur, 8s) ease-in-out infinite !important;
+      will-change: transform;
+    }
+
+    /* Beautiful Листалка (Controls bar) */
+    .controls-pill {
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-    }
-    .btn {
-      background: rgba(255, 255, 255, 0.08);
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px 8px;
+      border-radius: 24px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #F8FAFC;
+      width: fit-content;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #E2E8F0;
       border-radius: 50%;
       width: 32px;
       height: 32px;
@@ -131,25 +219,47 @@
       justify-content: center;
       cursor: pointer;
       font-size: 13px;
-      transition: all 0.15s ease;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      outline: none;
     }
     .btn:hover {
       background: rgba(255, 255, 255, 0.18);
-      transform: scale(1.08);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: #38BDF8;
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
     }
     .btn:active {
-      transform: scale(0.95);
+      transform: scale(0.92);
     }
+
+    /* Hero Play/Pause button */
     .btn-play {
-      background: #6366F1;
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+      border: none;
+      color: #FFFFFF;
       width: 36px;
       height: 36px;
       font-size: 15px;
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.55), 0 2px 8px rgba(0, 0, 0, 0.4);
     }
     .btn-play:hover {
-      background: #4F46E5;
+      background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #DB2777 100%);
+      box-shadow: 0 0 20px rgba(236, 72, 153, 0.65), 0 4px 12px rgba(0, 0, 0, 0.4);
+      color: #FFFFFF;
+      transform: scale(1.12);
     }
+    .btn-play:active {
+      transform: scale(0.94);
+    }
+
+    .vol-btn {
+      font-size: 11px;
+      width: 26px;
+      height: 26px;
+      border-radius: 13px;
+    }
+
     .chatty-anchor-dot {
       position: absolute;
       top: 12px;
@@ -181,6 +291,7 @@
 <body>
   <div class="player-card">
     <div class="chatty-anchor-dot" title="ChattyWidgets: ЛКМ — переместить, ПКМ — меню"></div>
+
     <div class="art-container">
       <div class="art-ring paused" id="artRing">
         <img id="coverImg" class="cover-image" alt="Обложка трека" />
@@ -189,15 +300,31 @@
     </div>
 
     <div class="track-info">
-      <div class="track-title" id="trackTitle">Ожидание медиа...</div>
-      <div class="track-artist" id="trackArtist">Запустите Spotify, Браузер...</div>
+      <!-- Title with running marquee if too long -->
+      <div class="marquee-container" id="titleWrapper">
+        <span class="track-title" id="trackTitle">Ожидание медиа...</span>
+      </div>
 
-      <div class="controls">
-        <button class="btn" title="Предыдущий" onclick="prevTrack()">⏮</button>
+      <!-- Artist with running marquee if too long -->
+      <div class="artist-row">
+        <div class="marquee-container" id="artistWrapper">
+          <span class="track-artist" id="trackArtist">Запустите Spotify, Браузер...</span>
+        </div>
+        <div class="eq-bars" title="Воспроизведение">
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+        </div>
+      </div>
+
+      <!-- Gorgeous Листалка Controls -->
+      <div class="controls-pill">
+        <button class="btn" title="Предыдущий трек (Листать назад)" onclick="prevTrack()">⏮</button>
         <button class="btn btn-play" id="playBtn" title="Воспроизведение / Пауза" onclick="togglePlay()">▶</button>
-        <button class="btn" title="Следующий" onclick="nextTrack()">⏭</button>
-        <button class="btn" title="Тише" onclick="volDown()" style="margin-left: 4px; font-size: 11px;">🔉</button>
-        <button class="btn" title="Громче" onclick="volUp()" style="font-size: 11px;">🔊</button>
+        <button class="btn" title="Следующий трек (Листать вперед)" onclick="nextTrack()">⏭</button>
+        <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.12); margin: 0 2px;"></div>
+        <button class="btn vol-btn" title="Тише" onclick="volDown()">🔉</button>
+        <button class="btn vol-btn" title="Громче" onclick="volUp()">🔊</button>
       </div>
     </div>
   </div>
@@ -205,6 +332,33 @@
   <script>
     let isPlaying = false;
     let isSquareArt = false;
+    let lastTitle = '';
+    let lastArtist = '';
+
+    // Marquee logic: if text exceeds container, trigger smooth bidirectional scroll
+    function updateMarquee(wrapperId, textId, text) {
+      const wrapper = document.getElementById(wrapperId);
+      const textEl = document.getElementById(textId);
+      if (!wrapper || !textEl) return;
+
+      textEl.textContent = text;
+      textEl.classList.remove('is-scrolling');
+      wrapper.classList.remove('faded');
+      textEl.style.removeProperty('--marquee-dist');
+      textEl.style.removeProperty('--marquee-dur');
+
+      requestAnimationFrame(() => {
+        const overflow = textEl.scrollWidth - wrapper.clientWidth;
+        if (overflow > 4) {
+          wrapper.classList.add('faded');
+          const dist = -(overflow + 16);
+          const dur = Math.max(6, Math.round(overflow / 28) + 4);
+          textEl.style.setProperty('--marquee-dist', `${dist}px`);
+          textEl.style.setProperty('--marquee-dur', `${dur}s`);
+          textEl.classList.add('is-scrolling');
+        }
+      });
+    }
 
     function togglePlay() {
       if (window.chatty) {
@@ -217,12 +371,12 @@
 
     function prevTrack() {
       if (window.chatty) window.chatty.prevTrack();
-      setTimeout(updateMedia, 400);
+      setTimeout(updateMedia, 350);
     }
 
     function nextTrack() {
       if (window.chatty) window.chatty.nextTrack();
-      setTimeout(updateMedia, 400);
+      setTimeout(updateMedia, 350);
     }
 
     function volDown() {
@@ -239,9 +393,11 @@
       if (isPlaying) {
         btn.textContent = '⏸';
         ring.classList.remove('paused');
+        ring.classList.add('playing');
       } else {
         btn.textContent = '▶';
         ring.classList.add('paused');
+        ring.classList.remove('playing');
       }
     }
 
@@ -251,12 +407,18 @@
         const json = window.chatty.getMediaJson();
         if (json) {
           const data = JSON.parse(json);
-          if (data.Title) {
-            document.getElementById('trackTitle').textContent = data.Title;
+          const title = data.Title || 'Ожидание медиа...';
+          const artist = data.Artist || 'Запустите Spotify, Браузер...';
+
+          if (title !== lastTitle) {
+            lastTitle = title;
+            updateMarquee('titleWrapper', 'trackTitle', title);
           }
-          if (data.Artist) {
-            document.getElementById('trackArtist').textContent = data.Artist;
+          if (artist !== lastArtist) {
+            lastArtist = artist;
+            updateMarquee('artistWrapper', 'trackArtist', artist);
           }
+
           if (typeof data.IsPlaying === 'boolean') {
             isPlaying = data.IsPlaying;
             updatePlayState();
@@ -302,6 +464,11 @@
         updateMedia();
       }
     };
+
+    window.addEventListener('resize', () => {
+      updateMarquee('titleWrapper', 'trackTitle', lastTitle || 'Ожидание медиа...');
+      updateMarquee('artistWrapper', 'trackArtist', lastArtist || 'Запустите Spotify, Браузер...');
+    });
 
     updateMedia();
     setInterval(updateMedia, 1200);

@@ -1,0 +1,15 @@
+{
+  "id": "com.chatty.rss-reader",
+  "name": "Лента Новостей & RSS",
+  "version": "1.0.0",
+  "author": "ChattyWidgets",
+  "description": "Живая лента новостей технологий, крипты и Telegram-каналов с автообновлением и карточками.",
+  "type": "web",
+  "entry": "index.html",
+  "defaultWidth": 330,
+  "defaultHeight": 380,
+  "minWidth": 280,
+  "minHeight": 260,
+  "defaultLayer": "desktop",
+  "permissions": ["network", "system"]
+}

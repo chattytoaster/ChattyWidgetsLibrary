@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>News & RSS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="rss-card" id="rssCard">
+        <!-- Header with Листалка Controls -->
+        <div class="rss-header">
+            <div class="rss-title">
+                <span class="rss-icon">📰</span>
+                <span>ИНФОРМЕР НОВОСТЕЙ</span>
+            </div>
+
+            <!-- Листалка Controls (Prev / Counter / Next / Refresh) -->
+            <div class="pager-controls">
+                <button class="pager-btn" id="btnPrev" title="Предыдущая новость (Листать назад)" onclick="prevNews(event)">◀</button>
+                <span class="pager-counter" id="pagerCounter">1 / 5</span>
+                <button class="pager-btn" id="btnNext" title="Следующая новость (Листать вперед)" onclick="nextNews(event)">▶</button>
+                <button class="refresh-btn" title="Обновить ленту" onclick="fetchFeed(event)">⟳</button>
+            </div>
+        </div>
+
+        <!-- Featured Slide (Листалка) with Running Marquee -->
+        <div class="carousel-slide" id="carouselSlide" onclick="openCurrentNews()" title="Нажмите, чтобы открыть новость в браузере">
+            <div class="slide-badge-row">
+                <span class="category-badge" id="slideCategory">AI & TECH</span>
+                <span class="time-badge" id="slideTime">10 мин назад</span>
+                <span class="live-dot" title="Автоматическая прокрутка"></span>
+            </div>
+
+            <!-- Running Marquee for text that doesn't fit -->
+            <div class="marquee-container" id="headlineWrapper">
+                <div class="headline-track" id="slideHeadline">Загрузка последних событий...</div>
+            </div>
+
+            <!-- Dots indicator -->
+            <div class="dots-row" id="dotsContainer"></div>
+        </div>
+
+        <!-- Feed List items -->
+        <div class="feed-header-label">Все новости:</div>
+        <div class="feed-list" id="feed-container">
+            <!-- News items rendered here -->
+        </div>
+    </div>
+
+    <script>
+        const fallbackNews = [
+            { cat: 'AI & TECH', time: '10 мин назад', title: 'OpenAI и DeepMind анонсировали новые мультимодальные модели следующего поколения', url: 'https://news.ycombinator.com' },
+            { cat: 'WINDOWS', time: '42 мин назад', title: 'Microsoft представила новые визуальные API для Windows 11 с нативной поддержкой Mica', url: 'https://blogs.windows.com' },
+            { cat: 'КРИПТА', time: '1 час назад', title: 'Сеть TON и Gram установили новый рекорд скорости транзакций и активных кошельков', url: 'https://ton.org' },
+            { cat: 'РАЗРАБОТКА', time: '2 часа назад', title: 'ChattyWidgets выпустили крупнейшее обновление с профилями рабочих столов, хоткеями и копиями виджетов', url: 'https://github.com/chattytoaster/ChattyWidgets' },
+            { cat: 'ГАДЖЕТЫ', time: '3 часа назад', title: 'Новые сверхбыстрые процессоры с энергопотреблением ниже 15W меняют рынок ультрабуков', url: 'https://theverge.com' }
+        ];
+
+        let currentNewsIndex = 0;
+        let newsData = fallbackNews;
+        let autoPlayTimer = null;
+        let isHovered = false;
+
+        function updateSlide(index) {
+            if (!newsData || newsData.length === 0) return;
+            currentNewsIndex = (index + newsData.length) % newsData.length;
+            const item = newsData[currentNewsIndex];
+
+            document.getElementById('slideCategory').textContent = item.cat;
+            document.getElementById('slideTime').textContent = item.time;
+            document.getElementById('pagerCounter').textContent = `${currentNewsIndex + 1} / ${newsData.length}`;
+
+            // Update running marquee for headline
+            updateMarquee('headlineWrapper', 'slideHeadline', item.title);
+
+            // Update dots
+            renderDots();
+
+            // Highlight in list
+            document.querySelectorAll('.news-item').forEach((el, i) => {
+                if (i === currentNewsIndex) {
+                    el.classList.add('active-item');
+                } else {
+                    el.classList.remove('active-item');
+                }
+            });
+        }
+
+        function updateMarquee(wrapperId, textId, text) {
+            const wrapper = document.getElementById(wrapperId);
+            const textEl = document.getElementById(textId);
+            if (!wrapper || !textEl) return;
+
+            textEl.textContent = text;
+            textEl.classList.remove('is-scrolling');
+            wrapper.classList.remove('faded');
+            textEl.style.removeProperty('--marquee-dist');
+            textEl.style.removeProperty('--marquee-dur');
+
+            requestAnimationFrame(() => {
+                const overflow = textEl.scrollWidth - wrapper.clientWidth;
+                if (overflow > 4) {
+                    wrapper.classList.add('faded');
+                    const dist = -(overflow + 16);
+                    const dur = Math.max(6, Math.round(overflow / 30) + 4);
+                    textEl.style.setProperty('--marquee-dist', `${dist}px`);
+                    textEl.style.setProperty('--marquee-dur', `${dur}s`);
+                    textEl.classList.add('is-scrolling');
+                }
+            });
+        }
+
+        function renderDots() {
+            const container = document.getElementById('dotsContainer');
+            container.innerHTML = '';
+            newsData.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot' + (i === currentNewsIndex ? ' active' : '');
+                dot.onclick = (e) => {
+                    e.stopPropagation();
+                    updateSlide(i);
+                };
+                container.appendChild(dot);
+            });
+        }
+
+        function prevNews(e) {
+            if (e) e.stopPropagation();
+            updateSlide(currentNewsIndex - 1);
+            resetAutoPlay();
+        }
+
+        function nextNews(e) {
+            if (e) e.stopPropagation();
+            updateSlide(currentNewsIndex + 1);
+            resetAutoPlay();
+        }
+
+        function openCurrentNews() {
+            if (newsData[currentNewsIndex]) {
+                openLink(newsData[currentNewsIndex].url);
+            }
+        }
+
+        function renderNews(items) {
+            newsData = items;
+            const container = document.getElementById('feed-container');
+            container.innerHTML = '';
+            items.forEach((item, index) => {
+                const el = document.createElement('div');
+                el.className = 'news-item' + (index === currentNewsIndex ? ' active-item' : '');
+                el.onclick = () => {
+                    updateSlide(index);
+                    openLink(item.url);
+                };
+                el.innerHTML = `
+                    <div class="news-meta">
+                        <span class="news-category">${item.cat}</span>
+                        <span>${item.time}</span>
+                    </div>
+                    <div class="news-item-headline">${item.title}</div>
+                `;
+                container.appendChild(el);
+            });
+
+            updateSlide(currentNewsIndex);
+        }
+
+        function openLink(url) {
+            try {
+                if (window.chatty && window.chatty.launchApp) {
+                    window.chatty.launchApp(url);
+                } else {
+                    window.open(url, '_blank');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function resetAutoPlay() {
+            if (autoPlayTimer) clearInterval(autoPlayTimer);
+            autoPlayTimer = setInterval(() => {
+                if (!isHovered) {
+                    updateSlide(currentNewsIndex + 1);
+                }
+            }, 6500);
+        }
+
+        async function fetchFeed(e) {
+            if (e) e.stopPropagation();
+            renderNews(fallbackNews);
+            resetAutoPlay();
+        }
+
+        // Pause auto-play when hovering to read
+        const card = document.getElementById('rssCard');
+        card.addEventListener('mouseenter', () => { isHovered = true; });
+        card.addEventListener('mouseleave', () => { isHovered = false; });
+
+        window.addEventListener('resize', () => {
+            if (newsData[currentNewsIndex]) {
+                updateMarquee('headlineWrapper', 'slideHeadline', newsData[currentNewsIndex].title);
+            }
+        });
+
+        fetchFeed();
+    </script>
+</body>
+</html>
