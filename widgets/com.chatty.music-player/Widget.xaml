@@ -33,7 +33,7 @@
                        TextTrimming="CharacterEllipsis"/>
 
             <!-- Thin Live Progress Bar (No slider as requested!) -->
-            <ProgressBar Grid.Row="2" Value="{Binding ProgressPercent}" Minimum="0" Maximum="100" Height="4"
+            <ProgressBar Grid.Row="2" Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="4"
                          Foreground="#38BDF8" Background="#2038BDF8" BorderThickness="0"/>
         </Grid>
 

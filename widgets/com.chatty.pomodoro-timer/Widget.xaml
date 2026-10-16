@@ -42,7 +42,7 @@
         </Viewbox>
 
         <!-- Progress Bar -->
-        <ProgressBar Grid.Row="2" Value="{Binding ProgressPercent}" Minimum="0" Maximum="100" Height="5" Margin="0,6,0,14"
+        <ProgressBar Grid.Row="2" Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="5" Margin="0,6,0,14"
                      Foreground="{Binding AccentColor}" Background="#20FFFFFF" BorderThickness="0"/>
 
         <!-- Action Button -->

@@ -36,7 +36,7 @@
                 <TextBlock Text="Загрузка чипа (GPU)" FontSize="12" Foreground="#CBD5E1"/>
                 <TextBlock Text="{Binding GpuPercent, StringFormat='{}{0:0}%'}" FontSize="12" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Right"/>
             </DockPanel>
-            <ProgressBar Grid.Row="1" Value="{Binding GpuPercent}" Minimum="0" Maximum="100" Height="6" Margin="0,4,0,0"
+            <ProgressBar Grid.Row="1" Value="{Binding GpuPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="6" Margin="0,4,0,0"
                          Foreground="#10B981" Background="#2010B981" BorderThickness="0"/>
         </Grid>
 
@@ -50,7 +50,7 @@
                 <TextBlock Text="Видеопамять (VRAM)" FontSize="12" Foreground="#CBD5E1"/>
                 <TextBlock Text="{Binding GpuMemoryPercent, StringFormat='{}{0:0}%'}" FontSize="12" FontWeight="Bold" Foreground="#F59E0B" HorizontalAlignment="Right"/>
             </DockPanel>
-            <ProgressBar Grid.Row="1" Value="{Binding GpuMemoryPercent}" Minimum="0" Maximum="100" Height="6" Margin="0,4,0,0"
+            <ProgressBar Grid.Row="1" Value="{Binding GpuMemoryPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="6" Margin="0,4,0,0"
                          Foreground="#F59E0B" Background="#20F59E0B" BorderThickness="0"/>
         </Grid>
 
