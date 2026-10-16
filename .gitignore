@@ -1,0 +1,13 @@
+# Private keys (keep secret! Use GitHub Secrets in CI)
+keys/*private*.pem
+keys/*.key
+*.pem.secret
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS
+.DS_Store
+Thumbs.db
