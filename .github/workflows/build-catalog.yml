@@ -1,0 +1,41 @@
+name: Build Widget Catalog & Packages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'widgets/**'
+      - 'scripts/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    name: Build .chw Packages and Update Catalog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build Packages and Catalog
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python scripts/build_catalog.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add packages/*.chw catalog.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: auto-build widget packages and catalog.json [skip ci]" && git push)

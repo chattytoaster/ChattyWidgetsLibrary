@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Календарь</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: transparent;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    .calendar-card {
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 22, 34, 0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 14px 18px 12px 18px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .glow-bg {
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-right: 22px;
+    }
+    .month-year {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: 0.3px;
+    }
+    .nav-btns {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #E2E8F0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 11px;
+      transition: all 0.15s ease;
+    }
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.08);
+    }
+    .btn-today {
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #818CF8;
+      font-size: 10.5px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+    .btn-today:hover {
+      background: rgba(99, 102, 241, 0.4);
+      color: #FFFFFF;
+    }
+    .weekdays-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #94A3B8;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .weekend-header {
+      color: #F472B6;
+    }
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      flex: 1;
+      gap: 2px;
+    }
+    .day-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 500;
+      color: #E2E8F0;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.12s ease;
+    }
+    .day-cell:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .day-cell.other-month {
+      color: #475569;
+    }
+    .day-cell.weekend {
+      color: #FDA4AF;
+    }
+    .day-cell.other-month.weekend {
+      color: #64414D;
+    }
+    .day-cell.today {
+      background: #3B82F6;
+      color: #FFFFFF !important;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+    }
+    .day-cell.selected {
+      border: 1px solid #818CF8;
+      background: rgba(129, 140, 248, 0.2);
+    }
+    .event-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #38BDF8;
+      position: absolute;
+      bottom: 2px;
+      box-shadow: 0 0 4px #38BDF8;
+    }
+    .note-bar {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .selected-date-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: #38BDF8;
+      white-space: nowrap;
+    }
+    .note-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      color: #F8FAFC;
+      outline: none;
+    }
+    .note-input:focus {
+      border-color: #38BDF8;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .chatty-anchor-dot {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 12px;
+      height: 12px;
+      background: #3B82F6;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #60A5FA;
+      cursor: grab;
+      z-index: 99999;
+      transition: transform 0.15s ease;
+    }
+    .chatty-anchor-dot:hover {
+      transform: scale(1.25);
+    }
+    .chatty-anchor-dot::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 4px;
+      height: 4px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="calendar-card">
+    <div class="glow-bg"></div>
+    <div class="chatty-anchor-dot" title="ChattyWidgets: ЛКМ — переместить, ПКМ — меню"></div>
+
+    <div class="header">
+      <div class="month-year" id="monthYear">Октябрь 2026</div>
+      <div class="nav-btns">
+        <button class="btn-nav" title="Предыдущий месяц" onclick="changeMonth(-1)">◀</button>
+        <button class="btn-today" onclick="goToToday()">Сегодня</button>
+        <button class="btn-nav" title="Следующий месяц" onclick="changeMonth(1)">▶</button>
+      </div>
+    </div>
+
+    <div class="weekdays-row">
+      <span>Пн</span>
+      <span>Вт</span>
+      <span>Ср</span>
+      <span>Чт</span>
+      <span>Пт</span>
+      <span class="weekend-header">Сб</span>
+      <span class="weekend-header">Вс</span>
+    </div>
+
+    <div class="days-grid" id="daysGrid"></div>
+
+    <div class="note-bar">
+      <span class="selected-date-badge" id="selectedDateBadge">16 Окт:</span>
+      <input type="text" class="note-input" id="noteInput" placeholder="Добавить заметку на этот день..." oninput="saveCurrentNote()" />
+    </div>
+  </div>
+
+  <script>
+    const monthNames = [
+      'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+      'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+    ];
+
+    let currentDate = new Date();
+    let selectedDate = new Date();
+    let notes = {};
+
+    function loadNotes() {
+      if (window.chatty) {
+        try {
+          const json = window.chatty.storageGet('cal_notes', '{}');
+          notes = JSON.parse(json) || {};
+        } catch(e) {}
+      }
+    }
+
+    function saveNotesToStorage() {
+      if (window.chatty) {
+        window.chatty.storageSet('cal_notes', JSON.stringify(notes));
+      }
+    }
+
+    function getDateKey(date) {
+      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    }
+
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+
+      document.getElementById('monthYear').textContent = `${monthNames[month]} ${year}`;
+
+      const grid = document.getElementById('daysGrid');
+      grid.innerHTML = '';
+
+      // First day of current month
+      const firstDay = new Date(year, month, 1);
+      // Day of week: 0 (Sun) to 6 (Sat) -> convert to Mon=0..Sun=6
+      let startDayOfWeek = firstDay.getDay() - 1;
+      if (startDayOfWeek === -1) startDayOfWeek = 6;
+
+      // Days in current month
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      // Days in previous month
+      const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+      const today = new Date();
+      const isCurrentMonthToday = today.getFullYear() === year && today.getMonth() === month;
+
+      // 42 cells total (6 weeks x 7 days)
+      for (let i = 0; i < 42; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
+
+        let dayNum, cellDate;
+        let isOtherMonth = false;
+
+        if (i < startDayOfWeek) {
+          // Previous month days
+          dayNum = daysInPrevMonth - (startDayOfWeek - 1 - i);
+          cellDate = new Date(year, month - 1, dayNum);
+          isOtherMonth = true;
+          cell.classList.add('other-month');
+        } else if (i < startDayOfWeek + daysInMonth) {
+          // Current month days
+          dayNum = i - startDayOfWeek + 1;
+          cellDate = new Date(year, month, dayNum);
+        } else {
+          // Next month days
+          dayNum = i - (startDayOfWeek + daysInMonth) + 1;
+          cellDate = new Date(year, month + 1, dayNum);
+          isOtherMonth = true;
+          cell.classList.add('other-month');
+        }
+
+        cell.textContent = dayNum;
+
+        // Weekend check (Sat / Sun)
+        const dayOfWeek = cellDate.getDay();
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+          cell.classList.add('weekend');
+        }
+
+        // Today check
+        if (cellDate.toDateString() === today.toDateString()) {
+          cell.classList.add('today');
+        }
+
+        // Selected check
+        if (cellDate.toDateString() === selectedDate.toDateString()) {
+          cell.classList.add('selected');
+        }
+
+        // Has note indicator
+        const dateKey = getDateKey(cellDate);
+        if (notes[dateKey] && notes[dateKey].trim().length > 0) {
+          const dot = document.createElement('div');
+          dot.className = 'event-dot';
+          cell.appendChild(dot);
+        }
+
+        cell.onclick = () => selectDate(cellDate);
+        grid.appendChild(cell);
+      }
+
+      updateNoteBar();
+    }
+
+    function selectDate(date) {
+      selectedDate = date;
+      renderCalendar();
+    }
+
+    function updateNoteBar() {
+      const day = selectedDate.getDate();
+      const month = monthNames[selectedDate.getMonth()].slice(0, 3);
+      document.getElementById('selectedDateBadge').textContent = `${day} ${month}:`;
+
+      const key = getDateKey(selectedDate);
+      document.getElementById('noteInput').value = notes[key] || '';
+    }
+
+    function saveCurrentNote() {
+      const val = document.getElementById('noteInput').value;
+      const key = getDateKey(selectedDate);
+      if (val.trim()) {
+        notes[key] = val;
+      } else {
+        delete notes[key];
+      }
+      saveNotesToStorage();
+
+      // Refresh calendar indicators
+      const cells = document.querySelectorAll('.day-cell');
+      renderCalendar();
+    }
+
+    function changeMonth(delta) {
+      currentDate.setMonth(currentDate.getMonth() + delta);
+      renderCalendar();
+    }
+
+    function goToToday() {
+      currentDate = new Date();
+      selectedDate = new Date();
+      renderCalendar();
+    }
+
+    // Developer Custom Menu Handling
+    window.onChattyMenu = function(id) {
+      if (id === 'today') {
+        goToToday();
+      } else if (id === 'clear-notes') {
+        if (confirm('Очистить все сохраненные заметки в календаре?')) {
+          notes = {};
+          saveNotesToStorage();
+          renderCalendar();
+        }
+      }
+    };
+
+    loadNotes();
+    renderCalendar();
+  </script>
+</body>
+</html>

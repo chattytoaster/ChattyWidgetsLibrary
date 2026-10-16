@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Медиа-Фоторамка</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: transparent;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    .frame-card {
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 22, 34, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 8px 32px rgba(0, 0, 0, 0.45);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .frame-card.drag-over {
+      border-color: #38BDF8 !important;
+      box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.3), 0 0 24px rgba(56, 189, 248, 0.5) !important;
+    }
+    .media-element {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+      border-radius: 19px;
+      pointer-events: none;
+    }
+    .media-element.contain-mode {
+      object-fit: contain !important;
+      background: rgba(10, 12, 18, 0.9);
+    }
+    .placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      transition: background 0.2s;
+    }
+    .placeholder:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.25));
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+    .placeholder-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #F8FAFC;
+      margin-bottom: 4px;
+    }
+    .placeholder-subtitle {
+      font-size: 11.5px;
+      color: #94A3B8;
+      margin-bottom: 10px;
+    }
+    .format-chips {
+      display: flex;
+      gap: 6px;
+    }
+    .chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #38BDF8;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    /* Hover Overlay Toolbar */
+    .overlay-toolbar {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 4px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+      pointer-events: auto;
+    }
+    .frame-card:hover .overlay-toolbar {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .tool-btn {
+      background: transparent;
+      border: none;
+      color: #E2E8F0;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .tool-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #38BDF8;
+    }
+    .chatty-anchor-dot {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 12px;
+      height: 12px;
+      background: #3B82F6;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #60A5FA;
+      cursor: grab;
+      z-index: 99999;
+      transition: transform 0.15s ease;
+    }
+    .chatty-anchor-dot:hover {
+      transform: scale(1.25);
+    }
+    .chatty-anchor-dot::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 4px;
+      height: 4px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame-card" id="frameCard">
+    <div class="chatty-anchor-dot" title="ChattyWidgets: ЛКМ — переместить, ПКМ — меню"></div>
+
+    <!-- Media display elements -->
+    <img id="mediaImg" class="media-element" alt="Фоторамка" />
+    <video id="mediaVideo" class="media-element" autoplay loop muted playsinline></video>
+
+    <!-- Empty state placeholder -->
+    <div class="placeholder" id="placeholder">
+      <div class="icon-box">🖼️</div>
+      <div class="placeholder-title">Перетащите сюда фото или видео</div>
+      <div class="placeholder-subtitle">или нажмите ПКМ для выбора файла</div>
+      <div class="format-chips">
+        <span class="chip">JPG</span>
+        <span class="chip">PNG</span>
+        <span class="chip">GIF</span>
+        <span class="chip">MP4</span>
+        <span class="chip">WEBM</span>
+      </div>
+    </div>
+
+    <input type="file" id="fileInput" accept="image/*,video/*" style="display:none" onchange="handleNativeInput(event)" />
+  </div>
+
+  <script>
+    let currentFit = 'cover'; // 'cover' or 'contain'
+    let isMuted = true;
+    let currentType = null; // 'image' or 'video'
+
+    const card = document.getElementById('frameCard');
+    const imgEl = document.getElementById('mediaImg');
+    const videoEl = document.getElementById('mediaVideo');
+    const placeholder = document.getElementById('placeholder');
+    const btnFit = document.getElementById('btnFit');
+    const btnSound = document.getElementById('btnSound');
+
+    // Drag and Drop support
+    card.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      card.classList.add('drag-over');
+    });
+
+    card.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      card.classList.remove('drag-over');
+    });
+
+    card.addEventListener('drop', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      card.classList.remove('drag-over');
+
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        const file = e.dataTransfer.files[0];
+        loadLocalFile(file);
+      }
+    });
+
+    function openFilePicker() {
+      // 1. Try ChattyBridge native file dialog (copies file safely to widget directory)
+      if (window.chatty && typeof window.chatty.selectMediaFile === 'function') {
+        try {
+          const fileName = window.chatty.selectMediaFile();
+          if (fileName) {
+            displayMediaSrc(fileName);
+            if (window.chatty.storageSet) {
+              window.chatty.storageSet('media_file', fileName);
+            }
+            return;
+          }
+        } catch(e) {
+          console.warn('Bridge selectMediaFile fallback:', e);
+        }
+      }
+
+      // 2. Fallback to HTML input file
+      document.getElementById('fileInput').click();
+    }
+
+    function handleNativeInput(event) {
+      const file = event.target.files && event.target.files[0];
+      if (file) {
+        loadLocalFile(file);
+      }
+    }
+
+    function loadLocalFile(file) {
+      const name = file.name.toLowerCase();
+      const isVideo = file.type.startsWith('video/') || name.endsWith('.mp4') || name.endsWith('.webm');
+
+      if (isVideo) {
+        const objectUrl = URL.createObjectURL(file);
+        displayMediaSrc(objectUrl, 'video');
+
+        // If file.path is available in WebView2, copy it via bridge
+        if (file.path && window.chatty && typeof window.chatty.copyDroppedFile === 'function') {
+          const copied = window.chatty.copyDroppedFile(file.path);
+          if (copied) {
+            window.chatty.storageSet('media_file', copied);
+            return;
+          }
+        }
+      } else {
+        // Image or GIF
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const dataUrl = e.target.result;
+          displayMediaSrc(dataUrl, 'image');
+          if (window.chatty) {
+            window.chatty.storageSet('media_data', dataUrl);
+            window.chatty.storageRemove('media_file');
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function displayMediaSrc(src, forcedType) {
+      const lower = src.toLowerCase();
+      const isVideo = forcedType === 'video' || lower.endsWith('.mp4') || lower.endsWith('.webm') || src.startsWith('blob:') && forcedType === 'video';
+
+      placeholder.style.display = 'none';
+
+      if (isVideo) {
+        currentType = 'video';
+        imgEl.style.display = 'none';
+        videoEl.style.display = 'block';
+        videoEl.src = src;
+        videoEl.muted = isMuted;
+        videoEl.play().catch(() => {});
+        if (btnSound) btnSound.style.display = 'flex';
+      } else {
+        currentType = 'image';
+        videoEl.pause();
+        videoEl.style.display = 'none';
+        imgEl.style.display = 'block';
+        imgEl.src = src;
+        if (btnSound) btnSound.style.display = 'none';
+      }
+
+      applyFitMode();
+    }
+
+    function toggleFit() {
+      currentFit = currentFit === 'cover' ? 'contain' : 'cover';
+      applyFitMode();
+      if (window.chatty) {
+        window.chatty.storageSet('fit_mode', currentFit);
+      }
+    }
+
+    function applyFitMode() {
+      if (currentFit === 'contain') {
+        imgEl.classList.add('contain-mode');
+        videoEl.classList.add('contain-mode');
+        if (btnFit) btnFit.textContent = '🔍 По размеру';
+      } else {
+        imgEl.classList.remove('contain-mode');
+        videoEl.classList.remove('contain-mode');
+        if (btnFit) btnFit.textContent = '🔍 Заполнить';
+      }
+    }
+
+    function toggleSound() {
+      isMuted = !isMuted;
+      videoEl.muted = isMuted;
+      if (btnSound) btnSound.textContent = isMuted ? '🔇 Звук' : '🔊 Звук';
+    }
+
+    function resetMedia() {
+      imgEl.style.display = 'none';
+      imgEl.src = '';
+      videoEl.pause();
+      videoEl.style.display = 'none';
+      videoEl.src = '';
+      placeholder.style.display = 'flex';
+      btnSound.style.display = 'none';
+      currentType = null;
+
+      if (window.chatty) {
+        window.chatty.storageRemove('media_file');
+        window.chatty.storageRemove('media_data');
+      }
+    }
+
+    // Developer Custom Menu Handling
+    window.onChattyMenu = function(id) {
+      if (id === 'choose-file') {
+        openFilePicker();
+      } else if (id === 'toggle-fit') {
+        toggleFit();
+      } else if (id === 'toggle-sound') {
+        toggleSound();
+      } else if (id === 'reset-media') {
+        resetMedia();
+      }
+    };
+
+    // Restore saved state
+    function initSavedState() {
+      if (window.chatty) {
+        const fit = window.chatty.storageGet('fit_mode', 'cover');
+        if (fit) currentFit = fit;
+
+        const savedFile = window.chatty.storageGet('media_file', '');
+        if (savedFile) {
+          displayMediaSrc(savedFile);
+          return;
+        }
+
+        const savedData = window.chatty.storageGet('media_data', '');
+        if (savedData) {
+          displayMediaSrc(savedData, 'image');
+          return;
+        }
+      }
+      applyFitMode();
+    }
+
+    initSavedState();
+  </script>
+</body>
+</html>

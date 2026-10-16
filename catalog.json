@@ -1,0 +1,98 @@
+[
+  {
+    "id": "com.chatty.calendar-glass",
+    "name": "Календарь",
+    "version": "1.0.0",
+    "author": "ChattyWidgets",
+    "description": "Элегантный настольный календарь с переключением месяцев, подсветкой сегодня и быстрыми заметками на дни.",
+    "category": "General",
+    "type": "web",
+    "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.calendar-glass/icon.png",
+    "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.calendar-glass.chw",
+    "size": "11 KB"
+  },
+  {
+    "id": "com.chatty.clock-glass",
+    "name": "Стеклянные Часы",
+    "version": "1.0.0",
+    "author": "ChattyWidgets",
+    "description": "Элегантные цифровые часы с неоморфизмом, эффектом матового стекла и актуальной погодой.",
+    "category": "General",
+    "type": "web",
+    "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.clock-glass/icon.png",
+    "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.clock-glass.chw",
+    "size": "10 KB"
+  },
+  {
+    "id": "com.chatty.crypto-tracker",
+    "name": "Курсы Валют и Крипты",
+    "version": "1.0.0",
+    "author": "ChattyWidgets",
+    "description": "Котировки BTC, ETH, GRAM, SOL, а также курсы USD, EUR и RUB в реальном времени.",
+    "category": "General",
+    "type": "web",
+    "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.crypto-tracker/icon.png",
+    "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.crypto-tracker.chw",
+    "size": "10 KB"
+  },
+  {
+    "id": "com.chatty.media-frame",
+    "name": "Медиа-Фоторамка",
+    "version": "1.0.0",
+    "author": "ChattyWidgets",
+    "description": "Настольная фоторамка и видеоплеер для фоток, гифок или зацикленных видео (MP4, WebM, PNG, JPG, GIF).",
+    "category": "General",
+    "type": "web",
+    "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.media-frame/icon.png",
+    "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.media-frame.chw",
+    "size": "11 KB"
+  },
+  {
+    "id": "com.chatty.music-player",
+    "name": "Мини-Медиаплеер",
+    "version": "1.0.0",
+    "author": "ChattyWidgets",
+    "description": "Стильный настольный контроллер для Spotify, Яндекс.Музыки, браузера и системных аудиоплееров.",
+    "category": "General",
+    "type": "web",
+    "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.music-player/icon.png",
+    "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.music-player.chw",
+    "size": "10 KB"
+  },
+  {
+    "id": "com.chatty.sticky-notes",
+    "name": "Быстрые Заметки / ToDo",
+    "version": "1.0.0",
+    "author": "ChattyWidgets",
+    "description": "Компактный стикер для важных заметок и чек-листа задач прямо на рабочем столе с автосохранением.",
+    "category": "General",
+    "type": "web",
+    "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.sticky-notes/icon.png",
+    "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.sticky-notes.chw",
+    "size": "10 KB"
+  },
+  {
+    "id": "com.chatty.system-gauges",
+    "name": "Датчики Ресурсов",
+    "version": "1.0.0",
+    "author": "ChattyWidgets",
+    "description": "Ультра-легковесный нативный монитор CPU, RAM, SSD и сетевой активности с мгновенным откликом.",
+    "category": "General",
+    "type": "native",
+    "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.system-gauges/icon.png",
+    "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.system-gauges.chw",
+    "size": "8 KB"
+  },
+  {
+    "id": "com.chatty.weather-card",
+    "name": "Прогноз Погоды",
+    "version": "1.0.0",
+    "author": "ChattyWidgets",
+    "description": "Детальный погодный информер с текущей температурой, ощущением, влажностью, ветром и прогнозом.",
+    "category": "General",
+    "type": "web",
+    "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.weather-card/icon.png",
+    "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.weather-card.chw",
+    "size": "12 KB"
+  }
+]

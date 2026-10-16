@@ -1,0 +1,21 @@
+{
+  "id": "com.chatty.clock-glass",
+  "name": "Стеклянные Часы",
+  "version": "1.0.0",
+  "author": "ChattyWidgets",
+  "description": "Элегантные цифровые часы с неоморфизмом, эффектом матового стекла и актуальной погодой.",
+  "type": "web",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "defaultWidth": 320,
+  "defaultHeight": 180,
+  "minWidth": 240,
+  "minHeight": 140,
+  "resizable": true,
+  "defaultLayer": "desktop",
+  "clickThrough": false,
+  "permissions": ["system"],
+  "menuItems": [
+    { "id": "refresh-weather", "title": "Обновить погоду" }
+  ]
+}

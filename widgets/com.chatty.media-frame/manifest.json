@@ -1,0 +1,24 @@
+{
+  "id": "com.chatty.media-frame",
+  "name": "Медиа-Фоторамка",
+  "version": "1.0.0",
+  "author": "ChattyWidgets",
+  "description": "Настольная фоторамка и видеоплеер для фоток, гифок или зацикленных видео (MP4, WebM, PNG, JPG, GIF).",
+  "type": "web",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "defaultWidth": 320,
+  "defaultHeight": 260,
+  "minWidth": 180,
+  "minHeight": 140,
+  "resizable": true,
+  "defaultLayer": "desktop",
+  "clickThrough": false,
+  "permissions": ["storage"],
+  "menuItems": [
+    { "id": "choose-file", "title": "Выбрать фото или видео..." },
+    { "id": "toggle-fit", "title": "Сменить масштаб (Cover / Contain)" },
+    { "id": "toggle-sound", "title": "Включить/выключить звук видео" },
+    { "id": "reset-media", "title": "Сбросить к демо-заставке" }
+  ]
+}

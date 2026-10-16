@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Быстрые Заметки</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: transparent;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    .note-card {
+      width: 100%;
+      height: 100%;
+      background: rgba(24, 26, 38, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      padding-right: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #FBBF24;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .task-input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 6px 10px;
+      color: #F8FAFC;
+      font-size: 12px;
+      outline: none;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+    .task-input:focus {
+      border-color: #FBBF24;
+    }
+    .btn-add {
+      background: #FBBF24;
+      color: #1E293B;
+      border: none;
+      border-radius: 8px;
+      padding: 0 12px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-add:hover {
+      opacity: 0.9;
+    }
+    .tasks-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-right: 4px;
+    }
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #E2E8F0;
+      transition: background 0.15s;
+    }
+    .task-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .task-item.done span {
+      text-decoration: line-through;
+      color: #64748B;
+    }
+    .task-checkbox {
+      cursor: pointer;
+      accent-color: #FBBF24;
+    }
+    .task-text {
+      flex: 1;
+      word-break: break-word;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+    .btn-del {
+      background: transparent;
+      border: none;
+      color: #64748B;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .btn-del:hover {
+      color: #EF4444;
+      background: rgba(239, 68, 68, 0.1);
+    }
+    .chatty-anchor-dot {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 12px;
+      height: 12px;
+      background: #3B82F6;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #60A5FA;
+      cursor: grab;
+      z-index: 99999;
+      transition: transform 0.15s ease;
+    }
+    .chatty-anchor-dot:hover {
+      transform: scale(1.25);
+    }
+    .chatty-anchor-dot::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 4px;
+      height: 4px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="note-card">
+    <div class="chatty-anchor-dot" title="ChattyWidgets: ЛКМ — переместить, ПКМ — меню"></div>
+    <div class="header">
+      <div class="title">📌 ЗАМЕТКИ И ЗАДАЧИ</div>
+      <div id="countBadge" style="font-size: 11px; color: #94A3B8;">0 задач</div>
+    </div>
+
+    <div class="input-row">
+      <input type="text" class="task-input" id="taskInput" placeholder="Новая задача..." onkeydown="if(event.key==='Enter') addTask()">
+      <button class="btn-add" onclick="addTask()">+</button>
+    </div>
+
+    <div class="tasks-list" id="tasksList"></div>
+  </div>
+
+  <script>
+    let tasks = [];
+
+    function loadTasks() {
+      let isInit = false;
+      if (window.chatty) {
+        try {
+          const initFlag = window.chatty.storageGet('tasks_init', '');
+          isInit = initFlag === 'true';
+          const raw = window.chatty.storageGet('tasks', '');
+          if (raw) {
+            tasks = JSON.parse(raw);
+          }
+        } catch(e) {
+          tasks = [];
+        }
+      }
+      if (!isInit && (!tasks || tasks.length === 0)) {
+        tasks = [
+          { text: 'Создать свой виджет (.chw)', done: false },
+          { text: 'Открыть магазин ChattyWidgets', done: true },
+          { text: 'Настроить слой на рабочем столе', done: false }
+        ];
+        if (window.chatty) window.chatty.storageSet('tasks_init', 'true');
+      }
+      render();
+    }
+
+    function saveTasks() {
+      if (window.chatty) {
+        try {
+          window.chatty.storageSet('tasks_init', 'true');
+          window.chatty.storageSet('tasks', JSON.stringify(tasks));
+        } catch(e) {}
+      }
+    }
+
+    function render() {
+      const list = document.getElementById('tasksList');
+      list.innerHTML = '';
+      tasks.forEach((t, i) => {
+        const item = document.createElement('div');
+        item.className = 'task-item' + (t.done ? ' done' : '');
+
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.className = 'task-checkbox';
+        cb.checked = t.done;
+        cb.onchange = () => toggleTask(i);
+
+        const txt = document.createElement('span');
+        txt.className = 'task-text';
+        txt.textContent = t.text;
+
+        const del = document.createElement('button');
+        del.className = 'btn-del';
+        del.textContent = '✕';
+        del.onclick = () => removeTask(i);
+
+        item.appendChild(cb);
+        item.appendChild(txt);
+        item.appendChild(del);
+        list.appendChild(item);
+      });
+
+      const pending = tasks.filter(t => !t.done).length;
+      document.getElementById('countBadge').textContent = `${pending} активных`;
+    }
+
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const val = input.value.trim();
+      if (!val) return;
+      tasks.push({ text: val, done: false });
+      input.value = '';
+      saveTasks();
+      render();
+    }
+
+    function toggleTask(index) {
+      tasks[index].done = !tasks[index].done;
+      saveTasks();
+      render();
+    }
+
+    function removeTask(index) {
+      tasks.splice(index, 1);
+      saveTasks();
+      render();
+    }
+
+    loadTasks();
+  </script>
+</body>
+</html>

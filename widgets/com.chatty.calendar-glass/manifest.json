@@ -1,0 +1,22 @@
+{
+  "id": "com.chatty.calendar-glass",
+  "name": "Календарь",
+  "version": "1.0.0",
+  "author": "ChattyWidgets",
+  "description": "Элегантный настольный календарь с переключением месяцев, подсветкой сегодня и быстрыми заметками на дни.",
+  "type": "web",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "defaultWidth": 320,
+  "defaultHeight": 300,
+  "minWidth": 260,
+  "minHeight": 240,
+  "resizable": true,
+  "defaultLayer": "desktop",
+  "clickThrough": false,
+  "permissions": ["storage"],
+  "menuItems": [
+    { "id": "today", "title": "Перейти к текущему месяцу" },
+    { "id": "clear-notes", "title": "Очистить все заметки дней" }
+  ]
+}

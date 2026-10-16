@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Стеклянные Часы</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: transparent;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    .widget-card {
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 22, 34, 0.76);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 16px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 8px 32px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .widget-card::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: -20%;
+      width: 140%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 20px;
+    }
+    .date-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #94A3B8;
+    }
+    .time-container {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin: 4px 0;
+    }
+    .time-digits {
+      font-size: 56px;
+      font-weight: 700;
+      color: #F8FAFC;
+      letter-spacing: -1.5px;
+      text-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+    .seconds-badge {
+      font-size: 20px;
+      font-weight: 600;
+      color: #818CF8;
+      font-variant-numeric: tabular-nums;
+    }
+    .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 10px;
+    }
+    .day-name {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #E2E8F0;
+    }
+    .weather-hint {
+      font-size: 12px;
+      color: #38BDF8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .weather-hint:hover {
+      opacity: 0.8;
+    }
+    .chatty-anchor-dot {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 12px;
+      height: 12px;
+      background: #3B82F6;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #60A5FA;
+      cursor: grab;
+      z-index: 99999;
+      transition: transform 0.15s ease;
+    }
+    .chatty-anchor-dot:hover {
+      transform: scale(1.25);
+    }
+    .chatty-anchor-dot::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 4px;
+      height: 4px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="widget-card">
+    <div class="chatty-anchor-dot" title="ChattyWidgets: ЛКМ — переместить, ПКМ — меню"></div>
+    <div class="top-bar">
+      <div class="date-label" id="dateLabel">16 ОКТЯБРЯ</div>
+    </div>
+
+    <div class="time-container">
+      <span class="time-digits" id="timeDigits">00:00</span>
+      <span class="seconds-badge" id="secondsBadge">00</span>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="day-name" id="dayName">Пятница</div>
+      <div class="weather-hint" id="weatherHint" title="Нажмите для обновления погоды" onclick="fetchWeather()">🌤 Загрузка погоды...</div>
+    </div>
+  </div>
+
+  <script>
+    const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+    const months = ['ЯНВАРЯ', 'ФЕВРАЛЯ', 'МАРТА', 'АПРЕЛЯ', 'МАЯ', 'ИЮНЯ', 'ИЮЛЯ', 'АВГУСТА', 'СЕНТЯБРЯ', 'ОКТЯБРЯ', 'НОЯБРЯ', 'ДЕКАБРЯ'];
+
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+
+      document.getElementById('timeDigits').textContent = `${h}:${m}`;
+      document.getElementById('secondsBadge').textContent = s;
+
+      document.getElementById('dayName').textContent = days[now.getDay()];
+      document.getElementById('dateLabel').textContent = `${now.getDate()} ${months[now.getMonth()]}`;
+    }
+
+    const weatherCodes = {
+      0: { text: 'Ясно', icon: '☀️' },
+      1: { text: 'Преимущественно ясно', icon: '🌤' },
+      2: { text: 'Переменная облачность', icon: '⛅' },
+      3: { text: 'Пасмурно', icon: '☁️' },
+      45: { text: 'Туман', icon: '🌫' },
+      48: { text: 'Инейный туман', icon: '🌫' },
+      51: { text: 'Легкая морось', icon: '🌦' },
+      53: { text: 'Морось', icon: '🌦' },
+      55: { text: 'Сильная морось', icon: '🌦' },
+      61: { text: 'Небольшой дождь', icon: '🌧' },
+      63: { text: 'Дождь', icon: '🌧' },
+      65: { text: 'Сильный дождь', icon: '🌧' },
+      71: { text: 'Небольшой снег', icon: '🌨' },
+      73: { text: 'Снегопад', icon: '🌨' },
+      75: { text: 'Сильный снегопад', icon: '❄️' },
+      77: { text: 'Снежные зерна', icon: '❄️' },
+      80: { text: 'Кратковременный дождь', icon: '🌧' },
+      81: { text: 'Ливень', icon: '🌧' },
+      82: { text: 'Сильный ливень', icon: '⛈' },
+      85: { text: 'Снегопад', icon: '🌨' },
+      86: { text: 'Метель', icon: '❄️' },
+      95: { text: 'Гроза', icon: '⛈' },
+      96: { text: 'Гроза с градом', icon: '⛈' },
+      99: { text: 'Сильная гроза', icon: '⛈' }
+    };
+
+    async function fetchWeather() {
+      const hint = document.getElementById('weatherHint');
+      try {
+        // Use Open-Meteo with fallback coordinates (Moscow / User region)
+        let lat = 55.7558;
+        let lon = 37.6173;
+
+        // Try getting coarse coordinates from geojs if available
+        try {
+          const geoRes = await fetch('https://get.geojs.io/v1/ip/geo.json');
+          if (geoRes.ok) {
+            const geo = await geoRes.json();
+            if (geo.latitude && geo.longitude) {
+              lat = parseFloat(geo.latitude);
+              lon = parseFloat(geo.longitude);
+            }
+          }
+        } catch(e) {}
+
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          const current = data.current;
+          if (current) {
+            const temp = Math.round(current.temperature_2m);
+            const tempStr = (temp > 0 ? '+' : '') + temp + '°C';
+            const code = current.weather_code;
+            const wInfo = weatherCodes[code] || { text: 'Облачно', icon: '🌤' };
+
+            const text = `${wInfo.icon} ${tempStr} • ${wInfo.text}`;
+            hint.textContent = text;
+
+            if (window.chatty) {
+              window.chatty.storageSet('cached_weather', text);
+            }
+          }
+        }
+      } catch (err) {
+        if (window.chatty) {
+          const cached = window.chatty.storageGet('cached_weather', '');
+          if (cached) hint.textContent = cached;
+        }
+      }
+    }
+
+    // Developer Custom Menu Handling
+    window.onChattyMenu = function(id) {
+      if (id === 'refresh-weather') {
+        fetchWeather();
+      }
+    };
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Initial weather load and cached recovery
+    if (window.chatty) {
+      const cached = window.chatty.storageGet('cached_weather', '');
+      if (cached) {
+        document.getElementById('weatherHint').textContent = cached;
+      }
+    }
+    fetchWeather();
+    setInterval(fetchWeather, 15 * 60 * 1000); // Every 15 minutes
+  </script>
+</body>
+</html>

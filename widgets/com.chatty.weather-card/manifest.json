@@ -1,0 +1,22 @@
+{
+  "id": "com.chatty.weather-card",
+  "name": "Прогноз Погоды",
+  "version": "1.0.0",
+  "author": "ChattyWidgets",
+  "description": "Детальный погодный информер с текущей температурой, ощущением, влажностью, ветром и прогнозом.",
+  "type": "web",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "defaultWidth": 330,
+  "defaultHeight": 220,
+  "minWidth": 260,
+  "minHeight": 180,
+  "resizable": true,
+  "defaultLayer": "desktop",
+  "clickThrough": false,
+  "permissions": ["network", "storage"],
+  "menuItems": [
+    { "id": "refresh-weather", "title": "Обновить прогноз" },
+    { "id": "change-city", "title": "Выбрать город..." }
+  ]
+}

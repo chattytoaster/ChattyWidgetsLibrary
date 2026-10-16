@@ -1,0 +1,18 @@
+{
+  "id": "com.chatty.sticky-notes",
+  "name": "Быстрые Заметки / ToDo",
+  "version": "1.0.0",
+  "author": "ChattyWidgets",
+  "description": "Компактный стикер для важных заметок и чек-листа задач прямо на рабочем столе с автосохранением.",
+  "type": "web",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "defaultWidth": 280,
+  "defaultHeight": 280,
+  "minWidth": 220,
+  "minHeight": 200,
+  "resizable": true,
+  "defaultLayer": "desktop",
+  "clickThrough": false,
+  "permissions": ["storage"]
+}

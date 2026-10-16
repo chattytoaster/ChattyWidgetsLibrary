@@ -1,0 +1,18 @@
+{
+  "id": "com.chatty.system-gauges",
+  "name": "Датчики Ресурсов",
+  "version": "1.0.0",
+  "author": "ChattyWidgets",
+  "description": "Ультра-легковесный нативный монитор CPU, RAM, SSD и сетевой активности с мгновенным откликом.",
+  "type": "native",
+  "entry": "Widget.xaml",
+  "icon": "icon.png",
+  "defaultWidth": 280,
+  "defaultHeight": 220,
+  "minWidth": 220,
+  "minHeight": 180,
+  "resizable": true,
+  "defaultLayer": "desktop",
+  "clickThrough": false,
+  "permissions": ["system"]
+}
