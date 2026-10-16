@@ -1,68 +1,146 @@
 <Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Background="#D0121622"
-        BorderThickness="0"
+        Background="#D80E121E"
+        BorderBrush="#25FFFFFF"
+        BorderThickness="1"
         CornerRadius="20"
-        Padding="16">
+        Padding="14,16">
     <Border.Effect>
-        <DropShadowEffect BlurRadius="25" ShadowDepth="8" Opacity="0.5" Color="#000000"/>
+        <DropShadowEffect BlurRadius="28" ShadowDepth="10" Opacity="0.5" Color="#000000"/>
     </Border.Effect>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Album / Music Icon Art -->
-        <Border Grid.Column="0" Width="48" Height="48" CornerRadius="12" Background="#1E293B" Margin="0,0,14,0" VerticalAlignment="Center">
-            <TextBlock Text="🎵" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
+        <!-- Realistic Vinyl Disc / Album Art -->
+        <Grid Grid.Column="0" Width="60" Height="60" Margin="0,0,14,0" VerticalAlignment="Center">
+            <!-- Vinyl Groove Background -->
+            <Ellipse Width="60" Height="60">
+                <Ellipse.Fill>
+                    <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                        <GradientStop Color="#1E1B4B" Offset="0.0"/>
+                        <GradientStop Color="#0F172A" Offset="0.65"/>
+                        <GradientStop Color="#020617" Offset="1.0"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+                <Ellipse.Stroke>
+                    <SolidColorBrush Color="#30FFFFFF"/>
+                </Ellipse.Stroke>
+                <Ellipse.Effect>
+                    <DropShadowEffect BlurRadius="16" ShadowDepth="0" Color="#8B5CF6" Opacity="0.4"/>
+                </Ellipse.Effect>
+            </Ellipse>
 
-        <!-- Track Info & Progress -->
-        <Grid Grid.Column="1" VerticalAlignment="Center" Margin="0,0,12,0">
+            <!-- Album Art if available -->
+            <Border Width="60" Height="60" CornerRadius="30">
+                <Border.Clip>
+                    <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
+                </Border.Clip>
+                <Image Source="{Binding CoverBitmap}" Stretch="UniformToFill"
+                       Visibility="{Binding HasCover, Converter={x:Null}}"/>
+            </Border>
+
+            <!-- Center Vinyl Hub -->
+            <Ellipse Width="18" Height="18" Fill="#0B0E17" Stroke="#60FFFFFF" StrokeThickness="1.5"
+                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Track Info & Листалка Controls -->
+        <Grid Grid.Column="1" VerticalAlignment="Center">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{Binding TrackTitle}" FontWeight="Bold" FontSize="13" Foreground="#F8FAFC"
-                       TextTrimming="CharacterEllipsis"/>
-            <TextBlock Grid.Row="1" Text="{Binding Artist}" FontSize="11" Foreground="#94A3B8" Margin="0,2,0,6"
+            <!-- Title -->
+            <TextBlock Grid.Row="0" Text="{Binding TrackTitle}" FontWeight="Bold" FontSize="13.5" Foreground="#F8FAFC"
                        TextTrimming="CharacterEllipsis"/>
 
-            <!-- Thin Live Progress Bar (No slider as requested!) -->
-            <ProgressBar Grid.Row="2" Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="4"
-                         Foreground="#38BDF8" Background="#2038BDF8" BorderThickness="0"/>
+            <!-- Artist and Equalizer row -->
+            <DockPanel Grid.Row="1" Margin="0,2,0,8">
+                <!-- Mini Equalizer bars -->
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="6,0,0,0">
+                    <Border Width="2.5" Height="6" Background="#38BDF8" CornerRadius="1" Margin="1,0"/>
+                    <Border Width="2.5" Height="10" Background="#8B5CF6" CornerRadius="1" Margin="1,0"/>
+                    <Border Width="2.5" Height="8" Background="#EC4899" CornerRadius="1" Margin="1,0"/>
+                </StackPanel>
+                <TextBlock Text="{Binding Artist}" FontSize="11.5" Foreground="#94A3B8"
+                           TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+            </DockPanel>
+
+            <!-- Controls Pill -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <!-- Prev Button -->
+                <Button Command="{Binding PrevCommand}" Content="⏮" Width="30" Height="30" Margin="0,0,4,0"
+                        Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="12" BorderThickness="0" Cursor="Hand">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <!-- Hero Play/Pause Button with Vibrant Gradient -->
+                <Button Command="{Binding PlayPauseCommand}" Content="{Binding PlayPauseIcon}" Width="36" Height="36" Margin="0,0,4,0"
+                        Foreground="#FFFFFF" FontWeight="Bold" FontSize="15" BorderThickness="0" Cursor="Hand">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#6366F1" Offset="0.0"/>
+                            <GradientStop Color="#8B5CF6" Offset="0.5"/>
+                            <GradientStop Color="#EC4899" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Effect>
+                        <DropShadowEffect BlurRadius="14" ShadowDepth="2" Color="#6366F1" Opacity="0.55"/>
+                    </Button.Effect>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="18"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <!-- Next Button -->
+                <Button Command="{Binding NextCommand}" Content="⏭" Width="30" Height="30" Margin="0,0,6,0"
+                        Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="12" BorderThickness="0" Cursor="Hand">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="8"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <!-- Separator -->
+                <Border Width="1" Height="16" Background="#20FFFFFF" Margin="2,0,8,0" VerticalAlignment="Center"/>
+
+                <!-- Volume Down -->
+                <Button Command="{Binding VolumeDownCommand}" Content="🔉" Width="26" Height="26" Margin="0,0,4,0"
+                        Background="#14FFFFFF" Foreground="#94A3B8" FontSize="11" BorderThickness="0" Cursor="Hand">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="13"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <!-- Volume Up -->
+                <Button Command="{Binding VolumeUpCommand}" Content="🔊" Width="26" Height="26"
+                        Background="#14FFFFFF" Foreground="#94A3B8" FontSize="11" BorderThickness="0" Cursor="Hand">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="13"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+
+            <!-- Subtle Live Track Progress Bar -->
+            <ProgressBar Grid.Row="3" Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="3" Margin="0,8,0,0"
+                         Foreground="#38BDF8" Background="#18FFFFFF" BorderThickness="0"/>
         </Grid>
-
-        <!-- Controls -->
-        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-            <Button Command="{Binding PrevCommand}" Content="⏮" Width="30" Height="30" Margin="2,0"
-                    Background="#18FFFFFF" Foreground="#94A3B8" BorderThickness="0" Cursor="Hand">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="8"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Command="{Binding PlayPauseCommand}" Content="{Binding PlayPauseIcon}" Width="36" Height="36" Margin="4,0"
-                    Background="#38BDF8" Foreground="#0F172A" FontWeight="Bold" FontSize="14" BorderThickness="0" Cursor="Hand">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="18"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Command="{Binding NextCommand}" Content="⏭" Width="30" Height="30" Margin="2,0"
-                    Background="#18FFFFFF" Foreground="#94A3B8" BorderThickness="0" Cursor="Hand">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="8"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-        </StackPanel>
     </Grid>
 </Border>

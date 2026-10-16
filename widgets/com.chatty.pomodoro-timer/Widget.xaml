@@ -1,58 +1,91 @@
 <Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Background="#D0121622"
-        BorderThickness="0"
-        CornerRadius="20"
-        Padding="18">
+        Background="#E0121622"
+        BorderBrush="#20FFFFFF"
+        BorderThickness="1"
+        CornerRadius="18"
+        Padding="14,12,14,14">
     <Border.Effect>
-        <DropShadowEffect BlurRadius="25" ShadowDepth="8" Opacity="0.5" Color="#000000"/>
+        <DropShadowEffect BlurRadius="28" ShadowDepth="10" Opacity="0.5" Color="#000000"/>
     </Border.Effect>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Mode & Reset Header -->
-        <DockPanel Grid.Row="0" Margin="0,0,0,4">
-            <Button Command="{Binding SwitchModeCommand}" Content="{Binding ModeText}" Padding="8,3"
-                    Background="#20FFFFFF" Foreground="{Binding AccentColor}" FontWeight="Bold" FontSize="11" BorderThickness="0" Cursor="Hand" DockPanel.Dock="Left">
+        <!-- Top Nav Switcher Pill -->
+        <Border Grid.Row="0" HorizontalAlignment="Center" Background="#10FFFFFF" CornerRadius="16" Padding="3" Margin="0,0,0,8">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding SwitchModeCommand}" Content="🍅 Фокус (25м)" Background="#25FFFFFF" Foreground="#FFFFFF"
+                        FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="10,4" Cursor="Hand">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="14"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Command="{Binding SwitchModeCommand}" Content="☕ Отдых (5м)" Background="Transparent" Foreground="#94A3B8"
+                        FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="10,4" Cursor="Hand">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="14"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <!-- Mode Indicator Badge -->
+        <Border Grid.Row="1" HorizontalAlignment="Center" Background="#14FFFFFF" CornerRadius="8" Padding="10,3" Margin="0,0,0,6">
+            <TextBlock Text="{Binding ModeText}" FontSize="11" FontWeight="Bold" Foreground="{Binding AccentColor}"/>
+        </Border>
+
+        <!-- Timer Display with Glowing Digits -->
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding TimeText}" FontSize="42" FontWeight="ExtraBold" Foreground="#FFFFFF"
+                       HorizontalAlignment="Center">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#EF4444" Opacity="0.45"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <ProgressBar Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="4" Width="180"
+                         Foreground="{Binding AccentColor}" Background="#14FFFFFF" BorderThickness="0" Margin="0,6,0,4"/>
+            <TextBlock Text="🍅 Сессия активна" FontSize="10.5" Foreground="#64748B" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Controls -->
+        <Grid Grid.Row="3" Margin="0,8,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Start / Pause Button -->
+            <Button Grid.Column="0" Command="{Binding ToggleTimerCommand}" Content="{Binding ActionButtonText}"
+                    Foreground="#FFFFFF" FontSize="12" FontWeight="Bold" Height="32" BorderThickness="0" Cursor="Hand">
+                <Button.Background>
+                    <SolidColorBrush Color="#EF4444"/>
+                </Button.Background>
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="8"/>
+                        <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
 
-            <Button Command="{Binding ResetCommand}" Content="↺ Сброс" Width="64" Height="24"
-                    Background="#18FFFFFF" Foreground="#94A3B8" FontSize="11" BorderThickness="0" Cursor="Hand" HorizontalAlignment="Right" DockPanel.Dock="Right">
+            <!-- Reset Button -->
+            <Button Grid.Column="2" Command="{Binding ResetCommand}" Content="Сброс"
+                    Background="#14FFFFFF" Foreground="#94A3B8" FontSize="12" FontWeight="SemiBold" Height="32" BorderThickness="0" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="6"/>
+                        <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-        </DockPanel>
-
-        <!-- Huge Time Display -->
-        <Viewbox Grid.Row="1" MaxHeight="80" Margin="0,8">
-            <TextBlock Text="{Binding TimeText}" FontWeight="Bold" Foreground="#F8FAFC" FontFamily="Segoe UI Variable Display, Segoe UI, sans-serif"/>
-        </Viewbox>
-
-        <!-- Progress Bar -->
-        <ProgressBar Grid.Row="2" Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="5" Margin="0,6,0,14"
-                     Foreground="{Binding AccentColor}" Background="#20FFFFFF" BorderThickness="0"/>
-
-        <!-- Action Button -->
-        <Button Grid.Row="3" Command="{Binding ToggleTimerCommand}" Content="{Binding ActionButtonText}" Height="36"
-                Background="{Binding AccentColor}" Foreground="#FFFFFF" FontWeight="Bold" FontSize="13" BorderThickness="0" Cursor="Hand">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+        </Grid>
     </Grid>
 </Border>
