@@ -20,7 +20,6 @@
         <!-- Header -->
         <DockPanel Grid.Row="0" Margin="0,0,0,12">
             <TextBlock Text="⚡ СИСТЕМА" FontWeight="Bold" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
-            <TextBlock Text="LIVE" FontWeight="Bold" FontSize="10" Foreground="#10B981" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
         </DockPanel>
 
         <!-- CPU -->

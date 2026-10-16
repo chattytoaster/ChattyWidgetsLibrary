@@ -18,9 +18,7 @@
         <!-- Top Row: Date Label -->
         <DockPanel Grid.Row="0">
             <TextBlock Text="{Binding DateLabel}" FontSize="12.5" FontWeight="Bold" Foreground="#94A3B8"
-                       DockPanel.Dock="Left" VerticalAlignment="Center"/>
-            <TextBlock Text="LIVE" FontSize="10" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Right"
-                       DockPanel.Dock="Right" VerticalAlignment="Center"/>
+                       VerticalAlignment="Center"/>
         </DockPanel>
 
         <!-- Middle Row: Large Digital Time + Seconds Badge -->
@@ -38,14 +36,10 @@
                        Margin="6,0,0,10" VerticalAlignment="Bottom"/>
         </StackPanel>
 
-        <!-- Bottom Row: Day Name & Widget Hint -->
+        <!-- Bottom Row: Day Name -->
         <Border Grid.Row="2" BorderBrush="#14FFFFFF" BorderThickness="0,1,0,0" Padding="0,10,0,0">
-            <DockPanel>
-                <TextBlock Text="{Binding DayName}" FontSize="13.5" FontWeight="SemiBold" Foreground="#E2E8F0"
-                           DockPanel.Dock="Left" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding WeatherHint}" FontSize="12" FontWeight="Medium" Foreground="#38BDF8"
-                           HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"/>
-            </DockPanel>
+            <TextBlock Text="{Binding DayName}" FontSize="13.5" FontWeight="SemiBold" Foreground="#E2E8F0"
+                       VerticalAlignment="Center"/>
         </Border>
     </Grid>
 </Border>
