@@ -260,41 +260,7 @@
       border-radius: 13px;
     }
 
-    /* Custom Modern Dark Rounded Range Slider */
-    .chatty-range-slider {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 58px;
-      height: 6px;
-      border-radius: 3px;
-      background: #0C101A;
-      border: 1px solid #20283E;
-      outline: none;
-      cursor: pointer;
-      margin: 0 2px 0 4px;
-      transition: all 0.2s ease;
-      vertical-align: middle;
-    }
-    .chatty-range-slider:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-    }
-    .chatty-range-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 14px;
-      height: 14px;
-      border-radius: 7px;
-      background: #1E2436;
-      border: 1.5px solid #38BDF8;
-      box-shadow: 0 0 8px rgba(56, 189, 248, 0.6), 0 2px 4px rgba(0, 0, 0, 0.5);
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-    .chatty-range-slider::-webkit-slider-thumb:hover {
-      transform: scale(1.25);
-      background: #28314A;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
-    }
+
 
     .chatty-anchor-dot {
       position: absolute;
@@ -353,15 +319,14 @@
         </div>
       </div>
 
-      <!-- Gorgeous Листалка Controls with Volume Slider -->
+      <!-- Gorgeous Листалка Controls -->
       <div class="controls-pill">
         <button class="btn" title="Предыдущий трек (Листать назад)" onclick="prevTrack()">⏮</button>
         <button class="btn btn-play" id="playBtn" title="Воспроизведение / Пауза" onclick="togglePlay()">▶</button>
         <button class="btn" title="Следующий трек (Листать вперед)" onclick="nextTrack()">⏭</button>
-        <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.12); margin: 0 2px;"></div>
+        <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.12); margin: 0 4px;"></div>
         <button class="btn vol-btn" title="Тише" onclick="volDown()">🔉</button>
         <button class="btn vol-btn" title="Громче" onclick="volUp()">🔊</button>
-        <input type="range" class="chatty-range-slider" id="volSlider" min="0" max="100" value="70" oninput="onVolSliderChange(this.value)" title="Регулятор громкости">
       </div>
     </div>
   </div>
@@ -416,35 +381,12 @@
       setTimeout(updateMedia, 350);
     }
 
-    let prevVolValue = 70;
-    function onVolSliderChange(val) {
-      const num = parseInt(val, 10);
-      if (window.chatty) {
-        if (num > prevVolValue) {
-          window.chatty.volumeUp();
-        } else if (num < prevVolValue) {
-          window.chatty.volumeDown();
-        }
-      }
-      prevVolValue = num;
-    }
-
     function volDown() {
       if (window.chatty) window.chatty.volumeDown();
-      const slider = document.getElementById('volSlider');
-      if (slider) {
-        slider.value = Math.max(0, parseInt(slider.value, 10) - 5);
-        prevVolValue = parseInt(slider.value, 10);
-      }
     }
 
     function volUp() {
       if (window.chatty) window.chatty.volumeUp();
-      const slider = document.getElementById('volSlider');
-      if (slider) {
-        slider.value = Math.min(100, parseInt(slider.value, 10) + 5);
-        prevVolValue = parseInt(slider.value, 10);
-      }
     }
 
     function updatePlayState() {
