@@ -267,11 +267,11 @@
       width: 58px;
       height: 6px;
       border-radius: 3px;
-      background: #10131F;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #0C101A;
+      border: 1px solid #20283E;
       outline: none;
       cursor: pointer;
-      margin: 0 4px;
+      margin: 0 2px 0 4px;
       transition: all 0.2s ease;
       vertical-align: middle;
     }
@@ -360,8 +360,8 @@
         <button class="btn" title="Следующий трек (Листать вперед)" onclick="nextTrack()">⏭</button>
         <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.12); margin: 0 2px;"></div>
         <button class="btn vol-btn" title="Тише" onclick="volDown()">🔉</button>
-        <input type="range" class="chatty-range-slider" id="volSlider" min="0" max="100" value="70" oninput="onVolSliderChange(this.value)" title="Регулятор громкости">
         <button class="btn vol-btn" title="Громче" onclick="volUp()">🔊</button>
+        <input type="range" class="chatty-range-slider" id="volSlider" min="0" max="100" value="70" oninput="onVolSliderChange(this.value)" title="Регулятор громкости">
       </div>
     </div>
   </div>
