@@ -260,14 +260,15 @@
       border-radius: 13px;
     }
 
-    /* Custom Modern Range Slider */
+    /* Custom Modern Dark Rounded Range Slider */
     .chatty-range-slider {
       -webkit-appearance: none;
       appearance: none;
-      width: 52px;
-      height: 4px;
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.18);
+      width: 58px;
+      height: 6px;
+      border-radius: 3px;
+      background: #10131F;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       outline: none;
       cursor: pointer;
       margin: 0 4px;
@@ -275,23 +276,24 @@
       vertical-align: middle;
     }
     .chatty-range-slider:hover {
-      background: rgba(255, 255, 255, 0.28);
+      border-color: rgba(56, 189, 248, 0.4);
     }
     .chatty-range-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #38BDF8;
-      box-shadow: 0 0 8px rgba(56, 189, 248, 0.8), 0 2px 4px rgba(0, 0, 0, 0.4);
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background: #1E2436;
+      border: 1.5px solid #38BDF8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.6), 0 2px 4px rgba(0, 0, 0, 0.5);
       cursor: pointer;
       transition: transform 0.15s ease, background 0.15s ease;
     }
     .chatty-range-slider::-webkit-slider-thumb:hover {
-      transform: scale(1.3);
-      background: #60A5FA;
-      box-shadow: 0 0 12px rgba(96, 165, 250, 0.9);
+      transform: scale(1.25);
+      background: #28314A;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
     }
 
     .chatty-anchor-dot {
