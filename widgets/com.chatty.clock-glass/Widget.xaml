@@ -1,0 +1,51 @@
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Background="#D0121622"
+        BorderBrush="#25FFFFFF"
+        BorderThickness="1"
+        CornerRadius="20"
+        Padding="20,16">
+    <Border.Effect>
+        <DropShadowEffect BlurRadius="28" ShadowDepth="10" Opacity="0.5" Color="#000000"/>
+    </Border.Effect>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Row: Date Label -->
+        <DockPanel Grid.Row="0">
+            <TextBlock Text="{Binding DateLabel}" FontSize="12.5" FontWeight="Bold" Foreground="#94A3B8"
+                       DockPanel.Dock="Left" VerticalAlignment="Center"/>
+            <TextBlock Text="LIVE" FontSize="10" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Right"
+                       DockPanel.Dock="Right" VerticalAlignment="Center"/>
+        </DockPanel>
+
+        <!-- Middle Row: Large Digital Time + Seconds Badge -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,4">
+            <!-- Big Hours & Minutes -->
+            <TextBlock Text="{Binding TimeDigits}" FontSize="56" FontWeight="Bold" Foreground="#F8FAFC"
+                       VerticalAlignment="Bottom">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="20" ShadowDepth="4" Color="#6366F1" Opacity="0.4"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <!-- Seconds Badge -->
+            <TextBlock Text="{Binding SecondsBadge}" FontSize="22" FontWeight="SemiBold" Foreground="#818CF8"
+                       Margin="6,0,0,10" VerticalAlignment="Bottom"/>
+        </StackPanel>
+
+        <!-- Bottom Row: Day Name & Widget Hint -->
+        <Border Grid.Row="2" BorderBrush="#14FFFFFF" BorderThickness="0,1,0,0" Padding="0,10,0,0">
+            <DockPanel>
+                <TextBlock Text="{Binding DayName}" FontSize="13.5" FontWeight="SemiBold" Foreground="#E2E8F0"
+                           DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding WeatherHint}" FontSize="12" FontWeight="Medium" Foreground="#38BDF8"
+                           HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Border>
