@@ -10,11 +10,11 @@
     </Border.Effect>
     <Grid>
         <!-- Image View -->
-        <Image Source="{Binding CurrentImage}" Stretch="UniformToFill"/>
+        <Image Source="{Binding CurrentImage}" Stretch="UniformToFill" Visibility="{Binding ImageVisibility}"/>
 
         <!-- Placeholder when empty -->
         <Border Background="#C0101420" Padding="16"
-                Visibility="{Binding CurrentImage, Converter={x:Null}}">
+                Visibility="{Binding PlaceholderVisibility}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="🖼️" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,6">
                     <TextBlock.Effect>

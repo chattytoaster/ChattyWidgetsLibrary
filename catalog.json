@@ -14,9 +14,9 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.calendar-glass/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.calendar-glass.chw",
     "size": "9 KB",
-    "sha256": "34088cb8c580491881c43e345ef2106191a61949b3270965896f76028c167a3a",
-    "contentHash": "cc14aa5461336bb0f08f243bf196170511ea374c32f033930651bef6ba90d105",
-    "signature": ""
+    "sha256": "81118f577a24eccae53624a81054044f029d3a2e289a7f284849c2e85d365e0b",
+    "contentHash": "f3fbcf0f72c87cd81296ea702e4b287e52825e5a475ee6474142a8a9d9003cb8",
+    "signature": "XgRYX6X25lZyLGInMOC5TdSNNbgjm2fTM8qacp3TASiso/9bjfCjQY32UBgxnh5GBXwsUymAau21MebSEa/ZgJTtDNRuDXV2bj9WR/zyVmEmWKowvCa/k6NiWiGFp1luO1rmc4/cZhizMESoVIGShB8d53EGDNZJyBwvmR3vDHg4X/Pe/I4CfLlWuzG5kSny/TlpAu72o48TZ2JSx4jf3Khr4dDMMGy+Tx2gZvmq36bbFSFsS83Y0zkm15y4CVb4OsGLtqi0ASqbmidCjE7Vj7ylNQtTb5IV9Bb66EwuIbfl6BumWs8EkuNuSgY7G6SBuVAc1zjfkqk9FwOawiCCDw=="
   },
   {
     "id": "com.chatty.clock-glass",
@@ -32,10 +32,10 @@
     "type": "native",
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.clock-glass/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.clock-glass.chw",
-    "size": "8 KB",
-    "sha256": "04e3d495b8f0c9e37514f8b2e4381285993d89ffcb657c730e7dfca2d7671d81",
-    "contentHash": "a02e477035639091edd8c0a29a6caff3a36179026979575668fd9b33484acec3",
-    "signature": ""
+    "size": "9 KB",
+    "sha256": "79091f8acbe003f000b755cc53666bede3275ccf5cc68340c427d8f31473a8de",
+    "contentHash": "b26198a05097712dc04ca51c3f17bca86686ac3a558995c9db8a458490513340",
+    "signature": "iezLp/II9X62oqR8Es771i4xSsW22ZjMF5C6z0Cl9O4hXU+yTLc01pdbNvW28R/B7mL4zGsyMC+j0SYnbA9+KQrNYfaSLWs45ZAW1F/3LG0QM8iofOjdOfNSLD420YV0vDfdbTj8yQAdkDfdy7LUC8f73iwgSwBavxrYuGL6HPGMw5WteOw+oPh6SU3nuy5lJ6+KEQWNSFKsxttwmZIz3JtPTfdC5z/NmZk15C6Qc6/9p/7zjxFyIR0WC7KeZw3fnnHOmkSwNNRyILjRlUTXCt1vPdp7DAXs5wUz5PMhjjnolY/NuyHpeN2Zf3ftrJGZJuQYcsgjgujX6I31lhpRLw=="
   },
   {
     "id": "com.chatty.crypto-tracker",
@@ -52,9 +52,9 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.crypto-tracker/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.crypto-tracker.chw",
     "size": "9 KB",
-    "sha256": "bcefd58119eb8019c6ab6c9bd19df626bcbca746e0901a1b6be0e8b89552bec5",
-    "contentHash": "2967de971b2a26c6d40d2e5d35ccfbf17113879646bd914ef1c651ad51be074a",
-    "signature": ""
+    "sha256": "4499c98a79e98451d09c17d058b17a62f4299bf68752cf7c0b91f25d08b226fb",
+    "contentHash": "31324c906e6ab05762c361869a38cf3de078877b0d51ea05498d7605fba709f9",
+    "signature": "gncwzeoFVYdu8B+3ExdVwqwAK1vwur6RzEhgxcW6AdCM0MT3K05mT8GmqWub7ilsVFBqyTNtlZouun+ehe5Vaa53icBjo98UdjDeXp1hZtlatKXaihwM1cdpLnysa36cHMVREvDQ6pEXTqqYw/5qMc4BPpyGJhbU0VWXpaNrfsCe92Ib2DDeijluWjRYx5iPbyyiOVvSIxo2qCgT+5arKqJ9IbKqpOlcK47TkvD3VeVykX5/zAKeTMyQ8MsRrgrXOQcYhQPcxeLeGDFiUaA4FTwbyh7PFyfKFQ2II0w4TpDzNEb0eyXlF67YFuKFbD5YBqnQb7RM/ccsAXpeGYo7ZQ=="
   },
   {
     "id": "com.chatty.gpu-monitor",
@@ -71,9 +71,9 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.gpu-monitor/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.gpu-monitor.chw",
     "size": "9 KB",
-    "sha256": "958717ea381126d755b145a80a66e3522a9ef42f00ad00de2acbcb0b3d012571",
-    "contentHash": "47a2408d5abf582c5914f72abb81e07eb947218e390bf2417f994c5217b5e0f7",
-    "signature": ""
+    "sha256": "451e2d09f41174578d106bac69be73bc228259e0131d8c331fa8136d141b4ef5",
+    "contentHash": "1ed397bc72311e3d8cc695df03dd1b22583ea792b3e32daf8fc47966e2473371",
+    "signature": "YLNWdsE5s1KlhA/V9kAkXqZ3PAqmf4cD+eSWMhyeirsaIi70VCKzaHEJQiekxQg9etXWnhIBeBwybnAvdrdfHy7h5AnT/AvVPBouhO/iggL72zkYGrDpSWu2N/f8Ef/E7TbI9Cojf+KdQVo9oahPne4ILsufi1BmTRdnao3bxinWXGVAfGQFIBiH287VjTjcF0p7D9AbddtLVN03/lp+1OBlWYK8QruGQ9EqcyQOCtF98MA64iCkbEpZyok5RHLsI9oT9mCqsR9t15zmoCdImLHpZ6HiH6zl3T6SbnGpS2Rlfsm5tV1gNJqKKDLKXvkuRM/D4hADN/9PpzTHdT12LQ=="
   },
   {
     "id": "com.chatty.media-frame",
@@ -90,9 +90,9 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.media-frame/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.media-frame.chw",
     "size": "9 KB",
-    "sha256": "5043355658fdda4c8e5225c4e7ffc28c4c96d1941e824045a8c351380742aa99",
-    "contentHash": "14a9c25853d4a96b12278920654f775187f44bc68c034a40997defc350a06df4",
-    "signature": ""
+    "sha256": "f74eb24870bf2a8c75d2667e8486195ec443fea18a9eee3a9ea8979f52b5d46b",
+    "contentHash": "9297dbcc182793e4ac479a54288c13f2834a2c412efe53d0e6f3f510aaf21fcb",
+    "signature": "Uf/1TbgqHYzFGnMrMsIJ7+sxNzvt0nuZz5YUviaKaGUogkst5FhUmjr1CyDcdiEwjlXiMcD6JEmnZn3XWU+fLYyBAbmR+0S99tvRm+xM/sQWXZreFlmDAOO+pVnXJ769iwhaFS1gZ6K62X92Q7NiYSqDo5SU8GoQAOJN9mLL4xbvNQAVwFjpcUL1InfIYgCZC19tBeSYh2g52Kr/bkr/NYHQsztn1/wtUrhr6tZI3ieet70CwuVP2RKFj0f05SziZaj4IXGK3rrOCdPyLrUfDKfsVWWT9kdZ8jYtDb4ub4NyJ51EcrYC1TP8wbQS9cBAYHKe82EA/Tlt6SjKxGju0g=="
   },
   {
     "id": "com.chatty.music-player",
@@ -108,10 +108,10 @@
     "type": "native",
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.music-player/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.music-player.chw",
-    "size": "9 KB",
-    "sha256": "7f3ede54a41099a3163a0e4d27b3ba30ddf9fa0b11cc4c765af15e3659823a7a",
-    "contentHash": "608491964dfc21fc0c4ed885cb3a2ee2a06e94bce11c2b702fff559467ab3016",
-    "signature": ""
+    "size": "10 KB",
+    "sha256": "16f5657b698d23f1215bfe046dbda781ce711aef17abd592a66c7201d4d427ba",
+    "contentHash": "7ffa0edb1cc8a48203fcb7b79d124d4aec3222feeefbd6dfb54f2fbca27a9da7",
+    "signature": "IAfOpyqyOBu7JiBxanC5zgSEi3fI+DYySPYNq23h3NEHhMPfvDjqjqlMJI87yCG8GyX5JsNBDNs4aCwct4O3ssPuQd5cu0vRL3b/B43/paXUJGDtuOcj6SOXb1LI6L6qowq6y3dG1NuVIRJ/MlllFXcF8cTZ+01yJRW/I5uQU4jQqcoRYUMcSpp5KiFCwK37cqR5v1OvrhEYJe8LT5GRw1phV5DSdx9XFJL/x1cCtmkdzY3L4Ujpi42ginmjDJf6uU2ntMANGQml9qoIzuB1OLTLBEuFRpJf0hMibO8J1FgSR1XJLjCshNp2gpobdXeCgkEtKDVVAh7m6BmFNjXRnw=="
   },
   {
     "id": "com.chatty.pomodoro-timer",
@@ -128,9 +128,9 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.pomodoro-timer/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.pomodoro-timer.chw",
     "size": "9 KB",
-    "sha256": "a00a4312320c91da162b3e9ae7db93a01fa3e8afc453a341efd0d89e5139c2c2",
-    "contentHash": "872a8b85fc05b60ab25d49834a6c1b3ed3cdef1dfa92a7580f892208edb4b587",
-    "signature": ""
+    "sha256": "6bdc437491de654f30ddcf2993230f4dcef3cda648f82a6b2a0c33db88d2dd79",
+    "contentHash": "0ef12f8e85a9fad2684cc6683f823d2f909b477543feb694931af8fc6f83306d",
+    "signature": "aT6tEoCWdULAndllruAQQxuib0eBivahm+vk5IyKcPHGG4hCNx9aIr+PTTBxMQhFGZb+Nr1DPqdJtRlIXWWcDGlKItCxOXl2makHYGlZ5Evq2KxfyLZ/a2GAPfRNwnVsTHYwTeQ/OKy2CSOk34Cfy1AR3Sf70H6+Q8r4+Ql03cgtxuzD1noYNhyoPV5rvK6mXNSPdiz4ztmBfkM5JOgeg6Nmu9VZ5xGqa2rtIael0xRoVXu9Yr9Hiwkwe+AlwQC6rHiTbEEcIubLZ18dDpobOAoSYcFLijpsTIRSxwmCL0OEyDleb4lIvIby8Ah6eOIYHN5zBHXKuWKBVTeTp84RKA=="
   },
   {
     "id": "com.chatty.quick-dock",
@@ -146,10 +146,10 @@
     "type": "native",
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.quick-dock/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.quick-dock.chw",
-    "size": "8 KB",
-    "sha256": "d8f90502c4b7052ef1f141dd08144a8a76e1532457af0743766ba4e8a32bed6a",
-    "contentHash": "32323281a87b0072ff85ce76682ca34bbe55598dc1a67817a0bdac86affd033d",
-    "signature": ""
+    "size": "9 KB",
+    "sha256": "2b0ca639d15f5c18ef2c389193237768128315001dae32ec86e032f6af6f3c5b",
+    "contentHash": "3469b22dcf2b038ee2aa4ec966b30aebad9f28d10ca9d7353c461ef6c2ebd173",
+    "signature": "BkTYnF9ZIjGol6JkMzwG+IA2NW/bTo5aFW5ga1vj623xSbkB7h3P9mij+DqsT7UD//i7W7GVFg+LHgVUxCbl69ofInFb2uknClU0NhkWe9uWNWYS+pz1pZuwiyzz1VwjnltRZx0MIvZsjdGGMfseCKbnbbRo3A/dpvaYhdo7/dt/rYgqR89SgwXaTHn8yEkDXRAL9UVWlfyl29X3TrpUroVKYJncPIxWN4LBK6L8Vd/9s9Pqx7+9rfcorBIls45PtK/nScqsIXHidF+DTWAt066QoH9P1TEM+JKwwgq77prVEqK1ddC/uuyER3oW8QLbYuvTr2diebQUOMpFCGQxFA=="
   },
   {
     "id": "com.chatty.rss-reader",
@@ -166,9 +166,9 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.rss-reader/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.rss-reader.chw",
     "size": "9 KB",
-    "sha256": "ea87da9947ade05b4f44cecc071981f28bf964de20fd27896bc4c1547cb62c9b",
-    "contentHash": "2c24d2c072a8eece045f5ac34b2a8eb523bdca7ade1236241d2db4f7c3647cbd",
-    "signature": ""
+    "sha256": "224ae300f540b6f652dd72cea82a1b98e9d2cc7c3eda4624c8a1d1226fa2b819",
+    "contentHash": "19d9ab0243d9786fa0f4ed12125b3c1e6f7e354d98153c077d0033d8400f134c",
+    "signature": "EI84uta2Y45wKzEDz3rm+lSrgSy7+rhNghbC3lZi03deIW3IUOHd0/10AuiBSRNkrz/IgeBBesCzlT+bLf7rbNLah1QA9XCozWWHMlX9I41DAFTeiPl/QYvkOnkgw40zJMs4nmLffvnJGYXpSpe85X/g9Lz2wVNOBaQQwRekFAEBpXGx7+tSQ4/3ForghyDsz7tX/lfiXCGUU9Ce6VJScvQKxEiv/d64gpZkEAYk31OL1X8rjB6r7qc4Nu0e1KqH9AfMhGFiLZc6LJsTRcKFALueEhLRVru0xfRPf59rsYKcSD8s8pffem1stSutSHO7naICqoJmDl0GexE+rF9oVA=="
   },
   {
     "id": "com.chatty.sticky-notes",
@@ -185,9 +185,9 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.sticky-notes/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.sticky-notes.chw",
     "size": "9 KB",
-    "sha256": "7a05e799480b41cb41bb9b4cd575231163dc184bc761066cce4321953f1a66f7",
-    "contentHash": "70bba0fb7e49fd7b5982bff52779c9ee2112c1bf503519a7c618f8f5080c3b47",
-    "signature": ""
+    "sha256": "926b2a9a824ac596f807b9cabff9f2a71bab62a37d54edcf8c98a179b3b63f6a",
+    "contentHash": "71b2fd5aae83f12b2cb0e08a3fda596e51766e6600b96c99cc73d12372238040",
+    "signature": "jVHcxAt2LLn3ZNp97HLmNPk172QiMKi+HCznft8dz7PM3P39iPDJFxqvcfWBs+Km3qGn/pfsN7kmSGquYU9fYMdgSXZvKyg+C+a+Czh5QHRSumCqKuXOzn4RWpT8pMp67b6X70tJ8izYh+kh49+CcNeeCmCa4VWoEmj6g6jcGFnE1BVnPmANnTE5O/KLPaUwswa3TdQ6oQp8tzMbo7aoOcVOdLGiOKf1wQ3JVoh9UbG+XC59p8x1klBTAhugvGtauSojVoXJopYfm5sZtYo4YVWtcBo4F2O72ft2a2nGDffY+PLsdJqs3fZdnAqtv2AY7WxqnaKucpLi4o3IZkGJtw=="
   },
   {
     "id": "com.chatty.system-gauges",
@@ -204,9 +204,9 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.system-gauges/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.system-gauges.chw",
     "size": "9 KB",
-    "sha256": "c84cea39be79c795fe804605387b1e13d7a1b52f5829d2357a5a64985ce92c5a",
-    "contentHash": "25fdf60c7aac584cc865e274a90ffa01734c86a4b061265f54d6a3d66a50e900",
-    "signature": ""
+    "sha256": "002f959710d2155dc36e93e8cee186ddae71f7b4b79b5d9962027b03fca60922",
+    "contentHash": "3a5cf489f837601569a5c2b8a11c54e59a194d60f2cbe20331de1cbaca49b6fe",
+    "signature": "fbLRbNIdnbmo2HFyo+i3tVTODERS3lONcbqh/CwWIDDBCmoig8oa6S/P7Br0nxq6HW2RERu6psZDmNX7RCbYxfnArXCZsbL6WyjPbSlIx2IORm8Bg36Fe+LkGYC2vqT9w08bhvCwEnDrnKrko01IrjMMquEyHbovnCAM0+bHGHQ51H9mDVdTRGZFaTnb0LFUazDoy0mbm7KexkYEtPAx4243wxg6lN6wAjAR6SB9WGOsT82DbYEj8KUm+1h3VqOkxG8Rax+/ju4++V5cPaU135GF9kvAGd3lm3DGys/wSUXO5PuxpqlWSEmoBi2K3UTGTnsGSdda0yoR/hyNigXzHQ=="
   },
   {
     "id": "com.chatty.weather-card",
@@ -223,8 +223,8 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.weather-card/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.weather-card.chw",
     "size": "9 KB",
-    "sha256": "13188e0b75baf3b1024aad2e18f3a930e0082a2813c42f027b9dfee651f5e9be",
-    "contentHash": "fc7a722f460c3980ebf507265e3634480288ef284d91a97efb5773335472b148",
-    "signature": ""
+    "sha256": "75445564878162b30254d32c4ba26148014441c660d2a30cb695619640361133",
+    "contentHash": "56084a9661299078912bdc332971e52398269e0f82922c22c7f0d60698571c30",
+    "signature": "Byz+cC1JzuEQXQoOfF5OnvlHu3cCfqmDtoC0DS2o1l4f58Di4B6c1gUAQJ0N3ieOGPIFW6Ujt5hdWEsInZhmrm+Q60ZbWPaOwkLfGjD5wlntyyPFlFBrehSboOjkX93VgAMol57Jf56dt51hS1hfNuQrjNR/jFpqOVeY+o7+atupkQN83j1ENcUFC0bODcWcfX4RinwUo8iWieGEZgRpnc8KUdGwRtVb7NC1xQdzF/SMTOUQJt0k/QOwgAg3T88/D+j/87KcV4FgSSicIiTGvl14YqmsUIpd2X6AGKik6HTizRtHRk7/9om6gP2XEBQhNXRLdWGgkKSsmB14TtiFHA=="
   }
 ]
