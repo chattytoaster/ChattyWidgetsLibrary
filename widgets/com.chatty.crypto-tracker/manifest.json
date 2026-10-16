@@ -1,21 +1,18 @@
 {
   "id": "com.chatty.crypto-tracker",
   "name": "Курсы Валют и Крипты",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "ChattyWidgets",
-  "description": "Котировки BTC, ETH, GRAM, SOL, а также курсы USD, EUR и RUB в реальном времени.",
-  "type": "web",
-  "entry": "index.html",
+  "description": "Котировки BTC, ETH, TON, SOL, а также курсы USD и EUR в реальном времени на нативном движке.",
+  "type": "native",
+  "entry": "Widget.xaml",
   "icon": "icon.png",
   "defaultWidth": 310,
-  "defaultHeight": 240,
+  "defaultHeight": 320,
   "minWidth": 240,
-  "minHeight": 180,
+  "minHeight": 200,
   "resizable": true,
   "defaultLayer": "desktop",
   "clickThrough": false,
-  "permissions": ["network"],
-  "menuItems": [
-    { "id": "refresh-rates", "title": "Обновить котировки" }
-  ]
+  "permissions": ["network"]
 }

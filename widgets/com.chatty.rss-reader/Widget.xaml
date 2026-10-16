@@ -1,0 +1,59 @@
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Background="#D0121622"
+        BorderThickness="0"
+        CornerRadius="20"
+        Padding="16">
+    <Border.Effect>
+        <DropShadowEffect BlurRadius="25" ShadowDepth="8" Opacity="0.5" Color="#000000"/>
+    </Border.Effect>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <TextBlock Text="📰 " FontSize="12" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding FeedTitle}" FontWeight="Bold" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+            </StackPanel>
+            <TextBlock Text="LIVE" FontWeight="Bold" FontSize="10" Foreground="#10B981" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+        </DockPanel>
+
+        <!-- News Cards List -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Articles}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding OpenCommand}" Margin="0,3" Padding="10,8"
+                                Background="#12FFFFFF" BorderThickness="0" Cursor="Hand" HorizontalContentAlignment="Stretch">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Source & Time -->
+                                <DockPanel Grid.Row="0" Margin="0,0,0,4">
+                                    <TextBlock Text="{Binding Source}" FontSize="10" FontWeight="SemiBold" Foreground="#38BDF8" DockPanel.Dock="Left"/>
+                                    <TextBlock Text="{Binding Time}" FontSize="10" Foreground="#64748B" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+                                </DockPanel>
+
+                                <!-- Title -->
+                                <TextBlock Grid.Row="1" Text="{Binding Title}" FontSize="11" FontWeight="Normal" Foreground="#E2E8F0"
+                                           TextWrapping="Wrap" LineHeight="15"/>
+                            </Grid>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Border>

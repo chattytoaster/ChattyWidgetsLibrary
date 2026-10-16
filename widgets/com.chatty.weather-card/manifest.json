@@ -1,22 +1,18 @@
 {
   "id": "com.chatty.weather-card",
   "name": "Прогноз Погоды",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "ChattyWidgets",
-  "description": "Детальный погодный информер с текущей температурой, ощущением, влажностью, ветром и прогнозом.",
-  "type": "web",
-  "entry": "index.html",
+  "description": "Детальный погодный информер с текущей температурой, влажностью, ветром, давлением и прогнозом на 4 дня на нативном движке.",
+  "type": "native",
+  "entry": "Widget.xaml",
   "icon": "icon.png",
-  "defaultWidth": 330,
-  "defaultHeight": 220,
+  "defaultWidth": 320,
+  "defaultHeight": 250,
   "minWidth": 260,
-  "minHeight": 180,
+  "minHeight": 200,
   "resizable": true,
   "defaultLayer": "desktop",
   "clickThrough": false,
-  "permissions": ["network", "storage"],
-  "menuItems": [
-    { "id": "refresh-weather", "title": "Обновить прогноз" },
-    { "id": "change-city", "title": "Выбрать город..." }
-  ]
+  "permissions": ["network", "storage"]
 }

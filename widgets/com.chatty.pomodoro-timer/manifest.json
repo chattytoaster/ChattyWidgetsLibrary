@@ -1,15 +1,18 @@
 {
   "id": "com.chatty.pomodoro-timer",
   "name": "Умный Таймер",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "ChattyWidgets",
-  "description": "Таймер с двумя режимами: Фокус (Pomodoro 25/5 мин) и Обычный таймер обратного отсчета с быстрыми пресетами.",
-  "type": "web",
-  "entry": "index.html",
-  "defaultWidth": 280,
-  "defaultHeight": 230,
-  "minWidth": 240,
-  "minHeight": 200,
+  "description": "Нативный таймер с режимами Фокус (Pomodoro) и Отдых с плавным индикатором прогресса.",
+  "type": "native",
+  "entry": "Widget.xaml",
+  "icon": "icon.png",
+  "defaultWidth": 260,
+  "defaultHeight": 220,
+  "minWidth": 220,
+  "minHeight": 180,
+  "resizable": true,
   "defaultLayer": "desktop",
-  "permissions": ["system"]
+  "clickThrough": false,
+  "permissions": []
 }

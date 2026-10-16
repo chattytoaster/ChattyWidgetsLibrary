@@ -1,22 +1,18 @@
 {
   "id": "com.chatty.music-player",
   "name": "Мини-Медиаплеер",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "ChattyWidgets",
-  "description": "Стильный настольный контроллер для Spotify, Яндекс.Музыки, браузера и системных аудиоплееров.",
-  "type": "web",
-  "entry": "index.html",
+  "description": "Стильный нативный контроллер медиа для Windows (Spotify, Яндекс.Музыка, Браузер).",
+  "type": "native",
+  "entry": "Widget.xaml",
   "icon": "icon.png",
-  "defaultWidth": 340,
-  "defaultHeight": 130,
+  "defaultWidth": 330,
+  "defaultHeight": 100,
   "minWidth": 260,
-  "minHeight": 110,
+  "minHeight": 85,
   "resizable": true,
   "defaultLayer": "desktop",
   "clickThrough": false,
-  "permissions": ["media"],
-  "menuItems": [
-    { "id": "toggle-art-style", "title": "Сменить стиль пластинки" },
-    { "id": "refresh-media", "title": "Обновить информацию о треке" }
-  ]
+  "permissions": ["media"]
 }
