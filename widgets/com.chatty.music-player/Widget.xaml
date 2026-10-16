@@ -52,7 +52,7 @@
                     <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
                 </Border.Clip>
                 <Image Source="{Binding CoverBitmap}" Stretch="UniformToFill"
-                       Visibility="{Binding HasCover, Converter={x:Null}}"/>
+                       Visibility="{Binding CoverVisibility}"/>
             </Border>
 
             <!-- Center Vinyl Hub -->
