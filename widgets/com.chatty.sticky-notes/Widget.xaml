@@ -24,11 +24,13 @@
                         Content="✓" Width="24" Height="22" Background="{Binding AccentSoftBrush}"
                         Foreground="{Binding HeaderBrush}" FontSize="11" FontWeight="Bold" BorderThickness="0"
                         Cursor="Hand" Margin="0,0,8,0">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="6"/>
-                        </Style>
-                    </Button.Resources>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
                 <TextBlock Text="{Binding ActiveCountText}" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
             </StackPanel>
@@ -64,11 +66,13 @@
             <Button Grid.Column="2" Command="{Binding AddTaskCommand}" Content="+" Width="34" Height="30"
                     Background="{Binding AccentBrush}" Foreground="#0F172A" FontWeight="Bold" FontSize="15" BorderThickness="0"
                     Cursor="Hand" VerticalAlignment="Center" ToolTip="{Binding AddTaskTooltip}" IsEnabled="{Binding CanAddTask}">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="8"/>
-                    </Style>
-                </Button.Resources>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
         </Grid>
 

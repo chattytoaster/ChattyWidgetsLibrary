@@ -40,10 +40,10 @@
                         <DockPanel>
                             <!-- Left: Icon + Symbol + Name -->
                             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Icon}" FontSize="13" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Icon}" FontSize="13" Foreground="#F8FAFC" Margin="0,0,6,0" VerticalAlignment="Center"/>
                                 <TextBlock Text="{Binding Symbol}" FontSize="12" FontWeight="Bold" Foreground="#F8FAFC"
                                            VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Name}" FontSize="10" Foreground="#64748B" Margin="6,0,0,0"
+                                <TextBlock Text="{Binding Name}" FontSize="10" Foreground="#94A3B8" Margin="6,0,0,0"
                                            VerticalAlignment="Center"/>
                             </StackPanel>
 
