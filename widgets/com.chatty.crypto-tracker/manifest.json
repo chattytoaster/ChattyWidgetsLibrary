@@ -3,7 +3,7 @@
   "name": "Курсы Валют и Крипты",
   "version": "1.2.0",
   "author": "ChattyWidgets",
-  "description": "Котировки BTC, ETH, SOL, GRAM (Грам), BNB, XRP, а также курсы USD, EUR, GBP, JPY в реальном времени на нативном движке.",
+  "description": "Котировки BTC, ETH, SOL, GRAM, BNB, XRP, а также курсы USD, EUR, GBP, JPY в реальном времени на нативном движке.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",
