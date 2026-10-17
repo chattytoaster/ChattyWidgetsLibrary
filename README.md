@@ -1,51 +1,53 @@
 # 🏪 ChattyWidgets Community Library & Catalog
 
-Официальный каталог и открытая библиотека виджетов сообщества для приложения **[ChattyWidgets](https://github.com/chattytoaster/ChattyWidgets)**.
+> **Language / Язык:** **[🇬🇧 English](README.md)** • **[🇷🇺 Русский](README.ru.md)**
 
-Каждый виджет в этом каталоге криптографически подписан официальным RSA-ключом и доступен для быстрой установки в один клик прямо из Магазина приложения.
+Official catalog and open-source community widget repository for **[ChattyWidgets](https://github.com/chattytoaster/ChattyWidgets)**.
+
+Every widget in this repository is cryptographically signed with the official RSA key and available for instant 1-click installation from the in-app Store.
 
 ---
 
-## 📦 Каталог официальных виджетов (12 виджетов)
+## 📦 Official Widgets Catalog (12 Widgets)
 
-| Иконка | Название | ID | Тип | Описание |
+| Icon | Name | ID | Type | Description |
 | :---: | :--- | :--- | :---: | :--- |
-| ⏱ | **Стеклянные Часы** | `com.chatty.clock-glass` | Native | Элегантные цифровые часы с мировыми часовыми поясами, датой и секундной стрелкой |
-| 📅 | **Стеклянный Календарь** | `com.chatty.calendar-glass` | Native | Настольный календарь с выбором первого дня недели (ПН/ВС), номерами недель и быстрыми заметками |
-| 🌤 | **Прогноз Погоды** | `com.chatty.weather-card` | Native | Детальный информер погоды через Open-Meteo API с глобальным поиском городов, координатами и выбором единиц (м/с, км/ч, мм рт. ст.) |
-| 💎 | **Курсы Валют и Крипты** | `com.chatty.crypto-tracker` | Native | Котировки криптовалют (BTC, ETH, SOL, GRAM, DOGE, XRP...) и фиатных валют (USD, EUR, RUB, CNY, KZT) в реальном времени |
-| 🎵 | **Мини-Медиаплеер** | `com.chatty.music-player` | Native | Контроллер Spotify, Яндекс.Музыки, браузера и системного звука с реалистичным вращающимся винилом и бегущей строкой |
-| ⏳ | **Таймер & Pomodoro** | `com.chatty.pomodoro-timer` | Native | Обычный таймер обратного отсчета с кнопками быстрой корректировки (-1м, +1м, +5м, +10м), режимы Фокус 25 мин и Отдых 5 мин со звуковым сигналом |
-| 📝 | **Заметки и Задачи** | `com.chatty.sticky-notes` | Native | Компактный стикер для заметок и чек-листа задач прямо на рабочем столе с автоматическим сохранением состояния |
-| 🚀 | **Быстрый Док / Лаунчер** | `com.chatty.quick-dock` | Native | Плавающая панель быстрого запуска любимых программ, терминала, проводника и сайтов с выбором файлов и иконок |
-| ⚡ | **Системные Датчики** | `com.chatty.system-gauges` | Native | Ультра-легковесный аппаратный монитор CPU, RAM, диска и сети. Поддержка круговых шкал (сетка 2x2 или 1 в ряд) и линейных полосок |
-| 🎮 | **Монитор GPU & Графика** | `com.chatty.gpu-monitor` | Native | Мониторинг видеокарты DirectX/DWM: загрузка 3D-ядра %, видеопамять VRAM % и температура с круговыми диаграммами и полосками |
-| 🖼 | **Медиа-Фоторамка** | `com.chatty.media-frame` | Native | Настольная рамка со скруглёнными углами, поддержкой Drag & Drop, выбором папки или одного фото и автоскрываемыми элементами управления |
-| 📰 | **Лента Новостей & RSS** | `com.chatty.rss-reader` | Native | Новостная лента с автоскроллом и поддержкой международных каналов (Новости ООН, Euronews, Hacker News, Habr, CoinDesk, NASA) |
+| ⏱ | **Glass Clock** | `com.chatty.clock-glass` | Native | Elegant digital clock with world timezones, localized date, and seconds toggle |
+| 📅 | **Glass Calendar** | `com.chatty.calendar-glass` | Native | Desktop calendar with first day of week selection (Mon/Sun), week numbers, and notes |
+| 🌤 | **Weather Card** | `com.chatty.weather-card` | Native | Detailed weather forecast via Open-Meteo API with global city search and standard units (m/s, km/h, mmHg) |
+| 💎 | **Crypto & Currency** | `com.chatty.crypto-tracker` | Native | Real-time prices for crypto (BTC, ETH, SOL, GRAM, DOGE, XRP...) and fiat currencies (USD, EUR, RUB, CNY, KZT) |
+| 🎵 | **Mini Music Player** | `com.chatty.music-player` | Native | Windows SMTC media controller (Spotify, Yandex.Music, browsers) with spinning vinyl and marquee text |
+| ⏳ | **Timer & Pomodoro** | `com.chatty.pomodoro-timer` | Native | Regular countdown timer on 1st place with quick +/- buttons, Focus and Break modes with audio alerts |
+| 📝 | **Sticky Notes & Tasks** | `com.chatty.sticky-notes` | Native | Compact desktop task checklist with persistent state, task counter, and 5 color themes |
+| 🚀 | **Quick Dock / Launcher** | `com.chatty.quick-dock` | Native | Floating quick-launch dock for apps, terminal, file manager, and websites with file picker |
+| ⚡ | **System Gauges** | `com.chatty.system-gauges` | Native | Ultra-lightweight hardware monitor for CPU, RAM, disk, and network. Circular rings (2x2 grid) & linear bars |
+| 🎮 | **GPU Monitor** | `com.chatty.gpu-monitor` | Native | DirectX/DWM graphics monitor: 3D Core %, dedicated VRAM, and temperature with rings and bars |
+| 🖼 | **Media Photo Frame** | `com.chatty.media-frame` | Native | Desktop photo frame with rounded corners, Drag & Drop, single photo / folder mode, and auto-hiding controls |
+| 📰 | **News Feed & RSS** | `com.chatty.rss-reader` | Native | Live news ticker with auto-scroll and curated international channels (UN News in Russian, Euronews, Hacker News, Habr, NASA) |
 
 ---
 
-## 🛠 Как опубликовать свой виджет
+## 🛠 How to Publish Your Own Widget
 
-Любой желающий может добавить свой виджет в этот каталог!
-Подробная пошаговая инструкция описана в **[CONTRIBUTING.md](CONTRIBUTING.md)**.
+Anyone can contribute and publish a widget to this catalog!
+Detailed step-by-step instructions are available in **[CONTRIBUTING.md](CONTRIBUTING.md)**.
 
-### Краткий процесс добавления:
-1. Сделайте **Fork** репозитория.
-2. Создайте папку для своего виджета в `widgets/<id>/` (например `widgets/com.author.my-widget/`).
-3. Добавьте файл `manifest.json`, иконку `icon.png` (64x64 или 128x128) и точку входа (`Widget.xaml` для нативных виджетов или `index.html` для веб-виджетов).
-4. Запустите скрипт сборки каталога:
+### Quick Publishing Steps:
+1. **Fork** this repository.
+2. Create a folder for your widget in `widgets/<id>/` (e.g. `widgets/com.author.my-widget/`).
+3. Add `manifest.json`, icon `icon.png` (64x64 or 128x128), and entry point (`Widget.xaml` for native widgets or `index.html` for web widgets).
+4. Run catalog builder script:
    ```bash
    python scripts/build_catalog.py
    ```
-5. Отправьте **Pull Request** в ветку `main`.
-6. После прохождения валидации GitHub Actions автоматически пересоберёт подписанный пакет `.chw` и обновит `catalog.json`.
+5. Submit a **Pull Request** to `main`.
+6. Once validated, GitHub Actions will automatically package the signed `.chw` file and update `catalog.json`. The widget will immediately appear in the in-app Store for all users!
 
 ---
 
-## 🔗 Прямой URL каталога для ChattyWidgets
+## 🔗 Direct Catalog URL for ChattyWidgets
 
-Приложение ChattyWidgets загружает актуальный каталог по ссылке:
+The ChattyWidgets application loads the latest catalog from:
 ```
 https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/catalog.json
 ```
