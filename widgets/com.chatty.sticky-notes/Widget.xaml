@@ -30,7 +30,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <TextBlock Text="{Binding ActiveCountText}" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding ActiveCountText}" FontSize="11" Foreground="{Binding ActiveCountColor}" VerticalAlignment="Center"/>
             </StackPanel>
         </DockPanel>
 
@@ -45,7 +45,9 @@
             <Grid Grid.Column="0">
                 <TextBox Text="{Binding NewTaskText, UpdateSourceTrigger=PropertyChanged}"
                          MaxLength="120"
-                         Background="#12FFFFFF" Foreground="#F8FAFC" BorderBrush="#20FFFFFF" BorderThickness="1"
+                         Background="{Binding InputBackground}" Foreground="{Binding InputForeground}"
+                         CaretBrush="{Binding InputForeground}"
+                         BorderBrush="{Binding InputBorder}" BorderThickness="1"
                          FontSize="12" Padding="8,6,42,6" VerticalAlignment="Center">
                     <TextBox.Resources>
                         <Style TargetType="Border">
@@ -53,16 +55,16 @@
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBlock Text="{Binding PlaceholderText}" Foreground="#64748B" FontSize="12"
+                <TextBlock Text="{Binding PlaceholderText}" Foreground="{Binding PlaceholderColor}" FontSize="12"
                            Margin="10,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False"
                            Visibility="{Binding PlaceholderVisibility}"/>
-                <TextBlock Text="{Binding CounterBadgeText}" Foreground="#475569" FontSize="10"
+                <TextBlock Text="{Binding CounterBadgeText}" Foreground="{Binding CounterColor}" FontSize="10"
                            HorizontalAlignment="Right" Margin="0,0,8,0" VerticalAlignment="Center"
                            IsHitTestVisible="False"/>
             </Grid>
 
             <Button Grid.Column="2" Command="{Binding AddTaskCommand}" Content="+" Width="34" Height="30"
-                    Background="{Binding AccentBrush}" Foreground="#0F172A" FontWeight="Bold" FontSize="15" BorderThickness="0"
+                    Background="{Binding AccentBrush}" Foreground="{Binding AddButtonForeground}" FontWeight="Bold" FontSize="15" BorderThickness="0"
                     Cursor="Hand" VerticalAlignment="Center" ToolTip="{Binding AddTaskTooltip}" IsEnabled="{Binding CanAddTask}">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
@@ -80,12 +82,12 @@
                 <ItemsControl ItemsSource="{Binding Tasks}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="#0AFFFFFF" BorderBrush="#10FFFFFF" BorderThickness="1" CornerRadius="8"
+                            <Border Background="{Binding CardBackground}" BorderBrush="{Binding CardBorder}" BorderThickness="1" CornerRadius="8"
                                     Padding="8,6" Margin="0,0,0,6">
                                 <DockPanel>
                                     <CheckBox IsChecked="{Binding IsDone}" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                     <Button Command="{Binding DeleteCommand}" Content="✕" DockPanel.Dock="Right" Background="Transparent"
-                                            Foreground="#64748B" FontSize="11" BorderThickness="0" Margin="4,0,0,0" Cursor="Hand"
+                                            Foreground="{Binding DeleteColor}" FontSize="11" BorderThickness="0" Margin="4,0,0,0" Cursor="Hand"
                                             VerticalAlignment="Center"/>
                                     <TextBlock Text="{Binding Text}" Foreground="{Binding TextColor}" TextDecorations="{Binding TextDecoration}"
                                                FontSize="{Binding DataContext.NoteFontSize, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
@@ -97,7 +99,7 @@
                 </ItemsControl>
             </ScrollViewer>
 
-            <TextBlock Text="{Binding EmptyStateText}" Foreground="#64748B" FontSize="11"
+            <TextBlock Text="{Binding EmptyStateText}" Foreground="{Binding EmptyStateColor}" FontSize="11"
                        TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center"
                        VerticalAlignment="Center" Margin="16,24,16,16"
                        Visibility="{Binding EmptyStateVisibility}"

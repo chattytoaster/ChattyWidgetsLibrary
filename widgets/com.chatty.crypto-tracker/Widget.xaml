@@ -15,17 +15,17 @@
         <!-- Header -->
         <DockPanel Grid.Row="0" Margin="0,0,0,10">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
-                <TextBlock Text="{Binding HeaderTitle, FallbackValue='💎 КОТИРОВКИ &amp; ВАЛЮТЫ'}" FontSize="11.5" FontWeight="ExtraBold" Foreground="#38BDF8" VerticalAlignment="Center"/>
-                <Border Background="#1CFFFFFF" CornerRadius="4" Padding="5,1" Margin="6,0,0,0" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding BaseCurrencyBadge, FallbackValue='USD'}" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                <TextBlock Text="{Binding HeaderTitle, FallbackValue='💎 КОТИРОВКИ &amp; ВАЛЮТЫ'}" FontSize="11.5" FontWeight="ExtraBold" Foreground="{Binding HeaderColor}" VerticalAlignment="Center"/>
+                <Border Background="{Binding BadgeBackground}" CornerRadius="4" Padding="5,1" Margin="6,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding BaseCurrencyBadge, FallbackValue='USD'}" FontSize="9.5" FontWeight="Bold" Foreground="{Binding BadgeForeground}"/>
                 </Border>
             </StackPanel>
-            <Border HorizontalAlignment="Right" DockPanel.Dock="Right" Background="#14FFFFFF" BorderBrush="#18FFFFFF"
+            <Border HorizontalAlignment="Right" DockPanel.Dock="Right" Background="{Binding RefreshBtnBackground}" BorderBrush="{Binding RefreshBtnBorder}"
                     BorderThickness="1" CornerRadius="6" Padding="8,3" Cursor="Hand" ToolTip="{Binding LastUpdatedText}">
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding RefreshCommand}"/>
                 </Border.InputBindings>
-                <TextBlock Text="{Binding RefreshButtonText, FallbackValue='Обновить ↻'}" FontSize="11" Foreground="#94A3B8"/>
+                <TextBlock Text="{Binding RefreshButtonText, FallbackValue='Обновить ↻'}" FontSize="11" Foreground="{Binding RefreshBtnForeground}"/>
             </Border>
         </DockPanel>
 
@@ -34,21 +34,21 @@
             <ItemsControl ItemsSource="{Binding Items}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#08FFFFFF" BorderBrush="#10FFFFFF" BorderThickness="1" CornerRadius="8"
+                        <Border Background="{Binding CardBackground}" BorderBrush="{Binding CardBorder}" BorderThickness="1" CornerRadius="8"
                                 Padding="10,6" Margin="0,0,0,5">
                             <DockPanel>
                                 <!-- Left: Icon + Symbol + Name -->
                                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Icon}" FontSize="13" Foreground="#F8FAFC" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding Symbol}" FontSize="12" FontWeight="Bold" Foreground="#F8FAFC"
+                                    <TextBlock Text="{Binding Icon}" FontSize="13" Foreground="{Binding SymbolColor}" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Symbol}" FontSize="12" FontWeight="Bold" Foreground="{Binding SymbolColor}"
                                                VerticalAlignment="Center"/>
-                                    <controls:MarqueeText Text="{Binding Name}" FontSize="10" Foreground="#94A3B8" Margin="6,0,0,0"
+                                    <controls:MarqueeText Text="{Binding Name}" FontSize="10" Foreground="{Binding NameColor}" Margin="6,0,0,0"
                                                           VerticalAlignment="Center" MaxWidth="85"/>
                                 </StackPanel>
 
                                 <!-- Right: Price + Change Badge -->
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Price}" FontSize="12" FontWeight="Bold" Foreground="#F8FAFC"
+                                    <TextBlock Text="{Binding Price}" FontSize="12" FontWeight="Bold" Foreground="{Binding PriceColor}"
                                                VerticalAlignment="Center" Margin="0,0,8,0"/>
                                     <Border CornerRadius="4" Padding="6,2" VerticalAlignment="Center"
                                             Background="{Binding ChangeColor, Converter={x:Null}}">
