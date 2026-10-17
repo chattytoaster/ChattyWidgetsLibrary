@@ -1,5 +1,6 @@
 <Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ChattyWidgets.UI.Controls;assembly=ChattyWidgets"
         Background="#D8121622"
         BorderBrush="#20FFFFFF"
         BorderThickness="1"
@@ -42,65 +43,113 @@
             </Border>
         </DockPanel>
 
-        <!-- Metrics Grid (Side-by-side 2 Columns) -->
+        <!-- Metrics Area -->
         <Grid Grid.Row="1" Margin="0,12,0,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="12"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <!-- 1. Linear Bars Mode (gpuGaugeStyle == 'bars') -->
+            <Grid Visibility="{Binding BarsVisibility, FallbackValue=Visible}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <!-- Box 1: Core GPU Load -->
-            <Border Grid.Column="0" Background="#0AFFFFFF" BorderBrush="#14FFFFFF" BorderThickness="1" CornerRadius="12" Padding="12,10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <DockPanel Grid.Row="0">
-                        <TextBlock Text="{Binding CoreLoadLabel, FallbackValue='ЗАГРУЗКА'}" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
-                        <TextBlock Text="%" FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
-                    </DockPanel>
-                    <TextBlock Grid.Row="1" Text="{Binding FormattedCoreLoad, FallbackValue='0%'}" FontSize="18" FontWeight="Bold"
-                               Foreground="{Binding CoreLoadBrush, FallbackValue='#10B981'}" Margin="0,4,0,6"/>
-                    <ProgressBar Grid.Row="2" Value="{Binding GpuPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="5"
-                                 Background="#14FFFFFF" BorderThickness="0">
-                        <ProgressBar.Foreground>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                <GradientStop Color="#10B981" Offset="0.0"/>
-                                <GradientStop Color="#34D399" Offset="1.0"/>
-                            </LinearGradientBrush>
-                        </ProgressBar.Foreground>
-                    </ProgressBar>
-                </Grid>
-            </Border>
+                <!-- Box 1: Core GPU Load -->
+                <Border Grid.Column="0" Background="#0AFFFFFF" BorderBrush="#14FFFFFF" BorderThickness="1" CornerRadius="12" Padding="12,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <TextBlock Text="{Binding CoreLoadLabel, FallbackValue='ЗАГРУЗКА'}" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
+                            <TextBlock Text="%" FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+                        </DockPanel>
+                        <TextBlock Grid.Row="1" Text="{Binding FormattedCoreLoad, FallbackValue='0%'}" FontSize="18" FontWeight="Bold"
+                                   Foreground="{Binding CoreLoadBrush, FallbackValue='#10B981'}" Margin="0,4,0,6"/>
+                        <ProgressBar Grid.Row="2" Value="{Binding GpuPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="5"
+                                     Background="#14FFFFFF" BorderThickness="0">
+                            <ProgressBar.Foreground>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#10B981" Offset="0.0"/>
+                                    <GradientStop Color="#34D399" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </ProgressBar.Foreground>
+                        </ProgressBar>
+                    </Grid>
+                </Border>
 
-            <!-- Box 2: VRAM Load -->
-            <Border Grid.Column="2" Background="#0AFFFFFF" BorderBrush="#14FFFFFF" BorderThickness="1" CornerRadius="12" Padding="12,10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <DockPanel Grid.Row="0">
-                        <TextBlock Text="{Binding VideoRamLabel, FallbackValue='ВИДЕОПАМЯТЬ'}" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
-                        <TextBlock Text="{Binding VramSubText}" FontSize="10" Foreground="#94A3B8" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
-                    </DockPanel>
-                    <TextBlock Grid.Row="1" Text="{Binding VramDisplayText, FallbackValue='0 GB'}" FontSize="17" FontWeight="Bold"
-                               Foreground="{Binding VramBrush, FallbackValue='#38BDF8'}" Margin="0,4,0,6"/>
-                    <ProgressBar Grid.Row="2" Value="{Binding GpuMemoryPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="5"
-                                 Background="#14FFFFFF" BorderThickness="0">
-                        <ProgressBar.Foreground>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                <GradientStop Color="#38BDF8" Offset="0.0"/>
-                                <GradientStop Color="#818CF8" Offset="1.0"/>
-                            </LinearGradientBrush>
-                        </ProgressBar.Foreground>
-                    </ProgressBar>
-                </Grid>
-            </Border>
+                <!-- Box 2: VRAM Load -->
+                <Border Grid.Column="2" Background="#0AFFFFFF" BorderBrush="#14FFFFFF" BorderThickness="1" CornerRadius="12" Padding="12,10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <TextBlock Text="{Binding VideoRamLabel, FallbackValue='ВИДЕОПАМЯТЬ'}" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
+                            <TextBlock Text="{Binding VramSubText}" FontSize="10" Foreground="#94A3B8" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+                        </DockPanel>
+                        <TextBlock Grid.Row="1" Text="{Binding VramDisplayText, FallbackValue='0 GB'}" FontSize="17" FontWeight="Bold"
+                                   Foreground="{Binding VramBrush, FallbackValue='#38BDF8'}" Margin="0,4,0,6"/>
+                        <ProgressBar Grid.Row="2" Value="{Binding GpuMemoryPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="5"
+                                     Background="#14FFFFFF" BorderThickness="0">
+                            <ProgressBar.Foreground>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#38BDF8" Offset="0.0"/>
+                                    <GradientStop Color="#818CF8" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </ProgressBar.Foreground>
+                        </ProgressBar>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- 2. Circular Rings Mode (gpuGaugeStyle == 'circular') -->
+            <Grid Visibility="{Binding CircularVisibility, FallbackValue=Collapsed}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Ring 1: GPU Core Load -->
+                <Border Grid.Column="0" Background="#0AFFFFFF" BorderBrush="#14FFFFFF" BorderThickness="1" CornerRadius="12" Padding="6,8">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding CoreLoadLabel, FallbackValue='ЯДРО'}" FontSize="10" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center" MaxWidth="75" TextTrimming="CharacterEllipsis"/>
+                        <controls:CircularGauge Value="{Binding GpuPercent, Mode=OneWay}" Width="50" Height="50" StrokeThickness="4.5"
+                                                ProgressBrush="{Binding CoreLoadProgressBrush}" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,5,0,3"/>
+                        <TextBlock Text="{Binding FormattedCoreLoad, FallbackValue='0%'}" FontSize="11" FontWeight="Bold"
+                                   Foreground="{Binding CoreLoadBrush, FallbackValue='#10B981'}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Ring 2: Dedicated VRAM -->
+                <Border Grid.Column="2" Background="#0AFFFFFF" BorderBrush="#14FFFFFF" BorderThickness="1" CornerRadius="12" Padding="6,8">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding VideoRamLabel, FallbackValue='VRAM'}" FontSize="10" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center" MaxWidth="75" TextTrimming="CharacterEllipsis"/>
+                        <controls:CircularGauge Value="{Binding GpuMemoryPercent, Mode=OneWay}" Width="50" Height="50" StrokeThickness="4.5"
+                                                ProgressBrush="{Binding VramProgressBrush}" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,5,0,3"/>
+                        <TextBlock Text="{Binding VramDisplayText, FallbackValue='0 GB'}" FontSize="10.5" FontWeight="Bold"
+                                   Foreground="{Binding VramBrush, FallbackValue='#38BDF8'}" HorizontalAlignment="Center" MaxWidth="75" TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Ring 3: Temperature -->
+                <Border Grid.Column="4" Background="#0AFFFFFF" BorderBrush="#14FFFFFF" BorderThickness="1" CornerRadius="12" Padding="6,8">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding TemperatureLabel, FallbackValue='ТЕМП'}" FontSize="10" FontWeight="SemiBold" Foreground="#94A3B8" HorizontalAlignment="Center" MaxWidth="75" TextTrimming="CharacterEllipsis"/>
+                        <controls:CircularGauge Value="{Binding GpuTempNormalized, Mode=OneWay}" Maximum="100" Text="{Binding FormattedTemp, FallbackValue='0°C'}"
+                                                Width="50" Height="50" StrokeThickness="4.5"
+                                                ProgressBrush="{Binding TempProgressBrush}" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,5,0,3"/>
+                        <TextBlock Text="{Binding FormattedTemp, FallbackValue='0°C'}" FontSize="11" FontWeight="Bold"
+                                   Foreground="{Binding AlertTextColor, FallbackValue='#F87171'}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
         </Grid>
 
         <!-- Footer Info -->

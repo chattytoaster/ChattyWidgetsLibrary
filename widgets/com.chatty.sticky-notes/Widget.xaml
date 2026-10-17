@@ -1,5 +1,6 @@
 <Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ChattyWidgets.UI.Controls;assembly=ChattyWidgets"
         Background="#D8181A26"
         BorderBrush="{Binding BorderAccentBrush}"
         BorderThickness="1"
@@ -18,7 +19,7 @@
         <!-- Header -->
         <DockPanel Grid.Row="0" Margin="0,0,0,12">
             <TextBlock Text="{Binding HeaderTitle}" FontSize="13" FontWeight="Bold" Foreground="{Binding HeaderBrush}"
-                       DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                       DockPanel.Dock="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center">
                 <Button Command="{Binding ClearCompletedCommand}" ToolTip="{Binding ClearCompletedTooltip}"
                         Content="✓" Width="24" Height="22" Background="{Binding AccentSoftBrush}"
@@ -102,7 +103,8 @@
             <TextBlock Text="{Binding EmptyStateText}" Foreground="#64748B" FontSize="11"
                        TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center"
                        VerticalAlignment="Center" Margin="16,24,16,16"
-                       Visibility="{Binding EmptyStateVisibility}"/>
+                       Visibility="{Binding EmptyStateVisibility}"
+                       IsHitTestVisible="False"/>
         </Grid>
     </Grid>
 </Border>

@@ -17,10 +17,10 @@
         </Grid.RowDefinitions>
 
         <!-- Top Nav Switcher Pill -->
-        <Border Grid.Row="0" HorizontalAlignment="Center" Background="#14FFFFFF" CornerRadius="16" Padding="3" Margin="0,0,0,8">
+        <Border Grid.Row="0" HorizontalAlignment="Center" Background="{Binding PillBackground}" CornerRadius="16" Padding="3" Margin="0,0,0,6">
             <StackPanel Orientation="Horizontal">
                 <Button Command="{Binding SetFocusModeCommand}" Content="{Binding FocusTabTitle}" Background="{Binding FocusTabBackground}" Foreground="{Binding FocusTabForeground}"
-                        FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="12,5" Cursor="Hand">
+                        FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="10,4" Cursor="Hand">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}" CornerRadius="13" Padding="{TemplateBinding Padding}">
@@ -30,7 +30,17 @@
                     </Button.Template>
                 </Button>
                 <Button Command="{Binding SetBreakModeCommand}" Content="{Binding BreakTabTitle}" Background="{Binding BreakTabBackground}" Foreground="{Binding BreakTabForeground}"
-                        FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="12,5" Cursor="Hand">
+                        FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="10,4" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="13" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Command="{Binding SetTimerModeCommand}" Content="{Binding TimerTabTitle}" Background="{Binding TimerTabBackground}" Foreground="{Binding TimerTabForeground}"
+                        FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="10,4" Cursor="Hand">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}" CornerRadius="13" Padding="{TemplateBinding Padding}">
@@ -43,20 +53,70 @@
         </Border>
 
         <!-- Mode Indicator Badge -->
-        <Border Grid.Row="1" HorizontalAlignment="Center" Background="#14FFFFFF" CornerRadius="8" Padding="10,3" Margin="0,0,0,6">
+        <Border Grid.Row="1" HorizontalAlignment="Center" Background="#14FFFFFF" CornerRadius="8" Padding="10,3" Margin="0,0,0,4">
             <TextBlock Text="{Binding ModeText}" FontSize="11" FontWeight="Bold" Foreground="{Binding AccentColor}"/>
         </Border>
 
         <!-- Timer Display with Glowing Digits -->
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="{Binding TimeText}" FontSize="42" FontWeight="ExtraBold" Foreground="#FFFFFF"
+            <TextBlock Text="{Binding TimeText}" FontSize="40" FontWeight="ExtraBold" Foreground="#FFFFFF"
                        HorizontalAlignment="Center">
                 <TextBlock.Effect>
-                    <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="#EF4444" Opacity="0.45"/>
+                    <DropShadowEffect BlurRadius="18" ShadowDepth="0" Color="{Binding AccentMediaColor}" Opacity="0.45"/>
                 </TextBlock.Effect>
             </TextBlock>
+
+            <!-- Quick Adjust Row (Visible only in Regular Timer mode) -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,4"
+                        Visibility="{Binding TimerControlsVisibility}">
+                <Button Command="{Binding AdjustMinutesCommand}" CommandParameter="-1" Content="{Binding Minus1mText}"
+                        Background="{Binding QuickButtonBackground}" Foreground="{Binding QuickButtonForeground}"
+                        FontSize="10.5" FontWeight="SemiBold" Height="22" Padding="7,1" Margin="2,0" Cursor="Hand" BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Command="{Binding AdjustMinutesCommand}" CommandParameter="1" Content="{Binding Plus1mText}"
+                        Background="{Binding QuickButtonBackground}" Foreground="{Binding QuickButtonForeground}"
+                        FontSize="10.5" FontWeight="SemiBold" Height="22" Padding="7,1" Margin="2,0" Cursor="Hand" BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Command="{Binding AdjustMinutesCommand}" CommandParameter="5" Content="{Binding Plus5mText}"
+                        Background="{Binding QuickButtonBackground}" Foreground="{Binding QuickButtonForeground}"
+                        FontSize="10.5" FontWeight="SemiBold" Height="22" Padding="7,1" Margin="2,0" Cursor="Hand" BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Command="{Binding AdjustMinutesCommand}" CommandParameter="10" Content="{Binding Plus10mText}"
+                        Background="{Binding QuickButtonBackground}" Foreground="{Binding QuickButtonForeground}"
+                        FontSize="10.5" FontWeight="SemiBold" Height="22" Padding="7,1" Margin="2,0" Cursor="Hand" BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+
             <ProgressBar Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="4" Width="180"
-                         Foreground="{Binding AccentColor}" Background="#14FFFFFF" BorderThickness="0" Margin="0,6,0,4"/>
+                         Foreground="{Binding AccentColor}" Background="#14FFFFFF" BorderThickness="0" Margin="0,4,0,4"/>
             <TextBlock Text="{Binding StatusText}" FontSize="10.5" Foreground="#94A3B8" HorizontalAlignment="Center"/>
         </StackPanel>
 
@@ -83,7 +143,8 @@
 
             <!-- Reset Button -->
             <Button Grid.Column="2" Command="{Binding ResetCommand}" Content="{Binding ResetButtonText}"
-                    Background="#18FFFFFF" Foreground="#94A3B8" FontSize="12" FontWeight="SemiBold" Height="34" BorderThickness="0" Cursor="Hand">
+                    Background="{Binding ResetButtonBackground}" Foreground="{Binding ResetButtonForeground}"
+                    FontSize="12" FontWeight="SemiBold" Height="34" BorderThickness="0" Cursor="Hand">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" CornerRadius="10">

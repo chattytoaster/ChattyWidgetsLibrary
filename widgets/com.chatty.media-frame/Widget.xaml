@@ -8,7 +8,7 @@
     <Border.Effect>
         <DropShadowEffect BlurRadius="28" ShadowDepth="10" Opacity="0.5" Color="#000000"/>
     </Border.Effect>
-    <Grid>
+    <Grid Background="Transparent">
         <!-- Image View -->
         <Image Source="{Binding CurrentImage}" Stretch="{Binding StretchMode}" Visibility="{Binding ImageVisibility}"/>
 
@@ -45,12 +45,59 @@
             </StackPanel>
         </Border>
 
-        <!-- Bottom Controls Bar -->
+        <!-- Bottom Controls Bar (hideable on hover / configurable) -->
         <Border VerticalAlignment="Bottom" Background="#80000000" Padding="8,4">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Style.Triggers>
+                        <!-- When AutoHideControls is True, animate Opacity on hover -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding AutoHideControls}" Value="True"/>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Grid}}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+
+                        <!-- When AutoHideControls is False, controls remain always visible -->
+                        <DataTrigger Binding="{Binding AutoHideControls}" Value="False">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
             <DockPanel>
                 <TextBlock Text="{Binding Caption}" FontSize="10.5" Foreground="#CBD5E1" TextTrimming="CharacterEllipsis"
                            VerticalAlignment="Center" DockPanel.Dock="Left"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right"
+                            Visibility="{Binding NavigationButtonsVisibility}">
                     <Button Command="{Binding PrevCommand}" ToolTip="{Binding PrevTooltip}" Content="◀" Width="22" Height="22" Background="#20FFFFFF"
                             Foreground="#FFFFFF" FontSize="9" BorderThickness="0" Margin="0,0,4,0" Cursor="Hand">
                         <Button.Resources>

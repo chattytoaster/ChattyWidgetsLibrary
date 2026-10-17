@@ -1,5 +1,6 @@
 <Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ChattyWidgets.UI.Controls;assembly=ChattyWidgets"
         Background="#D0121622"
         BorderBrush="#25FFFFFF"
         BorderThickness="1"
@@ -23,7 +24,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="📍 " FontSize="12" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding City}" FontSize="12.5" FontWeight="SemiBold" Foreground="#38BDF8"
-                               VerticalAlignment="Center"/>
+                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
                 </StackPanel>
             </Border>
 
@@ -43,7 +44,7 @@
             <StackPanel Grid.Column="0" VerticalAlignment="Center">
                 <TextBlock Text="{Binding Temperature}" FontSize="46" FontWeight="Bold" Foreground="#F8FAFC"/>
                 <TextBlock Text="{Binding Condition}" FontSize="13.5" FontWeight="SemiBold" Foreground="#E2E8F0"
-                           Margin="0,2,0,2"/>
+                           Margin="0,2,0,2" TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
                 <TextBlock Text="{Binding FeelsLike}" FontSize="11.5" Foreground="#94A3B8"/>
             </StackPanel>
 
