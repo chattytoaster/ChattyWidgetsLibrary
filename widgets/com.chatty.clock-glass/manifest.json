@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.clock-glass",
-  "name": "Стеклянные Часы",
+  "name": "Glass Clock",
+  "name_ru": "Стеклянные Часы",
   "version": "2.0.0",
   "author": "ChattyWidgets",
-  "description": "Элегантные цифровые часы с неоморфизмом, эффектом матового стекла и актуальной погодой.",
+  "description": "Elegant digital frosted glass clock with international timezones, world cities, and date.",
+  "description_ru": "Элегантные цифровые часы с неоморфизмом, эффектом матового стекла и актуальной датой.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

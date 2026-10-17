@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.weather-card",
-  "name": "Прогноз Погоды",
+  "name": "Weather Card",
+  "name_ru": "Прогноз Погоды",
   "version": "1.2.0",
   "author": "ChattyWidgets",
-  "description": "Детальный погодный информер: прогноз по 60+ городам мира, Open-Meteo API, онлайн поиск, °C/°F, м/с, км/ч, mph, мм рт. ст., гПа и полная локализация RU/EN.",
+  "description": "Hyperlocal meteorological forecast, 60+ world cities, temperature, wind, humidity, and pressure in RU/EN.",
+  "description_ru": "Детальный погодный информер: прогноз по 60+ городам мира, Open-Meteo API, онлайн поиск, °C/°F, м/с, км/ч, mph, мм рт. ст., гПа и полная локализация RU/EN.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

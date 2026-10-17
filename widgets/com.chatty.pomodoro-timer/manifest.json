@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.pomodoro-timer",
-  "name": "Умный Таймер",
+  "name": "Focus Timer & Pomodoro",
+  "name_ru": "Умный Таймер",
   "version": "1.3.0",
   "author": "ChattyWidgets",
-  "description": "Нативный таймер с режимами Фокус (Pomodoro), Отдых и обычный таймер обратного отсчета с быстрой настройкой минут.",
+  "description": "Productivity countdown timer, focus interval tracker, and Pomodoro workflow assistant.",
+  "description_ru": "Нативный таймер с режимами Фокус (Pomodoro), Отдых и обычный таймер обратного отсчета с быстрой настройкой минут.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

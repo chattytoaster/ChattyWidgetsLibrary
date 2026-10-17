@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.music-player",
-  "name": "Мини-Медиаплеер",
+  "name": "Mini Music Player",
+  "name_ru": "Мини-Медиаплеер",
   "version": "2.0.0",
   "author": "ChattyWidgets",
-  "description": "Стильный нативный контроллер медиа для Windows (Spotify, Яндекс.Музыка, Браузер).",
+  "description": "Compact desktop music controller with animated spinning vinyl and Windows Media integration.",
+  "description_ru": "Стильный нативный контроллер медиа для Windows (Spotify, Яндекс.Музыка, Браузер).",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

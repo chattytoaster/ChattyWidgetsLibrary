@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.crypto-tracker",
-  "name": "Курсы Валют и Крипты",
+  "name": "Crypto & Currency Tracker",
+  "name_ru": "Курсы Валют и Крипты",
   "version": "1.2.0",
   "author": "ChattyWidgets",
-  "description": "Котировки BTC, ETH, SOL, GRAM, BNB, XRP, а также курсы USD, EUR, GBP, JPY в реальном времени на нативном движке.",
+  "description": "Real-time market rates for BTC, ETH, SOL, Gram, USD, EUR, and any custom crypto and fiat pairs.",
+  "description_ru": "Котировки BTC, ETH, SOL, GRAM, BNB, XRP, а также курсы USD, EUR, GBP, JPY в реальном времени на нативном движке.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

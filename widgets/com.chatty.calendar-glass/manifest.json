@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.calendar-glass",
-  "name": "Календарь",
+  "name": "Glass Calendar",
+  "name_ru": "Календарь",
   "version": "1.1.0",
   "author": "ChattyWidgets",
-  "description": "Элегантный настольный календарь с переключением месяцев, подсветкой сегодня и нативным плавным рендерингом.",
+  "description": "Elegant desktop month calendar with smooth navigation, today highlight, and customizable first day of week.",
+  "description_ru": "Элегантный настольный календарь с переключением месяцев, подсветкой сегодня и нативным плавным рендерингом.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

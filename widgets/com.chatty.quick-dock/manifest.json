@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.quick-dock",
-  "name": "Быстрый Док / Лаунчер",
+  "name": "Quick Dock",
+  "name_ru": "Быстрый Док / Лаунчер",
   "version": "1.1.0",
   "author": "ChattyWidgets",
-  "description": "Нативная плавающая панель быстрого запуска любимых программ, терминала и проводника.",
+  "description": "Floating customizable application launcher and shortcut dock with animated icon zoom.",
+  "description_ru": "Нативная плавающая панель быстрого запуска любимых программ, терминала и проводника.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

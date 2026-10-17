@@ -15,8 +15,8 @@
 
         <!-- Header -->
         <DockPanel Grid.Row="0" Margin="0,0,0,12">
-            <TextBlock Text="{Binding HeaderTitle}" FontSize="13" FontWeight="Bold" Foreground="{Binding HeaderBrush}"
-                       DockPanel.Dock="Left" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
+            <controls:MarqueeText Text="{Binding HeaderTitle}" FontSize="13" FontWeight="Bold" Foreground="{Binding HeaderBrush}"
+                                  DockPanel.Dock="Left" VerticalAlignment="Center" MaxWidth="150"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center">
                 <Button Command="{Binding ClearCompletedCommand}" ToolTip="{Binding ClearCompletedTooltip}"
                         Content="✓" Width="24" Height="22" Background="{Binding AccentSoftBrush}"

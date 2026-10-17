@@ -20,8 +20,8 @@
                     CornerRadius="16" Padding="10,4" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="📍 " FontSize="12" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding City}" FontSize="12.5" FontWeight="SemiBold" Foreground="#38BDF8"
-                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
+                    <controls:MarqueeText Text="{Binding City}" FontSize="12.5" FontWeight="SemiBold" Foreground="#38BDF8"
+                                          VerticalAlignment="Center" MaxWidth="120"/>
                 </StackPanel>
             </Border>
 
@@ -40,8 +40,8 @@
             <!-- Temperature & Condition -->
             <StackPanel Grid.Column="0" VerticalAlignment="Center">
                 <TextBlock Text="{Binding Temperature}" FontSize="46" FontWeight="Bold" Foreground="#F8FAFC"/>
-                <TextBlock Text="{Binding Condition}" FontSize="13.5" FontWeight="SemiBold" Foreground="#E2E8F0"
-                           Margin="0,2,0,2" TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
+                <controls:MarqueeText Text="{Binding Condition}" FontSize="13.5" FontWeight="SemiBold" Foreground="#E2E8F0"
+                                      Margin="0,2,0,2" MaxWidth="160"/>
                 <TextBlock Text="{Binding FeelsLike}" FontSize="11.5" Foreground="#94A3B8"/>
             </StackPanel>
 

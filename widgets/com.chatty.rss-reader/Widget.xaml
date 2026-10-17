@@ -19,8 +19,8 @@
             <!-- Title -->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
                 <TextBlock Text="📰 " FontSize="13" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding FeedTitle}" FontSize="11.5" FontWeight="ExtraBold" Foreground="#F8FAFC"
-                           VerticalAlignment="Center" TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
+                <controls:MarqueeText Text="{Binding FeedTitle}" FontSize="11.5" FontWeight="ExtraBold" Foreground="#F8FAFC"
+                                      VerticalAlignment="Center" MaxWidth="150"/>
             </StackPanel>
 
             <!-- Pager Controls -->
@@ -101,8 +101,7 @@
                                     <TextBlock Text="{Binding Source}" FontSize="9.5" FontWeight="Bold" Foreground="#38BDF8" DockPanel.Dock="Left"/>
                                     <TextBlock Text="{Binding Time}" FontSize="9.5" Foreground="#64748B" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
                                 </DockPanel>
-                                <TextBlock Grid.Row="1" Text="{Binding Title}" FontSize="11" Foreground="#E2E8F0"
-                                           TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
+                                <controls:MarqueeText Grid.Row="1" Text="{Binding Title}" FontSize="11" Foreground="#E2E8F0"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

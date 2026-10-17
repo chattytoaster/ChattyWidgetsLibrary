@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.sticky-notes",
-  "name": "Быстрые Заметки / ToDo",
+  "name": "Notes & Tasks",
+  "name_ru": "Быстрые Заметки / ToDo",
   "version": "1.2.0",
   "author": "ChattyWidgets",
-  "description": "Компактный нативный стикер для важных заметок и задач с цветовыми акцентами, шаблонами и автосохранением.",
+  "description": "Desktop sticky notepad with quick checklists, task completion tracking, and color themes.",
+  "description_ru": "Компактный нативный стикер для важных заметок и задач с цветовыми акцентами, шаблонами и автосохранением.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

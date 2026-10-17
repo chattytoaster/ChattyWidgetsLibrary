@@ -176,6 +176,7 @@ def build():
         item = {
             "id": manifest.get("id", widget_id),
             "name": manifest.get("name", widget_id),
+            "name_ru": manifest.get("name_ru", ""),
             "version": version,
             "author": author_info["author"],
             "authorGithub": author_info["authorGithub"],
@@ -183,6 +184,7 @@ def build():
             "isOfficial": author_info["isOfficial"],
             "trustLevel": author_info["trustLevel"],
             "description": manifest.get("description", ""),
+            "description_ru": manifest.get("description_ru", ""),
             "category": manifest.get("category", "General"),
             "type": manifest.get("type", "web"),
             "icon": f"{raw_base}/widgets/{widget_id}/{icon_file}",

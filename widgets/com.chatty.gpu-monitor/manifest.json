@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.gpu-monitor",
-  "name": "Монитор GPU & Графика",
+  "name": "GPU Monitor",
+  "name_ru": "Монитор GPU & Графика",
   "version": "1.1.0",
   "author": "ChattyWidgets",
-  "description": "Мониторинг видеокарты: загрузка GPU %, видеопамять VRAM, температура и модель адаптера на нативном движке.",
+  "description": "Hardware graphics monitoring: 3D core load, VRAM memory usage, temperature, and adapter details.",
+  "description_ru": "Мониторинг видеокарты: загрузка GPU %, видеопамять VRAM, температура и модель адаптера на нативном движке.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

@@ -42,8 +42,8 @@
                                     <TextBlock Text="{Binding Icon}" FontSize="13" Foreground="#F8FAFC" Margin="0,0,6,0" VerticalAlignment="Center"/>
                                     <TextBlock Text="{Binding Symbol}" FontSize="12" FontWeight="Bold" Foreground="#F8FAFC"
                                                VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding Name}" FontSize="10" Foreground="#94A3B8" Margin="6,0,0,0"
-                                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
+                                    <controls:MarqueeText Text="{Binding Name}" FontSize="10" Foreground="#94A3B8" Margin="6,0,0,0"
+                                                          VerticalAlignment="Center" MaxWidth="85"/>
                                 </StackPanel>
 
                                 <!-- Right: Price + Change Badge -->

@@ -1,9 +1,11 @@
 {
   "id": "com.chatty.media-frame",
-  "name": "Медиа-Фоторамка",
+  "name": "Photo Frame",
+  "name_ru": "Медиа-Фоторамка",
   "version": "1.1.0",
   "author": "ChattyWidgets",
-  "description": "Настольная фоторамка для просмотра локальных картинок и фотоальбомов на сверхбыстром нативном движке.",
+  "description": "Desktop picture frame with folder slideshow, single photo display, and drag-and-drop support.",
+  "description_ru": "Настольная фоторамка для просмотра локальных картинок и фотоальбомов на сверхбыстром нативном движке.",
   "type": "native",
   "entry": "Widget.xaml",
   "icon": "icon.png",

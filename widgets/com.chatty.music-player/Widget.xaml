@@ -58,8 +58,7 @@
             </Grid.RowDefinitions>
 
             <!-- Title -->
-            <TextBlock Grid.Row="0" Text="{Binding TrackTitle}" FontWeight="Bold" FontSize="13.5" Foreground="#F8FAFC"
-                       TextTrimming="CharacterEllipsis" controls:MarqueeBehavior.EnableMarquee="True"/>
+            <controls:MarqueeText Grid.Row="0" Text="{Binding TrackTitle}" FontWeight="Bold" FontSize="13.5" Foreground="#F8FAFC"/>
 
             <!-- Artist and Equalizer row -->
             <DockPanel Grid.Row="1" Margin="0,2,0,8">
@@ -69,8 +68,7 @@
                     <Border Width="2.5" Height="10" Background="#8B5CF6" CornerRadius="1" Margin="1,0"/>
                     <Border Width="2.5" Height="8" Background="#EC4899" CornerRadius="1" Margin="1,0"/>
                 </StackPanel>
-                <TextBlock Text="{Binding Artist}" FontSize="11.5" Foreground="#94A3B8"
-                           TextTrimming="CharacterEllipsis" VerticalAlignment="Center" controls:MarqueeBehavior.EnableMarquee="True"/>
+                <controls:MarqueeText Text="{Binding Artist}" FontSize="11.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
             </DockPanel>
 
             <!-- Controls Pill -->
