@@ -42,7 +42,15 @@
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
-                        <TextBlock Text="{Binding Icon}" FontSize="20" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Image Source="{Binding IconImage}" MaxWidth="28" MaxHeight="28" Stretch="Uniform"
+                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Visibility="{Binding ImageIconVisibility}"/>
+                            <TextBlock Text="{Binding Icon}" FontSize="20" Foreground="#F8FAFC"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Visibility="{Binding TextIconVisibility}"/>
+                        </Grid>
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
