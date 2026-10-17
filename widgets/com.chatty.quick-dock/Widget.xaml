@@ -6,9 +6,6 @@
         CornerRadius="20"
         Height="62"
         Padding="10,0">
-    <Border.Effect>
-        <DropShadowEffect BlurRadius="28" ShadowDepth="10" Opacity="0.5" Color="#000000"/>
-    </Border.Effect>
     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
         <ItemsControl ItemsSource="{Binding Apps}">
             <ItemsControl.ItemsPanel>

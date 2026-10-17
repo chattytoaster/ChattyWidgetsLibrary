@@ -6,9 +6,6 @@
         BorderThickness="1"
         CornerRadius="20"
         Padding="18">
-    <Border.Effect>
-        <DropShadowEffect BlurRadius="25" ShadowDepth="8" Opacity="0.5" Color="#000000"/>
-    </Border.Effect>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

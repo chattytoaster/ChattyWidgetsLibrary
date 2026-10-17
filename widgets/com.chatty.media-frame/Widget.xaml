@@ -5,9 +5,6 @@
         BorderThickness="1"
         CornerRadius="20"
         ClipToBounds="True">
-    <Border.Effect>
-        <DropShadowEffect BlurRadius="28" ShadowDepth="10" Opacity="0.5" Color="#000000"/>
-    </Border.Effect>
     <Grid Background="Transparent">
         <Grid.OpacityMask>
             <VisualBrush>
@@ -38,7 +35,7 @@
                Visibility="{Binding ImageVisibility}"/>
 
         <!-- Placeholder when empty -->
-        <Border Background="#C0101420" Padding="16"
+        <Border Background="#C0101420" Padding="16" CornerRadius="20"
                 Visibility="{Binding PlaceholderVisibility}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="🖼️" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,6">
