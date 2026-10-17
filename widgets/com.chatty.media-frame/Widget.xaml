@@ -9,8 +9,33 @@
         <DropShadowEffect BlurRadius="28" ShadowDepth="10" Opacity="0.5" Color="#000000"/>
     </Border.Effect>
     <Grid Background="Transparent">
-        <!-- Image View -->
-        <Image Source="{Binding CurrentImage}" Stretch="{Binding StretchMode}" Visibility="{Binding ImageVisibility}"/>
+        <Grid.OpacityMask>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Border Background="Black" CornerRadius="20"
+                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                            Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.OpacityMask>
+        <!-- Blurred background image for letterbox / contain mode -->
+        <Image Source="{Binding CurrentImage}"
+               Stretch="UniformToFill"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Opacity="0.30"
+               Visibility="{Binding ImageVisibility}">
+            <Image.Effect>
+                <BlurEffect Radius="24"/>
+            </Image.Effect>
+        </Image>
+
+        <!-- Main Image View -->
+        <Image Source="{Binding CurrentImage}"
+               Stretch="{Binding StretchMode}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Visibility="{Binding ImageVisibility}"/>
 
         <!-- Placeholder when empty -->
         <Border Background="#C0101420" Padding="16"
