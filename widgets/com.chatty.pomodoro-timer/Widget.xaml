@@ -4,7 +4,7 @@
         BorderBrush="#20FFFFFF"
         BorderThickness="1"
         CornerRadius="18"
-        Padding="14,12,14,14">
+        Padding="14,10,14,14">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <!-- Top Nav Switcher Pill -->
-        <Border Grid.Row="0" HorizontalAlignment="Center" Background="{Binding PillBackground}" CornerRadius="16" Padding="3" Margin="0,0,0,6">
+        <Border Grid.Row="0" HorizontalAlignment="Center" Background="{Binding PillBackground}" CornerRadius="16" Padding="3" Margin="0,0,0,4">
             <StackPanel Orientation="Horizontal">
                 <Button Command="{Binding SetTimerModeCommand}" Content="{Binding TimerTabTitle}" Background="{Binding TimerTabBackground}" Foreground="{Binding TimerTabForeground}"
                         FontSize="11" FontWeight="SemiBold" BorderThickness="0" Padding="10,4" Cursor="Hand">
@@ -50,12 +50,12 @@
         </Border>
 
         <!-- Mode Indicator Badge -->
-        <Border Grid.Row="1" HorizontalAlignment="Center" Background="#14FFFFFF" CornerRadius="8" Padding="10,3" Margin="0,0,0,4">
+        <Border Grid.Row="1" HorizontalAlignment="Center" Background="#14FFFFFF" CornerRadius="8" Padding="10,3" Margin="0,0,0,3">
             <TextBlock Text="{Binding ModeText}" FontSize="11" FontWeight="Bold" Foreground="{Binding AccentColor}"/>
         </Border>
 
-        <!-- Timer Display with Glowing Digits -->
-        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <!-- Timer Display with Glowing Digits (Shifted higher vertically) -->
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-12,0,2">
             <TextBlock Text="{Binding TimeText}" FontSize="40" FontWeight="ExtraBold" Foreground="#FFFFFF"
                        HorizontalAlignment="Center">
                 <TextBlock.Effect>

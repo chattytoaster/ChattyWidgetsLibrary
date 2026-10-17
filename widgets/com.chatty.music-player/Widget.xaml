@@ -5,7 +5,7 @@
         BorderBrush="#25FFFFFF"
         BorderThickness="1"
         CornerRadius="20"
-        Padding="14,16">
+        Padding="14,11">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -48,7 +48,7 @@
                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
-        <!-- Track Info & Листалка Controls -->
+        <!-- Track Info & Controls -->
         <Grid Grid.Column="1" VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -58,10 +58,10 @@
             </Grid.RowDefinitions>
 
             <!-- Title -->
-            <controls:MarqueeText Grid.Row="0" Text="{Binding TrackTitle}" FontWeight="Bold" FontSize="13.5" Foreground="#F8FAFC"/>
+            <controls:MarqueeText Grid.Row="0" Text="{Binding TrackTitle}" FontWeight="Bold" FontSize="13" Foreground="#F8FAFC" Margin="0,0,0,2"/>
 
             <!-- Artist and Equalizer row -->
-            <DockPanel Grid.Row="1" Margin="0,2,0,8">
+            <DockPanel Grid.Row="1" Margin="0,0,0,6">
                 <!-- Mini Equalizer bars -->
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="6,0,0,0">
                     <Border Width="2.5" Height="6" Background="#38BDF8" CornerRadius="1" Margin="1,0"/>
@@ -74,18 +74,20 @@
             <!-- Controls Pill -->
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
                 <!-- Prev Button -->
-                <Button Command="{Binding PrevCommand}" Content="⏮" Width="30" Height="30" Margin="0,0,4,0"
-                        Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="12" BorderThickness="0" Cursor="Hand">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="8"/>
-                        </Style>
-                    </Button.Resources>
+                <Button Command="{Binding PrevCommand}" Content="⏮" Width="28" Height="28" Margin="0,0,4,0"
+                        Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="11" BorderThickness="0" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
 
                 <!-- Hero Play/Pause Button with Vibrant Gradient -->
-                <Button Command="{Binding PlayPauseCommand}" Content="{Binding PlayPauseIcon}" Width="36" Height="36" Margin="0,0,4,0"
-                        Foreground="#FFFFFF" FontWeight="Bold" FontSize="15" BorderThickness="0" Cursor="Hand">
+                <Button Command="{Binding PlayPauseCommand}" Content="{Binding PlayPauseIcon}" Width="36" Height="36" Margin="0,0,5,0"
+                        Foreground="#FFFFFF" FontWeight="Bold" FontSize="16" BorderThickness="0" Cursor="Hand">
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                             <GradientStop Color="#6366F1" Offset="0.0"/>
@@ -94,23 +96,27 @@
                         </LinearGradientBrush>
                     </Button.Background>
                     <Button.Effect>
-                        <DropShadowEffect BlurRadius="14" ShadowDepth="2" Color="#6366F1" Opacity="0.55"/>
+                        <DropShadowEffect BlurRadius="12" ShadowDepth="1" Color="#6366F1" Opacity="0.55"/>
                     </Button.Effect>
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="18"/>
-                        </Style>
-                    </Button.Resources>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="18">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
 
                 <!-- Next Button -->
-                <Button Command="{Binding NextCommand}" Content="⏭" Width="30" Height="30" Margin="0,0,6,0"
-                        Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="12" BorderThickness="0" Cursor="Hand">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="8"/>
-                        </Style>
-                    </Button.Resources>
+                <Button Command="{Binding NextCommand}" Content="⏭" Width="28" Height="28" Margin="0,0,6,0"
+                        Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="11" BorderThickness="0" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
 
                 <!-- Separator -->
@@ -119,26 +125,30 @@
                 <!-- Volume Down -->
                 <Button Command="{Binding VolumeDownCommand}" Content="🔉" Width="26" Height="26" Margin="0,0,4,0"
                         Background="#14FFFFFF" Foreground="#94A3B8" FontSize="11" BorderThickness="0" Cursor="Hand">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="13"/>
-                        </Style>
-                    </Button.Resources>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="13">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
 
                 <!-- Volume Up -->
                 <Button Command="{Binding VolumeUpCommand}" Content="🔊" Width="26" Height="26"
                         Background="#14FFFFFF" Foreground="#94A3B8" FontSize="11" BorderThickness="0" Cursor="Hand">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="13"/>
-                        </Style>
-                    </Button.Resources>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="13">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
             </StackPanel>
 
-            <!-- Subtle Live Track Progress Bar -->
-            <ProgressBar Grid.Row="3" Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="3" Margin="0,8,0,0"
+            <!-- Live Track Progress Bar -->
+            <ProgressBar Grid.Row="3" Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="3" Margin="0,6,0,0"
                          Foreground="#38BDF8" Background="#18FFFFFF" BorderThickness="0"/>
         </Grid>
     </Grid>
