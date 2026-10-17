@@ -144,26 +144,40 @@ def build():
         pkg_filename = f"{widget_id}.chw"
         pkg_filepath = os.path.join(packages_dir, pkg_filename)
 
-        with zipfile.ZipFile(pkg_filepath, "w", zipfile.ZIP_DEFLATED) as zipf:
-            for root, _, files in os.walk(widget_path):
-                for file in sorted(files):
-                    if file.endswith((".chw", ".git", ".DS_Store", "signature.sig")):
-                        continue
-                    full_path = os.path.join(root, file)
-                    rel_path = os.path.relpath(full_path, widget_path)
-                    zipf.write(full_path, rel_path)
+        skip_repack = False
+        if not private_key and os.path.exists(pkg_filepath):
+            try:
+                with zipfile.ZipFile(pkg_filepath, 'r') as ez:
+                    if 'chatty_signature.json' in ez.namelist():
+                        em = json.loads(ez.read('chatty_signature.json'))
+                        if em.get('signature'):
+                            skip_repack = True
+                            signature = em['signature']
+                            content_hash = em.get('contentHash', content_hash)
+            except Exception:
+                pass
 
-            # Embed verification signature metadata inside the package
-            meta = {
-                "id": widget_id,
-                "version": version,
-                "author": author_info["author"],
-                "authorGithub": author_info["authorGithub"],
-                "isOfficial": author_info["isOfficial"],
-                "contentHash": content_hash,
-                "signature": signature
-            }
-            zipf.writestr("chatty_signature.json", json.dumps(meta, indent=2))
+        if not skip_repack:
+            with zipfile.ZipFile(pkg_filepath, "w", zipfile.ZIP_DEFLATED) as zipf:
+                for root, _, files in os.walk(widget_path):
+                    for file in sorted(files):
+                        if file.endswith((".chw", ".git", ".DS_Store", "signature.sig")):
+                            continue
+                        full_path = os.path.join(root, file)
+                        rel_path = os.path.relpath(full_path, widget_path)
+                        zipf.write(full_path, rel_path)
+
+                # Embed verification signature metadata inside the package
+                meta = {
+                    "id": widget_id,
+                    "version": version,
+                    "author": author_info["author"],
+                    "authorGithub": author_info["authorGithub"],
+                    "isOfficial": author_info["isOfficial"],
+                    "contentHash": content_hash,
+                    "signature": signature
+                }
+                zipf.writestr("chatty_signature.json", json.dumps(meta, indent=2))
 
         # Calculate package file hash and size
         with open(pkg_filepath, "rb") as f:
