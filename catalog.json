@@ -250,5 +250,26 @@
     "sha256": "a7cb35cbab81becc9d85d1e5a6f79e1a78b8bf457973186319739f5387fb423f",
     "contentHash": "290acb8a1348b3fe260bc8eb1f29290a107eecc2e34507b338ac1bcf2b41e26c",
     "signature": "VyCXvokOV6pUDIl5/3UpJcG7qwizIzRPhDwt8EtCTpd2rWeY/sQlxbjqdn2xwhb2XHwy6gpR3qn1GXIC5q9vOB3EmC9hMfL/3cOCYWPQfnW/BshTUVwtPyKisnDLeW6krUl+4wy5EE6td+BMBUik2YKRffZ0yCoawltUdYL/3IMlu/YV3g91aum1y8DDMfdSh/yRGt9zknqfVDuo+Z3yKd4KM8ox6cacyOP7zJWesNsM36N9oXou6P0JfeQG3hNO7kpa2pP9lz7BIjw1s5GP/BBcF/V0NIe0b8rfSBGUVcn8ZgQLydzAP7MRo6iqeARO7cC3XzNA6LEVlcWZ1PESnw=="
+  },
+  {
+    "id": "com.github.hlebsmaslomcht.analog-clock",
+    "name": "Glass Analog Clock",
+    "name_ru": "Стеклянные аналоговые часы",
+    "version": "1.0.0",
+    "author": "@hlebsmaslomcht",
+    "authorGithub": "hlebsmaslomcht",
+    "authorUrl": "https://github.com/hlebsmaslomcht",
+    "isOfficial": false,
+    "trustLevel": "verified_community",
+    "description": "Premium glassmorphic analog desktop clock with ultra-smooth sweeping hands, customizable glow styles, and live date indicator.",
+    "description_ru": "Премиальные стеклянные аналоговые часы с плавным ходом стрелок, настраиваемыми стилями подсветки и индикатором даты.",
+    "category": "utility",
+    "type": "web",
+    "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.github.hlebsmaslomcht.analog-clock/icon.png",
+    "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.github.hlebsmaslomcht.analog-clock.chw",
+    "size": "26 KB",
+    "sha256": "7a787521707db8d6a77bc0e718be215ca68bcc4322d2fc23b36203ef2e1404f7",
+    "contentHash": "98a03b5827daf9adcde75da7c749d0dca461078a7b21f4d1415563a7f134db18",
+    "signature": ""
   }
 ]
