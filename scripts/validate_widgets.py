@@ -11,6 +11,7 @@ import os
 import sys
 import json
 import re
+import subprocess
 
 DANGEROUS_EXTENSIONS = {".exe", ".bat", ".cmd", ".vbs", ".ps1", ".msi", ".scr", ".pif", ".dll"}
 MAX_PACKAGE_SIZE_BYTES = 25 * 1024 * 1024  # 25 MB
@@ -35,6 +36,26 @@ def get_pr_author():
             pass
     return None
 
+def get_changed_widget_ids():
+    changed = set()
+    base_ref = os.environ.get("GITHUB_BASE_REF", "main")
+    diff_targets = [f"origin/{base_ref}...HEAD", "origin/main...HEAD", "HEAD~1"]
+    
+    for target in diff_targets:
+        try:
+            res = subprocess.run(["git", "diff", "--name-only", target], capture_output=True, text=True)
+            if res.returncode == 0 and res.stdout.strip():
+                for line in res.stdout.strip().splitlines():
+                    clean_line = line.strip().replace("\\", "/")
+                    parts = clean_line.split("/")
+                    if len(parts) >= 2 and parts[0] == "widgets":
+                        changed.add(parts[1])
+                if changed:
+                    return changed
+        except Exception:
+            pass
+    return None
+
 def validate():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     widgets_dir = os.path.join(base_dir, "widgets")
@@ -44,8 +65,27 @@ def validate():
         sys.exit(1)
 
     pr_author = get_pr_author()
+    changed_widget_ids = get_changed_widget_ids() if pr_author else None
+
+    # Load existing official widget IDs from catalog.json as extra safety check
+    existing_catalog_ids = set()
+    catalog_path = os.path.join(base_dir, "catalog.json")
+    if os.path.isfile(catalog_path):
+        try:
+            with open(catalog_path, "r", encoding="utf-8") as f:
+                cat_items = json.load(f)
+                for item in cat_items:
+                    if item.get("id"):
+                        existing_catalog_ids.add(item.get("id"))
+        except Exception:
+            pass
+
     if pr_author:
         print(f"Validating PR submitted by authenticated GitHub user: @{pr_author}")
+        if changed_widget_ids is not None:
+            print(f"Detected {len(changed_widget_ids)} widget(s) modified in this PR: {', '.join(sorted(changed_widget_ids)) or 'None'}")
+        else:
+            print("Notice: Git diff against base branch not available, using catalog fallback for unchanged widgets.")
 
     widget_dirs = sorted([d for d in os.listdir(widgets_dir) if os.path.isdir(os.path.join(widgets_dir, d))])
     errors = []
@@ -86,34 +126,46 @@ def validate():
         is_official = widget_id.startswith(OFFICIAL_ID_PREFIX)
 
         if pr_author:
-            # If submitted in a PR by a community user:
-            if pr_author != "chattytoaster":
-                # Non-owner PR cannot touch or create com.chatty.* widgets!
-                if is_official:
-                    errors.append(
-                        f"[{widget_id}] Security error: The '{OFFICIAL_ID_PREFIX}' prefix is strictly reserved for official ChattyWidgets widgets. Community widgets must use 'com.github.{pr_author}.<name>' or '{pr_author}.<name>'."
-                    )
+            # Determine if this specific widget was submitted/modified in this PR
+            is_changed_in_pr = False
+            if changed_widget_ids is not None:
+                is_changed_in_pr = (widget_id in changed_widget_ids)
+            else:
+                # Fallback: if not in git diff, consider it changed unless it is an existing official widget from catalog
+                is_changed_in_pr = not (is_official and widget_id in existing_catalog_ids)
 
-                # Check that community widget matches PR author login
-                expected_prefix_1 = f"com.github.{pr_author}."
-                expected_prefix_2 = f"{pr_author}."
-                if not (widget_id.lower().startswith(expected_prefix_1) or widget_id.lower().startswith(expected_prefix_2)):
-                    errors.append(
-                        f"[{widget_id}] Namespace error: Widget ID must start with your authenticated GitHub username: '{expected_prefix_1}' or '{expected_prefix_2}' (Got: '{widget_id}')."
-                    )
-
-                # Cannot claim reserved official names in author field
-                raw_author = str(manifest.get("author", "")).strip().lower()
-                for reserved in RESERVED_AUTHORS:
-                    if reserved in raw_author:
+            # If the widget is an existing repo widget NOT touched by this PR, skip PR author ownership checks
+            if not is_changed_in_pr:
+                print(f"  [Skip PR Author Check] {widget_id} is an existing repository widget (not modified in PR).")
+            else:
+                # If submitted in a PR by a community user:
+                if pr_author != "chattytoaster":
+                    # Non-owner PR cannot touch or create com.chatty.* widgets!
+                    if is_official:
                         errors.append(
-                            f"[{widget_id}] Anti-spoofing error: Community widgets cannot claim reserved author name '{raw_author}'. Your verified GitHub username will be used automatically."
+                            f"[{widget_id}] Security error: The '{OFFICIAL_ID_PREFIX}' prefix is strictly reserved for official ChattyWidgets widgets. Community widgets must use 'com.github.{pr_author}.<name>' or '{pr_author}.<name>'."
                         )
 
-                if manifest.get("isOfficial") is True:
-                    errors.append(
-                        f"[{widget_id}] Anti-spoofing error: 'isOfficial: true' is reserved exclusively for officially signed ChattyWidgets packages."
-                    )
+                    # Check that community widget matches PR author login
+                    expected_prefix_1 = f"com.github.{pr_author}."
+                    expected_prefix_2 = f"{pr_author}."
+                    if not (widget_id.lower().startswith(expected_prefix_1) or widget_id.lower().startswith(expected_prefix_2)):
+                        errors.append(
+                            f"[{widget_id}] Namespace error: Widget ID must start with your authenticated GitHub username: '{expected_prefix_1}' or '{expected_prefix_2}' (Got: '{widget_id}')."
+                        )
+
+                    # Cannot claim reserved official names in author field
+                    raw_author = str(manifest.get("author", "")).strip().lower()
+                    for reserved in RESERVED_AUTHORS:
+                        if reserved in raw_author:
+                            errors.append(
+                                f"[{widget_id}] Anti-spoofing error: Community widgets cannot claim reserved author name '{raw_author}'. Your verified GitHub username will be used automatically."
+                            )
+
+                    if manifest.get("isOfficial") is True:
+                        errors.append(
+                            f"[{widget_id}] Anti-spoofing error: 'isOfficial: true' is reserved exclusively for officially signed ChattyWidgets packages."
+                        )
 
         # 7. Check entry file exists
         entry_file = manifest.get("entry", "")
