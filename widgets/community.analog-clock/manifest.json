@@ -1,0 +1,86 @@
+{
+  "$schema": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/schema/widget.schema.json",
+  "id": "community.analog-clock",
+  "name": "Glass Analog Clock",
+  "name_ru": "Стеклянные аналоговые часы",
+  "version": "1.0.0",
+  "author": "Alex Dev",
+  "authorGithub": "community",
+  "description": "Premium glassmorphic analog desktop clock with ultra-smooth sweeping hands, customizable glow styles, and live date indicator.",
+  "description_ru": "Премиальные стеклянные аналоговые часы с плавным ходом стрелок, настраиваемыми стилями подсветки и индикатором даты.",
+  "category": "utility",
+  "type": "web",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "width": 260,
+  "height": 260,
+  "minWidth": 180,
+  "minHeight": 180,
+  "maxWidth": 800,
+  "maxHeight": 800,
+  "isResizable": true,
+  "isTransparent": true,
+  "defaultOpacity": 1.0,
+  "defaultLayer": "Normal",
+  "customSettings": {
+    "themeStyle": "neon-cyan",
+    "smoothSeconds": "true",
+    "showSeconds": "true",
+    "showDate": "true",
+    "showNumbers": "true"
+  },
+  "settingsSchema": [
+    {
+      "key": "themeStyle",
+      "type": "select",
+      "title": "Color Theme",
+      "title_ru": "Стиль оформления",
+      "description": "Select the dial accent and glow palette",
+      "description_ru": "Цветовая гамма стрелок и акцентов циферблата",
+      "default": "neon-cyan",
+      "options": [
+        { "value": "neon-cyan", "label": "Cyber Cyan", "label_ru": "💎 Неоновый лазурный (Cyber Cyan)" },
+        { "value": "minimal-dark", "label": "Deep Graphite", "label_ru": "🌑 Сдержанный графит (Deep Graphite)" },
+        { "value": "gold-luxury", "label": "Royal Gold", "label_ru": "👑 Золотая классика (Royal Gold)" },
+        { "value": "amethyst-glow", "label": "Purple Amethyst", "label_ru": "🔮 Аметистовое сияние (Purple Amethyst)" },
+        { "value": "emerald", "label": "Emerald Mint", "label_ru": "🌿 Изумрудный хром (Emerald Mint)" }
+      ]
+    },
+    {
+      "key": "smoothSeconds",
+      "type": "boolean",
+      "title": "Smooth Second Hand",
+      "title_ru": "Плавный ход секундной стрелки",
+      "description": "Continuous 60fps sweeping motion instead of standard ticking",
+      "description_ru": "Плавное непрерывное скольжение стрелки (60 fps) вместо шагового тиканья",
+      "default": "true"
+    },
+    {
+      "key": "showSeconds",
+      "type": "boolean",
+      "title": "Show Seconds Hand",
+      "title_ru": "Показывать секундную стрелку",
+      "description": "Display the thin accent needle hand",
+      "description_ru": "Отображать тонкую секундную стрелку с неоновым наконечником",
+      "default": "true"
+    },
+    {
+      "key": "showDate",
+      "type": "boolean",
+      "title": "Date Badge",
+      "title_ru": "Индикатор даты",
+      "description": "Show day of the week and date aperture",
+      "description_ru": "Отображать аккуратную плашку с днём недели и числом",
+      "default": "true"
+    },
+    {
+      "key": "showNumbers",
+      "type": "boolean",
+      "title": "Dial Numbers (12, 3, 6, 9)",
+      "title_ru": "Цифры на циферблате (12, 3, 6, 9)",
+      "description": "Display cardinal hour numbers",
+      "description_ru": "Отображать основные цифровые метки на циферблате",
+      "default": "true"
+    }
+  ]
+}
