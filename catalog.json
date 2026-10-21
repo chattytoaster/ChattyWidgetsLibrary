@@ -121,9 +121,9 @@
     "icon": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/widgets/com.chatty.music-player/icon.png",
     "downloadUrl": "https://raw.githubusercontent.com/chattytoaster/ChattyWidgetsLibrary/main/packages/com.chatty.music-player.chw",
     "size": "10 KB",
-    "sha256": "4ababad096dfb44f0454886ccf29033fd4ca08a230938aa48af49bda876d909e",
-    "contentHash": "d3765912a20c3c4307cad3fbd39a61c3b58c51164dd14157e1929ec76a1cf158",
-    "signature": "XMS7QFzbH5bIs3qfqtp/loRIu5L0+PqWcdHSk3gL9WGb/EFU6fConbvFARtrRb7QZbL+an4VIYVCE+8jR15Kv6mNMQ87yxeeOtvWzX+FkVUShrK9wtrftJ+o7d4qWfy9JJLwmepNYIb7sBO9YwRpsaC9BMW9/Do/z0sne4yuaPlGP5Q8UM+OCzMBb6aPVk4VtTC98XFa04WxM3xiPzdqR1Hl7PIwqiIBEAJS8j4wk/ES2Kx+GPju6PzH4aGMbQrP238t1jF8Z9AI6067Wdytj4v/X3oX9b7WCl+AXzUO/34vSWKkasn3zvlQazEG0YVfahX60fefVfgOal+0crlVZA=="
+    "sha256": "54cd2b92a57e764afd44f69c237e6845ce1bcaf6a4218fcd40878116b89faffa",
+    "contentHash": "666aa06644572032f8ad2f5f88f3de9268e32c71fef359c844ef210f43f3f428",
+    "signature": "ZmPjY4CwVeVuFT0rBJR7Jq7OmJignzGdiwRleYDCoA8MA93LV1K5nVuE6uqJIauRLxg9T5c/iYRvFnnmohCUZ6gBUKxTXrjqGWN83dKPhauQoY6CgRh1F6nFflvkGamF0d9tshWZKUR8xOkiuyH7gc4Kmtb8KCsMllBcJe8mNnj4wggqeCgfV22y/E6VratsUYu4gVtg5KQd6wXPtU60GSONfMEmZk8MSV9ZMIEc7LMrhxgruLbfdWnURdbfNmq/swZvw26FeO9JhgsQ5tEUL2d6CW0PeH3YHlVZjGh2MAuHkptZPtO5sdY+b6USDDZnHoH/awCwJHsdpk3FrujPaA=="
   },
   {
     "id": "com.chatty.pomodoro-timer",
