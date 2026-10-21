@@ -4,8 +4,8 @@
         Background="#D8121622"
         BorderBrush="#20FFFFFF"
         BorderThickness="1"
-        CornerRadius="18"
-        Padding="16,18">
+        CornerRadius="20"
+        Padding="16,14">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -41,9 +41,9 @@
         </DockPanel>
 
         <!-- Metrics Area -->
-        <Grid Grid.Row="1" Margin="0,12,0,10">
+        <Grid Grid.Row="1" Margin="0,10,0,8">
             <!-- 1. Linear Bars Mode (gpuGaugeStyle == 'bars') -->
-            <Grid Visibility="{Binding BarsVisibility, FallbackValue=Visible}">
+            <Grid Visibility="{Binding BarsVisibility, FallbackValue=Visible}" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="12"/>
@@ -68,8 +68,8 @@
                                      Background="#14FFFFFF" BorderThickness="0">
                             <ProgressBar.Foreground>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                    <GradientStop Color="#10B981" Offset="0.0"/>
-                                    <GradientStop Color="#34D399" Offset="1.0"/>
+                                     <GradientStop Color="#10B981" Offset="0.0"/>
+                                     <GradientStop Color="#34D399" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </ProgressBar.Foreground>
                         </ProgressBar>
@@ -94,8 +94,8 @@
                                      Background="#14FFFFFF" BorderThickness="0">
                             <ProgressBar.Foreground>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                    <GradientStop Color="#38BDF8" Offset="0.0"/>
-                                    <GradientStop Color="#818CF8" Offset="1.0"/>
+                                     <GradientStop Color="#38BDF8" Offset="0.0"/>
+                                     <GradientStop Color="#818CF8" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </ProgressBar.Foreground>
                         </ProgressBar>
@@ -104,7 +104,7 @@
             </Grid>
 
             <!-- 2. Circular Rings Mode (gpuGaugeStyle == 'circular') -->
-            <Grid Visibility="{Binding CircularVisibility, FallbackValue=Collapsed}">
+            <Grid Visibility="{Binding CircularVisibility, FallbackValue=Collapsed}" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="8"/>

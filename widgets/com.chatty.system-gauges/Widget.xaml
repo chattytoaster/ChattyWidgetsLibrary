@@ -5,7 +5,7 @@
         BorderBrush="#25FFFFFF"
         BorderThickness="1"
         CornerRadius="20"
-        Padding="18">
+        Padding="16,14">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,12 +13,12 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <DockPanel Grid.Row="0" Margin="0,0,0,12">
+        <DockPanel Grid.Row="0" Margin="0,0,0,10">
             <TextBlock Text="{Binding HeaderTitle, FallbackValue='⚡ СИСТЕМА'}" FontWeight="Bold" FontSize="11" Foreground="#94A3B8" DockPanel.Dock="Left"/>
         </DockPanel>
 
         <!-- Content Area -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" VerticalAlignment="Center">
             <!-- 1. Linear Bars View (Default / Classic) -->
             <Grid Visibility="{Binding BarsVisibility, FallbackValue=Visible}">
                 <Grid.RowDefinitions>
@@ -29,7 +29,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- CPU -->
-                <Grid Grid.Row="0" Margin="0,3">
+                <Grid Grid.Row="0" Margin="0,2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -38,12 +38,12 @@
                         <TextBlock Text="{Binding CpuTitle, FallbackValue='Процессор (CPU)'}" FontSize="12" Foreground="#CBD5E1"/>
                         <TextBlock Text="{Binding CurrentMetrics.CpuPercent, StringFormat='{}{0:0}%'}" FontSize="12" FontWeight="Bold" Foreground="#38BDF8" HorizontalAlignment="Right"/>
                     </DockPanel>
-                    <ProgressBar Grid.Row="1" Value="{Binding CurrentMetrics.CpuPercent}" Minimum="0" Maximum="100" Height="6" Margin="0,4,0,0"
+                    <ProgressBar Grid.Row="1" Value="{Binding CurrentMetrics.CpuPercent}" Minimum="0" Maximum="100" Height="6" Margin="0,3,0,0"
                                  Foreground="#38BDF8" Background="#2038BDF8" BorderThickness="0"/>
                 </Grid>
 
                 <!-- RAM -->
-                <Grid Grid.Row="1" Margin="0,3">
+                <Grid Grid.Row="1" Margin="0,2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -52,12 +52,12 @@
                         <TextBlock Text="{Binding RamTitle, FallbackValue='Память (RAM)'}" FontSize="12" Foreground="#CBD5E1"/>
                         <TextBlock Text="{Binding MemoryDetail, FallbackValue='0 / 0 ГБ'}" FontSize="12" FontWeight="Bold" Foreground="#A855F7" HorizontalAlignment="Right"/>
                     </DockPanel>
-                    <ProgressBar Grid.Row="1" Value="{Binding CurrentMetrics.MemoryPercent}" Minimum="0" Maximum="100" Height="6" Margin="0,4,0,0"
+                    <ProgressBar Grid.Row="1" Value="{Binding CurrentMetrics.MemoryPercent}" Minimum="0" Maximum="100" Height="6" Margin="0,3,0,0"
                                  Foreground="#A855F7" Background="#20A855F7" BorderThickness="0"/>
                 </Grid>
 
                 <!-- DISK -->
-                <Grid Grid.Row="2" Margin="0,3">
+                <Grid Grid.Row="2" Margin="0,2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -66,12 +66,12 @@
                         <TextBlock Text="{Binding DiskTitle, FallbackValue='Диск (C:)'}" FontSize="12" Foreground="#CBD5E1"/>
                         <TextBlock Text="{Binding CurrentMetrics.DiskPercent, StringFormat='{}{0:0}%'}" FontSize="12" FontWeight="Bold" Foreground="#F59E0B" HorizontalAlignment="Right"/>
                     </DockPanel>
-                    <ProgressBar Grid.Row="1" Value="{Binding CurrentMetrics.DiskPercent}" Minimum="0" Maximum="100" Height="6" Margin="0,4,0,0"
+                    <ProgressBar Grid.Row="1" Value="{Binding CurrentMetrics.DiskPercent}" Minimum="0" Maximum="100" Height="6" Margin="0,3,0,0"
                                  Foreground="#F59E0B" Background="#20F59E0B" BorderThickness="0"/>
                 </Grid>
 
                 <!-- Network Stats -->
-                <Border Grid.Row="3" Margin="0,8,0,0" Background="#18FFFFFF" CornerRadius="8" Padding="8,5">
+                <Border Grid.Row="3" Margin="0,6,0,0" Background="#18FFFFFF" CornerRadius="8" Padding="8,5">
                     <DockPanel>
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                             <TextBlock Text="↓ " Foreground="#10B981" FontWeight="Bold" FontSize="11"/>
@@ -99,41 +99,41 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- CPU Circular (Row 0, Col 0) -->
-                <Border Grid.Row="0" Grid.Column="0" Background="#14FFFFFF" CornerRadius="12" Padding="6,8">
+                <Border Grid.Row="0" Grid.Column="0" Background="#14FFFFFF" CornerRadius="12" Padding="6,7">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="⚡ CPU" FontSize="11" FontWeight="SemiBold" Foreground="#CBD5E1" HorizontalAlignment="Center"/>
                         <controls:CircularGauge Value="{Binding CurrentMetrics.CpuPercent, FallbackValue=0}" Width="48" Height="48" StrokeThickness="4"
-                                                ProgressBrush="#38BDF8" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,5,0,3"/>
+                                                ProgressBrush="#38BDF8" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,4,0,2"/>
                         <TextBlock Text="{Binding FormattedCpu, FallbackValue='0%'}" FontSize="10" FontWeight="Bold" Foreground="#38BDF8" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
                 <!-- RAM Circular (Row 0, Col 2) -->
-                <Border Grid.Row="0" Grid.Column="2" Background="#14FFFFFF" CornerRadius="12" Padding="6,8">
+                <Border Grid.Row="0" Grid.Column="2" Background="#14FFFFFF" CornerRadius="12" Padding="6,7">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="🧠 RAM" FontSize="11" FontWeight="SemiBold" Foreground="#CBD5E1" HorizontalAlignment="Center"/>
                         <controls:CircularGauge Value="{Binding CurrentMetrics.MemoryPercent, FallbackValue=0}" Width="48" Height="48" StrokeThickness="4"
-                                                ProgressBrush="#A855F7" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,5,0,3"/>
+                                                ProgressBrush="#A855F7" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,4,0,2"/>
                         <TextBlock Text="{Binding MemoryGbText, FallbackValue='0 ГБ'}" FontSize="10" FontWeight="Bold" Foreground="#A855F7" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
                 <!-- DISK Circular (Row 2, Col 0) -->
-                <Border Grid.Row="2" Grid.Column="0" Background="#14FFFFFF" CornerRadius="12" Padding="6,8">
+                <Border Grid.Row="2" Grid.Column="0" Background="#14FFFFFF" CornerRadius="12" Padding="6,7">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="{Binding DiskTitleShort, FallbackValue='💾 ДИСК (C:)'}" FontSize="11" FontWeight="SemiBold" Foreground="#CBD5E1" HorizontalAlignment="Center"/>
                         <controls:CircularGauge Value="{Binding CurrentMetrics.DiskPercent, FallbackValue=0}" Width="48" Height="48" StrokeThickness="4"
-                                                ProgressBrush="#F59E0B" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,5,0,3"/>
+                                                ProgressBrush="#F59E0B" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,4,0,2"/>
                         <TextBlock Text="{Binding FormattedDisk, FallbackValue='0%'}" FontSize="10" FontWeight="Bold" Foreground="#F59E0B" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
                 <!-- NET Circular (Row 2, Col 2) -->
-                <Border Grid.Row="2" Grid.Column="2" Background="#14FFFFFF" CornerRadius="12" Padding="6,8">
+                <Border Grid.Row="2" Grid.Column="2" Background="#14FFFFFF" CornerRadius="12" Padding="6,7">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Text="{Binding NetTitleShort, FallbackValue='🌐 СЕТЬ'}" FontSize="11" FontWeight="SemiBold" Foreground="#CBD5E1" HorizontalAlignment="Center"/>
                         <controls:CircularGauge Value="{Binding NetSpeedRatio, FallbackValue=0}" Width="48" Height="48" StrokeThickness="4"
-                                                ProgressBrush="#10B981" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,5,0,3"/>
+                                                ProgressBrush="#10B981" TrackBrush="#20FFFFFF" Foreground="White" Margin="0,4,0,2"/>
                         <TextBlock Text="{Binding FormattedNetTotal, FallbackValue='0 КБ/с'}" FontSize="10" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>

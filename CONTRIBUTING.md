@@ -42,15 +42,18 @@ widgets/
   "entry": "index.html",
   "icon": "icon.png",
   "defaultWidth": 320,
-  "defaultHeight": 220,
+  "defaultHeight": 240,
   "minWidth": 240,
-  "minHeight": 160,
+  "minHeight": 180,
   "resizable": true,
   "defaultLayer": "desktop",
   "clickThrough": false,
   "permissions": ["network"]
 }
 ```
+
+> [!TIP]
+> **Единый стандарт пропорций 4:3**: чтобы виджеты стояли красиво и гармонично в один ряд на рабочем столе пользователей, всегда используйте базовые размеры **`defaultWidth: 320`** и **`defaultHeight: 240`** с минимальными **`minWidth: 240`** и **`minHeight: 180`**. Подробнее об адаптивной верстке читайте в [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ---
 

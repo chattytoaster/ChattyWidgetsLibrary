@@ -5,7 +5,7 @@
         BorderBrush="#25FFFFFF"
         BorderThickness="1"
         CornerRadius="20"
-        Padding="14,16">
+        Padding="14,12">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -15,12 +15,12 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <DockPanel Grid.Row="0" Margin="0,0,0,10">
+        <DockPanel Grid.Row="0" Margin="0,0,0,6">
             <!-- Title -->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
                 <TextBlock Text="📰 " FontSize="13" VerticalAlignment="Center"/>
                 <controls:MarqueeText Text="{Binding FeedTitle}" FontSize="11.5" FontWeight="ExtraBold" Foreground="{Binding FeedTitleColor}"
-                                      VerticalAlignment="Center" MaxWidth="150"/>
+                                      VerticalAlignment="Center" MaxWidth="160"/>
             </StackPanel>
 
             <!-- Pager Controls -->
@@ -40,8 +40,8 @@
         </DockPanel>
 
         <!-- Featured News Slide Card -->
-        <Border Grid.Row="1" CornerRadius="14" BorderBrush="{Binding FeaturedCardBorderBrush}" BorderThickness="1"
-                Background="{Binding FeaturedCardBackground}" Padding="12,10" Margin="0,0,0,10">
+        <Border Grid.Row="1" CornerRadius="12" BorderBrush="{Binding FeaturedCardBorderBrush}" BorderThickness="1"
+                Background="{Binding FeaturedCardBackground}" Padding="10,7" Margin="0,0,0,6">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -50,7 +50,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- Badge Row -->
-                <DockPanel Grid.Row="0" Margin="0,0,0,6">
+                <DockPanel Grid.Row="0" Margin="0,0,0,4">
                     <Border DockPanel.Dock="Left" CornerRadius="6" Padding="6,2">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -67,18 +67,18 @@
                 </DockPanel>
 
                 <!-- Headline -->
-                <TextBlock Grid.Row="1" Text="{Binding CurrentArticle.Title}" FontSize="13" FontWeight="Bold" Foreground="{Binding FeaturedHeadlineColor}"
-                           TextWrapping="Wrap" LineHeight="17" Margin="0,0,0,6"/>
+                <TextBlock Grid.Row="1" Text="{Binding CurrentArticle.Title}" FontSize="12.5" FontWeight="Bold" Foreground="{Binding FeaturedHeadlineColor}"
+                           TextWrapping="Wrap" LineHeight="16" MaxHeight="34" TextTrimming="CharacterEllipsis" Margin="0,0,0,4"/>
 
                 <!-- Open Link button -->
                 <Button Grid.Row="2" Command="{Binding CurrentArticle.OpenCommand}" Content="Читать в источнике →"
-                        HorizontalAlignment="Left" Background="Transparent" Foreground="{Binding FeaturedLinkColor}" FontSize="10.5"
+                        HorizontalAlignment="Left" Background="Transparent" Foreground="{Binding FeaturedLinkColor}" FontSize="10"
                         FontWeight="SemiBold" BorderThickness="0" Cursor="Hand"/>
             </Grid>
         </Border>
 
         <!-- Sub-header -->
-        <TextBlock Grid.Row="2" Text="ВСЕ НОВОСТИ:" FontSize="10" FontWeight="Bold" Foreground="{Binding SubheaderColor}" Margin="0,0,0,6"/>
+        <TextBlock Grid.Row="2" Text="ВСЕ НОВОСТИ:" FontSize="9.5" FontWeight="Bold" Foreground="{Binding SubheaderColor}" Margin="0,0,0,4"/>
 
         <!-- Feed List Items -->
         <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
@@ -86,7 +86,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Background="{Binding CardBackground}" BorderBrush="{Binding CardBorder}" BorderThickness="1" CornerRadius="8"
-                                Padding="8,6" Margin="0,0,0,6">
+                                Padding="8,5" Margin="0,0,0,4">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>

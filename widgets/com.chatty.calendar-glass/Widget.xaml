@@ -4,7 +4,7 @@
         BorderBrush="#25FFFFFF"
         BorderThickness="1"
         CornerRadius="20"
-        Padding="14,16,14,12">
+        Padding="14,10,14,8">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,20 +14,20 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <DockPanel Grid.Row="0" Margin="0,0,0,10">
+        <DockPanel Grid.Row="0" Margin="0,0,0,6">
             <TextBlock Text="{Binding MonthYear}" FontSize="14.5" FontWeight="Bold" Foreground="{Binding MonthYearColor}"
                        DockPanel.Dock="Left" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center">
-                <Button Command="{Binding PrevMonthCommand}" Content="◀" Width="26" Height="26" Background="{Binding NavBtnBackground}"
+                <Button Command="{Binding PrevMonthCommand}" Content="◀" Width="26" Height="24" Background="{Binding NavBtnBackground}"
                         BorderBrush="{Binding NavBtnBorder}" BorderThickness="1" Foreground="{Binding NavBtnForeground}" FontSize="10" Cursor="Hand">
                     <Button.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="13"/>
+                            <Setter Property="CornerRadius" Value="12"/>
                         </Style>
                     </Button.Resources>
                 </Button>
                 <Button Command="{Binding TodayCommand}" Content="{Binding TodayButtonText}" Background="{Binding TodayBtnBackground}" BorderBrush="{Binding TodayBtnBorder}"
-                        BorderThickness="1" Foreground="{Binding TodayBtnForeground}" FontSize="10.5" FontWeight="SemiBold" Padding="8,3"
+                        BorderThickness="1" Foreground="{Binding TodayBtnForeground}" FontSize="10.5" FontWeight="SemiBold" Padding="8,2"
                         Margin="4,0" Cursor="Hand">
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -35,11 +35,11 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Command="{Binding NextMonthCommand}" Content="▶" Width="26" Height="26" Background="{Binding NavBtnBackground}"
+                <Button Command="{Binding NextMonthCommand}" Content="▶" Width="26" Height="24" Background="{Binding NavBtnBackground}"
                         BorderBrush="{Binding NavBtnBorder}" BorderThickness="1" Foreground="{Binding NavBtnForeground}" FontSize="10" Cursor="Hand">
                     <Button.Resources>
                         <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="13"/>
+                            <Setter Property="CornerRadius" Value="12"/>
                         </Style>
                     </Button.Resources>
                 </Button>
@@ -47,7 +47,7 @@
         </DockPanel>
 
         <!-- Weekdays Header Row -->
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding WeekHeaders}" Margin="0,0,0,6">
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding WeekHeaders}" Margin="0,0,0,4">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="{Binding ColumnCount}"/>
@@ -70,7 +70,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="1.5" Height="26" CornerRadius="13" Background="{Binding BgColor}">
+                    <Border Margin="1" Height="22" CornerRadius="11" Background="{Binding BgColor}">
                         <TextBlock Text="{Binding DayText}" FontSize="11" FontWeight="{Binding Weight}"
                                    Foreground="{Binding FgColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
@@ -79,7 +79,7 @@
         </ItemsControl>
 
         <!-- Footer / Today Status -->
-        <Border Grid.Row="3" BorderBrush="{Binding DividerColor}" BorderThickness="0,1,0,0" Padding="0,6,0,0" Margin="0,6,0,0">
+        <Border Grid.Row="3" BorderBrush="{Binding DividerColor}" BorderThickness="0,1,0,0" Padding="0,4,0,0" Margin="0,4,0,0">
             <DockPanel>
                 <TextBlock Text="{Binding TodayLabel}" FontSize="10.5" Foreground="{Binding TextSecondaryColor}" DockPanel.Dock="Left"/>
                 <TextBlock Text="{Binding TodayFull}" FontSize="11" FontWeight="SemiBold" Foreground="{Binding TodayFullColor}"

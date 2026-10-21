@@ -5,151 +5,164 @@
         BorderBrush="#25FFFFFF"
         BorderThickness="1"
         CornerRadius="20"
-        Padding="14,11">
+        Padding="16,14">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <!-- Realistic Vinyl Disc / Album Art (Spins only when music is playing) -->
-        <Grid Grid.Column="0" Width="60" Height="60" Margin="0,0,14,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-            <Grid.RenderTransform>
-                <RotateTransform Angle="{Binding VinylAngle}"/>
-            </Grid.RenderTransform>
-            <!-- Vinyl Groove Background -->
-            <Ellipse Width="60" Height="60">
-                <Ellipse.Fill>
-                    <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
-                        <GradientStop Color="#1E1B4B" Offset="0.0"/>
-                        <GradientStop Color="#0F172A" Offset="0.65"/>
-                        <GradientStop Color="#020617" Offset="1.0"/>
-                    </RadialGradientBrush>
-                </Ellipse.Fill>
-                <Ellipse.Stroke>
-                    <SolidColorBrush Color="#30FFFFFF"/>
-                </Ellipse.Stroke>
-                <Ellipse.Effect>
-                    <DropShadowEffect BlurRadius="16" ShadowDepth="0" Color="#8B5CF6" Opacity="0.4"/>
-                </Ellipse.Effect>
-            </Ellipse>
-
-            <!-- Album Art if available -->
-            <Border Width="60" Height="60" CornerRadius="30">
-                <Border.Clip>
-                    <EllipseGeometry Center="30,30" RadiusX="30" RadiusY="30"/>
-                </Border.Clip>
-                <Image Source="{Binding CoverBitmap}" Stretch="UniformToFill"
-                       Visibility="{Binding CoverVisibility}"/>
-            </Border>
-
-            <!-- Center Vinyl Hub -->
-            <Ellipse Width="18" Height="18" Fill="#0B0E17" Stroke="#60FFFFFF" StrokeThickness="1.5"
-                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Grid>
-
-        <!-- Track Info & Controls -->
-        <Grid Grid.Column="1" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <!-- Title -->
-            <controls:MarqueeText Grid.Row="0" Text="{Binding TrackTitle}" FontWeight="Bold" FontSize="13" Foreground="#F8FAFC" Margin="0,0,0,2"/>
-
-            <!-- Artist and Equalizer row -->
-            <DockPanel Grid.Row="1" Margin="0,0,0,6">
-                <!-- Mini Equalizer bars -->
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="6,0,0,0">
-                    <Border Width="2.5" Height="6" Background="#38BDF8" CornerRadius="1" Margin="1,0"/>
-                    <Border Width="2.5" Height="10" Background="#8B5CF6" CornerRadius="1" Margin="1,0"/>
-                    <Border Width="2.5" Height="8" Background="#EC4899" CornerRadius="1" Margin="1,0"/>
-                </StackPanel>
-                <controls:MarqueeText Text="{Binding Artist}" FontSize="11.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
-            </DockPanel>
-
-            <!-- Controls Pill -->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-                <!-- Prev Button -->
-                <Button Command="{Binding PrevCommand}" Content="⏮" Width="28" Height="28" Margin="0,0,4,0"
-                        Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="11" BorderThickness="0" Cursor="Hand">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="8">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-
-                <!-- Hero Play/Pause Button with Vibrant Gradient -->
-                <Button Command="{Binding PlayPauseCommand}" Content="{Binding PlayPauseIcon}" Width="36" Height="36" Margin="0,0,5,0"
-                        Foreground="#FFFFFF" FontWeight="Bold" FontSize="16" BorderThickness="0" Cursor="Hand">
-                    <Button.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#6366F1" Offset="0.0"/>
-                            <GradientStop Color="#8B5CF6" Offset="0.5"/>
-                            <GradientStop Color="#EC4899" Offset="1.0"/>
-                        </LinearGradientBrush>
-                    </Button.Background>
-                    <Button.Effect>
-                        <DropShadowEffect BlurRadius="12" ShadowDepth="1" Color="#6366F1" Opacity="0.55"/>
-                    </Button.Effect>
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="18">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,0,0,0"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-
-                <!-- Next Button -->
-                <Button Command="{Binding NextCommand}" Content="⏭" Width="28" Height="28" Margin="0,0,6,0"
-                        Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="11" BorderThickness="0" Cursor="Hand">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="8">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-
-                <!-- Separator -->
-                <Border Width="1" Height="16" Background="#20FFFFFF" Margin="2,0,8,0" VerticalAlignment="Center"/>
-
-                <!-- Volume Down -->
-                <Button Command="{Binding VolumeDownCommand}" Content="🔉" Width="26" Height="26" Margin="0,0,4,0"
-                        Background="#14FFFFFF" Foreground="#94A3B8" FontSize="11" BorderThickness="0" Cursor="Hand">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="13">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-
-                <!-- Volume Up -->
-                <Button Command="{Binding VolumeUpCommand}" Content="🔊" Width="26" Height="26"
-                        Background="#14FFFFFF" Foreground="#94A3B8" FontSize="11" BorderThickness="0" Cursor="Hand">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="13">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+        <!-- Header -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
+                <TextBlock Text="🎵" FontSize="13" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                <TextBlock Text="МУЗЫКА" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" VerticalAlignment="Center"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center">
+                <Border Width="2.5" Height="6" Background="#38BDF8" CornerRadius="1" Margin="1,0"/>
+                <Border Width="2.5" Height="10" Background="#8B5CF6" CornerRadius="1" Margin="1,0"/>
+                <Border Width="2.5" Height="8" Background="#EC4899" CornerRadius="1" Margin="1,0"/>
+            </StackPanel>
+        </DockPanel>
 
-            <!-- Live Track Progress Bar -->
-            <ProgressBar Grid.Row="3" Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="3" Margin="0,6,0,0"
-                         Foreground="#38BDF8" Background="#18FFFFFF" BorderThickness="0"/>
+        <!-- Player Body -->
+        <Grid Grid.Row="1" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Realistic Vinyl Disc / Album Art (Spins only when music is playing) -->
+            <Grid Grid.Column="0" Width="72" Height="72" Margin="0,0,14,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <RotateTransform Angle="{Binding VinylAngle}"/>
+                </Grid.RenderTransform>
+                <!-- Vinyl Groove Background -->
+                <Ellipse Width="72" Height="72">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush Center="0.5,0.5" GradientOrigin="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                            <GradientStop Color="#1E1B4B" Offset="0.0"/>
+                            <GradientStop Color="#0F172A" Offset="0.65"/>
+                            <GradientStop Color="#020617" Offset="1.0"/>
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                    <Ellipse.Stroke>
+                        <SolidColorBrush Color="#30FFFFFF"/>
+                    </Ellipse.Stroke>
+                    <Ellipse.Effect>
+                        <DropShadowEffect BlurRadius="16" ShadowDepth="0" Color="#8B5CF6" Opacity="0.4"/>
+                    </Ellipse.Effect>
+                </Ellipse>
+
+                <!-- Album Art if available -->
+                <Border Width="72" Height="72" CornerRadius="36">
+                    <Border.Clip>
+                        <EllipseGeometry Center="36,36" RadiusX="36" RadiusY="36"/>
+                    </Border.Clip>
+                    <Image Source="{Binding CoverBitmap}" Stretch="UniformToFill"
+                           Visibility="{Binding CoverVisibility}"/>
+                </Border>
+
+                <!-- Center Vinyl Hub -->
+                <Ellipse Width="20" Height="20" Fill="#0B0E17" Stroke="#60FFFFFF" StrokeThickness="1.5"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+
+            <!-- Track Info & Controls -->
+            <Grid Grid.Column="1" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Title -->
+                <controls:MarqueeText Grid.Row="0" Text="{Binding TrackTitle}" FontWeight="Bold" FontSize="13.5" Foreground="#F8FAFC" Margin="0,0,0,2"/>
+
+                <!-- Artist -->
+                <controls:MarqueeText Grid.Row="1" Text="{Binding Artist}" FontSize="11.5" Foreground="#94A3B8" Margin="0,0,0,6"/>
+
+                <!-- Controls Pill -->
+                <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <!-- Prev Button -->
+                    <Button Command="{Binding PrevCommand}" Content="⏮" Width="28" Height="28" Margin="0,0,4,0"
+                            Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="11" BorderThickness="0" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Hero Play/Pause Button with Vibrant Gradient -->
+                    <Button Command="{Binding PlayPauseCommand}" Content="{Binding PlayPauseIcon}" Width="36" Height="36" Margin="0,0,5,0"
+                            Foreground="#FFFFFF" FontWeight="Bold" FontSize="16" BorderThickness="0" Cursor="Hand">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#6366F1" Offset="0.0"/>
+                                <GradientStop Color="#8B5CF6" Offset="0.5"/>
+                                <GradientStop Color="#EC4899" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="12" ShadowDepth="1" Color="#6366F1" Opacity="0.55"/>
+                        </Button.Effect>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="18">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1,0,0,0"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Next Button -->
+                    <Button Command="{Binding NextCommand}" Content="⏭" Width="28" Height="28" Margin="0,0,6,0"
+                            Background="#18FFFFFF" Foreground="#CBD5E1" FontSize="11" BorderThickness="0" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Separator -->
+                    <Border Width="1" Height="16" Background="#20FFFFFF" Margin="2,0,8,0" VerticalAlignment="Center"/>
+
+                    <!-- Volume Down -->
+                    <Button Command="{Binding VolumeDownCommand}" Content="🔉" Width="26" Height="26" Margin="0,0,4,0"
+                            Background="#14FFFFFF" Foreground="#94A3B8" FontSize="11" BorderThickness="0" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="13">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Volume Up -->
+                    <Button Command="{Binding VolumeUpCommand}" Content="🔊" Width="26" Height="26"
+                            Background="#14FFFFFF" Foreground="#94A3B8" FontSize="11" BorderThickness="0" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="13">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+                <!-- Live Track Progress Bar -->
+                <ProgressBar Grid.Row="3" Value="{Binding ProgressPercent, Mode=OneWay}" Minimum="0" Maximum="100" Height="4" Margin="0,8,0,0"
+                             Foreground="#38BDF8" Background="#18FFFFFF" BorderThickness="0"/>
+            </Grid>
         </Grid>
     </Grid>
 </Border>

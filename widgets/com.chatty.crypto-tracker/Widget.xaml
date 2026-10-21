@@ -5,7 +5,7 @@
         BorderBrush="#25FFFFFF"
         BorderThickness="1"
         CornerRadius="20"
-        Padding="14,16">
+        Padding="14,12">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <DockPanel Grid.Row="0" Margin="0,0,0,10">
+        <DockPanel Grid.Row="0" Margin="0,0,0,8">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
                 <TextBlock Text="{Binding HeaderTitle, FallbackValue='💎 КОТИРОВКИ &amp; ВАЛЮТЫ'}" FontSize="11.5" FontWeight="ExtraBold" Foreground="{Binding HeaderColor}" VerticalAlignment="Center"/>
                 <Border Background="{Binding BadgeBackground}" CornerRadius="4" Padding="5,1" Margin="6,0,0,0" VerticalAlignment="Center">
@@ -35,7 +35,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border Background="{Binding CardBackground}" BorderBrush="{Binding CardBorder}" BorderThickness="1" CornerRadius="8"
-                                Padding="10,6" Margin="0,0,0,5">
+                                Padding="10,5" Margin="0,0,0,4">
                             <DockPanel>
                                 <!-- Left: Icon + Symbol + Name -->
                                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
@@ -43,7 +43,7 @@
                                     <TextBlock Text="{Binding Symbol}" FontSize="12" FontWeight="Bold" Foreground="{Binding SymbolColor}"
                                                VerticalAlignment="Center"/>
                                     <controls:MarqueeText Text="{Binding Name}" FontSize="10" Foreground="{Binding NameColor}" Margin="6,0,0,0"
-                                                          VerticalAlignment="Center" MaxWidth="85"/>
+                                                          VerticalAlignment="Center" MaxWidth="95"/>
                                 </StackPanel>
 
                                 <!-- Right: Price + Change Badge -->

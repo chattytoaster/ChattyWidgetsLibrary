@@ -5,13 +5,13 @@
         BorderThickness="1"
         CornerRadius="20"
         ClipToBounds="True">
-    <Grid Background="Transparent">
+    <Grid x:Name="MediaGrid" Background="Transparent">
         <Grid.OpacityMask>
-            <VisualBrush>
+            <VisualBrush Stretch="None" AlignmentX="Left" AlignmentY="Top">
                 <VisualBrush.Visual>
-                    <Border Background="Black" CornerRadius="20"
-                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
-                            Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}"/>
+                    <Border Background="Black" CornerRadius="19"
+                            Width="{Binding ActualWidth, ElementName=MediaGrid}"
+                            Height="{Binding ActualHeight, ElementName=MediaGrid}"/>
                 </VisualBrush.Visual>
             </VisualBrush>
         </Grid.OpacityMask>
@@ -36,7 +36,7 @@
                Visibility="{Binding ImageVisibility}"/>
 
         <!-- Placeholder when empty -->
-        <Border Background="#C0101420" Opacity="{Binding PhotoOpacity}" Padding="16" CornerRadius="20"
+        <Border Background="#C0101420" Opacity="{Binding PhotoOpacity}" Padding="16" CornerRadius="19"
                 Visibility="{Binding PlaceholderVisibility}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="🖼️" FontSize="36" HorizontalAlignment="Center" Margin="0,0,0,6">
@@ -69,7 +69,7 @@
         </Border>
 
         <!-- Bottom Controls Bar (hideable on hover / configurable) -->
-        <Border VerticalAlignment="Bottom" Background="#80000000" Padding="8,4">
+        <Border VerticalAlignment="Bottom" Background="#80000000" CornerRadius="0,0,19,19" Padding="8,4">
             <Border.Style>
                 <Style TargetType="Border">
                     <Setter Property="Opacity" Value="0"/>

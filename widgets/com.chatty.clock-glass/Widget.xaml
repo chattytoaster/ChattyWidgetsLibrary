@@ -4,7 +4,7 @@
         BorderBrush="#25FFFFFF"
         BorderThickness="1"
         CornerRadius="20"
-        Padding="20,16">
+        Padding="22,18">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,14 +14,14 @@
 
         <!-- Top Row: Date Label -->
         <DockPanel Grid.Row="0">
-            <TextBlock Text="{Binding DateLabel}" FontSize="12.5" FontWeight="Bold" Foreground="#94A3B8"
+            <TextBlock Text="{Binding DateLabel}" FontSize="13" FontWeight="Bold" Foreground="#94A3B8"
                        VerticalAlignment="Center"/>
         </DockPanel>
 
         <!-- Middle Row: Large Digital Time + Seconds Badge -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,4">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,6">
             <!-- Big Hours & Minutes -->
-            <TextBlock Text="{Binding TimeDigits}" FontSize="56" FontWeight="Bold" Foreground="#F8FAFC"
+            <TextBlock Text="{Binding TimeDigits}" FontSize="60" FontWeight="Bold" Foreground="#F8FAFC"
                        VerticalAlignment="Bottom">
                 <TextBlock.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="4" Color="#6366F1" Opacity="0.4"/>
@@ -29,13 +29,13 @@
             </TextBlock>
 
             <!-- Seconds Badge -->
-            <TextBlock Text="{Binding SecondsBadge}" FontSize="22" FontWeight="SemiBold" Foreground="#818CF8"
-                       Margin="6,0,0,10" VerticalAlignment="Bottom"/>
+            <TextBlock Text="{Binding SecondsBadge}" FontSize="24" FontWeight="SemiBold" Foreground="#818CF8"
+                       Margin="8,0,0,12" VerticalAlignment="Bottom"/>
         </StackPanel>
 
         <!-- Bottom Row: Day Name -->
-        <Border Grid.Row="2" BorderBrush="#14FFFFFF" BorderThickness="0,1,0,0" Padding="0,10,0,0">
-            <TextBlock Text="{Binding DayName}" FontSize="13.5" FontWeight="SemiBold" Foreground="#E2E8F0"
+        <Border Grid.Row="2" BorderBrush="#14FFFFFF" BorderThickness="0,1,0,0" Padding="0,12,0,0">
+            <TextBlock Text="{Binding DayName}" FontSize="14" FontWeight="SemiBold" Foreground="#E2E8F0"
                        VerticalAlignment="Center"/>
         </Border>
     </Grid>

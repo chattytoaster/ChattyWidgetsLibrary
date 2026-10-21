@@ -5,7 +5,7 @@
         BorderBrush="{Binding BorderAccentBrush}"
         BorderThickness="1"
         CornerRadius="20"
-        Padding="16">
+        Padding="14,12">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <DockPanel Grid.Row="0" Margin="0,0,0,12">
+        <DockPanel Grid.Row="0" Margin="0,0,0,8">
             <controls:MarqueeText Text="{Binding HeaderTitle}" FontSize="13" FontWeight="Bold" Foreground="{Binding HeaderBrush}"
-                                  DockPanel.Dock="Left" VerticalAlignment="Center" MaxWidth="150"/>
+                                  DockPanel.Dock="Left" VerticalAlignment="Center" MaxWidth="170"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right" VerticalAlignment="Center">
                 <Button Command="{Binding ClearCompletedCommand}" ToolTip="{Binding ClearCompletedTooltip}"
                         Content="✓" Width="24" Height="22" Background="{Binding AccentSoftBrush}"
@@ -35,7 +35,7 @@
         </DockPanel>
 
         <!-- Input Row -->
-        <Grid Grid.Row="1" Margin="0,0,0,12">
+        <Grid Grid.Row="1" Margin="0,0,0,8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="8"/>
@@ -83,7 +83,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Background="{Binding CardBackground}" BorderBrush="{Binding CardBorder}" BorderThickness="1" CornerRadius="8"
-                                    Padding="8,6" Margin="0,0,0,6">
+                                    Padding="8,5" Margin="0,0,0,4">
                                 <DockPanel>
                                     <CheckBox IsChecked="{Binding IsDone}" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                     <Button Command="{Binding DeleteCommand}" Content="✕" DockPanel.Dock="Right" Background="Transparent"
@@ -101,7 +101,7 @@
 
             <TextBlock Text="{Binding EmptyStateText}" Foreground="{Binding EmptyStateColor}" FontSize="11"
                        TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Margin="16,24,16,16"
+                       VerticalAlignment="Center" Margin="16,20,16,16"
                        Visibility="{Binding EmptyStateVisibility}"
                        IsHitTestVisible="False"/>
         </Grid>
