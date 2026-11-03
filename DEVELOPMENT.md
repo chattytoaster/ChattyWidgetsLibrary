@@ -145,62 +145,186 @@ widgets/com.github.<ваш_логин>.<имя_виджета>/
 
 ## ⚡ JavaScript Bridge API (`window.chatty`)
 
-В каждый веб-виджет среда ChattyWidgets автоматически внедряет объект `window.chatty`.
+В каждый веб-виджет среда ChattyWidgets автоматически внедряет объект `window.chatty` с синхронными методами, реактивными событиями и удобными хелперами.
 
-### 1. Мониторинг системы (Hardware API)
+### 1. Реактивные события в реальном времени (Event Subscriptions)
+
+Подписывайтесь на системные события без опроса в таймере:
+
 ```javascript
-// Процессор и память
-const cpu = window.chatty.getCpu();             // % загрузки CPU (например, 24.5)
-const ramPercent = window.chatty.getMemoryPercent(); // % загрузки RAM
-const ramUsed = window.chatty.getMemoryUsed();       // Использовано RAM в ГБ
-const ramTotal = window.chatty.getMemoryTotal();     // Всего RAM в ГБ
+// Подписка на изменение метрик системы (CPU, RAM, GPU, сеть)
+window.chatty.on('metrics', (metrics) => {
+    console.log('Загрузка CPU:', metrics.CpuPercent, 'GPU:', metrics.GpuPercent);
+});
 
-// Накопитель и сеть
-const diskPercent = window.chatty.getDiskPercent();  // % использования диска
-const diskFreeGb = window.chatty.getDiskFree();      // Свободно на диске в ГБ
-const netDown = window.chatty.getNetDownload();      // Скорость загрузки (КБ/с)
-const netUp = window.chatty.getNetUpload();          // Скорость отдачи (КБ/с)
+// Подписка на смену трека или статуса воспроизведения (GSMTC)
+window.chatty.on('media', (media) => {
+    console.log('Сейчас играет:', media.Title, media.Artist, media.IsPlaying);
+});
 
-// Получить все метрики одним JSON-объектом
-const metrics = JSON.parse(window.chatty.getSystemMetricsJson());
+// Подписка на изменение настроек пользователем в окне параметров
+window.chatty.on('settingsChanged', () => {
+    const settings = window.chatty.getSettings();
+});
+
+// Отписка
+const handler = window.chatty.on('metrics', (m) => { /* ... */ });
+window.chatty.off('metrics', handler);
 ```
 
-### 2. Мультимедиа (GSMTC Media API)
-Управление воспроизведением треков (Spotify, Яндекс.Музыка, браузеры, системные плееры):
-```javascript
-window.chatty.playPause();  // Пауза / Воспроизведение
-window.chatty.nextTrack();  // Следующий трек
-window.chatty.prevTrack();  // Предыдущий трек
+### 2. Мониторинг системы (Hardware & System API)
 
-// Получение информации о текущем треке
-const media = JSON.parse(window.chatty.getMediaJson());
-console.log(media.Title, media.Artist, media.IsPlaying);
+```javascript
+// Быстрый опрос перегрузки процессора и видеокарты
+const isOverloaded = window.chatty.isHardwareOverloaded(80.0); // true, если CPU >= 80% или GPU >= 80%
+const cpu = window.chatty.getCpu();                           // % загрузки CPU
+const cpuModel = window.chatty.getCpuModel();                 // Например: "Intel(R) Core(TM) i7-12700H"
+
+// Оперативная память и накопитель
+const ramPercent = window.chatty.getMemoryPercent();          // % загрузки RAM
+const ramUsed = window.chatty.getMemoryUsed();                // Использовано RAM в ГБ
+const ramTotal = window.chatty.getMemoryTotal();              // Всего RAM в ГБ
+const diskPercent = window.chatty.getDiskPercent();           // % использования диска
+const diskFree = window.chatty.getDiskFree();                 // Свободно на диске в ГБ
+
+// Видеокарта (GPU)
+const gpu = window.chatty.getGpuPercent();                    // % загрузки GPU
+const gpuName = window.chatty.getGpuName();                   // Имя адаптера (например: "NVIDIA GeForce RTX 4070")
+const gpuTemp = window.chatty.getGpuTemperature();            // Температура GPU в °C
+
+// Сеть
+const netDown = window.chatty.getNetDownload();               // Скорость загрузки (КБ/с)
+const netUp = window.chatty.getNetUpload();                   // Скорость отдачи (КБ/с)
+
+// Активность пользователя и ОС
+const idleSeconds = window.chatty.getUserIdleSeconds();       // Секунд с момента последнего ввода (мышь/клавиатура)
+const isIdle = window.chatty.isUserIdle(60.0);                // true, если пользователь бездействует > 60 сек
+const osVer = window.chatty.getOsVersion();                   // "Windows 11 (Build 22631)"
+const uptimeSec = window.chatty.getSystemUptimeSeconds();     // Время работы ПК в секундах
+
+// Получить все метрики системы в виде готового JS-объекта
+const metrics = window.chatty.getMetrics();
 ```
 
-### 3. Постоянное хранилище (Storage API)
-Данные в хранилище сохраняются навсегда между перезапусками приложения:
+### 3. Мультимедиа (GSMTC Media API)
+
+Управление воспроизведением треков (Spotify, Яндекс Музыка, VK Музыка, браузеры, системные плееры):
+
 ```javascript
-// Сохранить значение
-window.chatty.storageSet('myKey', 'Привет, мир!');
+// Проверка состояния
+const isPlaying = window.chatty.isMusicPlaying();             // true, если музыка воспроизводится
+const trackTitle = window.chatty.getTrackTitle();             // Название трека
+const trackArtist = window.chatty.getTrackArtist();           // Исполнитель
+const trackAlbum = window.chatty.getTrackAlbum();             // Альбом
+const thumbnail = window.chatty.getTrackThumbnail();          // Обложка трека (base64 data URI)
+const volume = window.chatty.getVolume();                     // Системная громкость (0-100)
 
-// Прочитать значение (с дефолтным fallback)
-const value = window.chatty.storageGet('myKey', 'По умолчанию');
+// Управление
+window.chatty.playPause();                                    // Пауза / Воспроизведение
+window.chatty.nextTrack();                                    // Следующий трек
+window.chatty.prevTrack();                                    // Предыдущий трек
+window.chatty.volumeUp();                                     // Увеличить громкость
+window.chatty.volumeDown();                                   // Уменьшить громкость
+window.chatty.mute();                                         // Заглушить / включить звук
 
-// Удалить значение
-window.chatty.storageRemove('myKey');
+// Получить полный объект текущего медиа
+const media = window.chatty.getMedia();
 ```
 
-### 4. Управление окном виджета
+### 4. Звуковые эффекты и голосовой синтез (SFX & Speech API)
+
 ```javascript
-window.chatty.showContextMenu();   // Программно открыть контекстное меню виджета
-window.chatty.closeWidget();        // Закрыть виджет
-window.chatty.resize(350, 250);     // Изменить размер виджета
-window.chatty.setLocked(true);      // Зафиксировать позицию
-window.chatty.setClickThrough(true);// Включить режим "Клик насквозь"
-window.chatty.setAutoHideDot(true); // Спрятать точку управления (показывать только при hover)
+// Воспроизведение системных звуков Windows или локального .wav файла
+window.chatty.beep();                                         // Системный звуковой сигнал (Beep)
+window.chatty.playSound("asterisk");                          // Системное уведомление (info)
+window.chatty.playSound("exclamation");                       // Предупреждение (warning)
+window.chatty.playSound("hand");                              // Звук ошибки (error)
+window.chatty.playSound("sounds/purr.wav");                   // Воспроизведение своего WAV-файла из папки виджета
+
+// Синтез речи (Text-to-Speech) через системный Windows SAPI voice
+window.chatty.ttsSpeak("Привет! Я ваш новый рабочий виджет.");
 ```
 
-### 5. Обработка пунктов контекстного меню
+### 5. Время и фазы суток (Time & Schedule API)
+
+```javascript
+// Проверка ночного режима (с 22:00 до 07:00)
+const isNight = window.chatty.isNightTime();
+
+// Полный объект времени
+const time = window.chatty.getTime();
+// time = { hour, minute, second, millisecond, day, month, year, dayOfWeek, dayName, isNightTime, timestamp, iso }
+```
+
+### 6. Управление окном, анимации и геометрия
+
+```javascript
+// Геометрия окна и экранов
+const bounds = window.chatty.getBounds();                     // { x, y, width, height }
+const screen = window.chatty.getScreen();                     // { primaryWidth, primaryHeight, currentWidth, currentHeight, workAreaWidth, workAreaHeight }
+
+// Эффекты и позиционирование
+window.chatty.shake(400);                                     // Тряска виджета (например, при клике или тревоге)
+window.chatty.centerOnScreen();                               // Центрировать виджет на текущем экране
+window.chatty.setPosition(100, 200);                          // Переместить окно по координатам
+window.chatty.resize(320, 240);                               // Изменить размер виджета
+window.chatty.dragMove();                                     // Начать перетаскивание окна мышью
+
+// Режимы окна
+window.chatty.setLocked(true);                                // Зафиксировать виджет от случайного перемещения
+window.chatty.setClickThrough(true);                          // Включить режим "Клик насквозь"
+window.chatty.setAutoHideDot(true);                           // Скрывать синюю точку управления (показывать только при hover)
+window.chatty.setOpacity(0.9);                                // Настроить прозрачность
+window.chatty.showContextMenu();                              // Открыть контекстное меню ChattyWidgets
+window.chatty.closeWidget();                                  // Закрыть виджет
+window.chatty.reload();                                       // Перезагрузить страницу виджета
+window.chatty.openDevTools();                                 // Открыть DevTools Chromium (F12)
+```
+
+### 7. Файловое хранилище данных (Data Storage & File I/O)
+
+Каждый экземпляр виджета изолирован и имеет безопасную постоянную директорию данных:
+
+```javascript
+// Быстрое сохранение ключ-значение
+window.chatty.storageSet('highScore', '1500');
+const score = window.chatty.storageGet('highScore', '0');
+window.chatty.storageRemove('highScore');
+const allStorage = window.chatty.getStorageAll();             // Все ключи хранилища в виде объекта
+window.chatty.storageClear();                                 // Очистить хранилище
+
+// Произвольные текстовые файлы (JSON, CSV, лог)
+window.chatty.writeDataText('pet_stats.json', JSON.stringify({ hunger: 85, energy: 90 }));
+const petStatsJson = window.chatty.readDataText('pet_stats.json', '{}');
+```
+
+### 8. Пользовательские параметры (Settings API)
+
+```javascript
+// Чтение и запись параметров из манифеста виджета
+const petType = window.chatty.getSetting('PetType');
+window.chatty.setSetting('PetType', 'cat');
+
+// Пакетное получение всех настроек в виде JS-объекта
+const allSettings = window.chatty.getSettings();
+```
+
+### 9. Системные утилиты и интеграция
+
+```javascript
+window.chatty.notify('Напоминание', 'Пора размяться!');        // Системный тост в трее Windows
+window.chatty.clipboardWrite('Скопированный текст');          // Запись в буфер обмена Windows
+const clip = window.chatty.clipboardRead();                   // Чтение из буфера обмена Windows
+const lang = window.chatty.getLanguage();                     // "ru" или "en"
+const isRu = window.chatty.isRussian();                       // true, если язык интерфейса русский
+const accent = window.chatty.getWindowsAccentColor();         // Акцентный цвет Windows (например: "#6366F1")
+const battery = window.chatty.getBatteryLevel();              // % заряда батареи (0-100)
+const isCharging = window.chatty.isBatteryCharging();         // true, если ноутбук на зарядке
+window.chatty.openUrl('https://github.com');                  // Открыть ссылку в браузере по умолчанию
+```
+
+### 10. Обработка пунктов контекстного меню
+
 Когда пользователь выбирает ваш кастомный пункт меню (из `menuItems` в манифесте), в окне вызывается событие:
 ```javascript
 window.addEventListener('chatty:menu', function(e) {

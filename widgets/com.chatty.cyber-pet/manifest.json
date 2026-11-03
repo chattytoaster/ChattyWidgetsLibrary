@@ -1,0 +1,74 @@
+{
+  "id": "com.chatty.cyber-pet",
+  "name": "Cyber-Pet",
+  "name_ru": "Кибер-Питомец",
+  "version": "1.0.0",
+  "author": "ChattyWidgets",
+  "authorGithub": "chattytoaster",
+  "description": "Interactive animated pixel companion (Capybara, Pixel Cat, Cyber Bot) that reacts to CPU/GPU load, dances to music, sleeps at night, and loves being petted.",
+  "description_ru": "Живой анимированный пиксельный питомец (Капибара, Пиксельный Котик, Кибер-Бот): реагирует на нагрузку CPU/GPU, качает головой под музыку, засыпает ночью и реагирует на ласку.",
+  "category": "fun",
+  "type": "native",
+  "entry": "Widget.xaml",
+  "icon": "icon.png",
+  "defaultWidth": 320,
+  "defaultHeight": 240,
+  "minWidth": 240,
+  "minHeight": 180,
+  "resizable": true,
+  "defaultLayer": "desktop",
+  "clickThrough": false,
+  "permissions": [
+    "system",
+    "media"
+  ],
+  "customSettings": {
+    "petType": "capybara",
+    "petName": "Капи",
+    "autoSleep": "true",
+    "showStats": "true"
+  },
+  "settingsSchema": [
+    {
+      "key": "petType",
+      "type": "select",
+      "title": "Pet Character",
+      "title_ru": "Персонаж питомца",
+      "description": "Choose your desktop companion",
+      "description_ru": "Выберите персонажа: Капибара, Котик или Кибер-Бот",
+      "default": "capybara",
+      "options": [
+        { "value": "capybara", "label": "Capybara (Капибара)" },
+        { "value": "cat", "label": "Pixel Cat (Пиксельный Котик)" },
+        { "value": "bot", "label": "Cyber Bot (Кибер-Бот)" }
+      ]
+    },
+    {
+      "key": "petName",
+      "type": "string",
+      "title": "Pet Name",
+      "title_ru": "Имя питомца",
+      "description": "Give your companion a custom name",
+      "description_ru": "Задайте кличку вашему питомцу",
+      "default": "Капи"
+    },
+    {
+      "key": "autoSleep",
+      "type": "boolean",
+      "title": "Night Sleep Mode (23:00 - 07:00)",
+      "title_ru": "Ночной режим сна (23:00 - 07:00)",
+      "description": "Pet goes to sleep automatically during the night",
+      "description_ru": "Питомец автоматически засыпает на ночь",
+      "default": "true"
+    },
+    {
+      "key": "showStats",
+      "type": "boolean",
+      "title": "Show Hardware Info",
+      "title_ru": "Показывать инфо о нагрузке железа",
+      "description": "Display CPU & GPU workload badge in the header",
+      "description_ru": "Отображать компактный бейдж нагрузки CPU и GPU",
+      "default": "true"
+    }
+  ]
+}

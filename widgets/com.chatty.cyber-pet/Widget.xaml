@@ -1,0 +1,272 @@
+<Border xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:ChattyWidgets.UI.Controls;assembly=ChattyWidgets"
+        Background="#D8101420"
+        BorderBrush="#25FFFFFF"
+        BorderThickness="1"
+        CornerRadius="20"
+        ClipToBounds="True">
+
+    <Grid>
+        <!-- Background Night Sky (Stars & Moon) -->
+        <Canvas Visibility="{Binding NightSkyVisibility, FallbackValue=Collapsed}" IsHitTestVisible="False">
+            <Ellipse Canvas.Left="260" Canvas.Top="20" Width="4" Height="4" Fill="#80FFFFFF"/>
+            <Ellipse Canvas.Left="285" Canvas.Top="45" Width="2" Height="2" Fill="#50FFFFFF"/>
+            <Ellipse Canvas.Left="40" Canvas.Top="50" Width="3" Height="3" Fill="#60FFFFFF"/>
+            <Ellipse Canvas.Left="90" Canvas.Top="25" Width="2" Height="2" Fill="#40FFFFFF"/>
+            <Ellipse Canvas.Left="160" Canvas.Top="35" Width="3" Height="3" Fill="#70FFFFFF"/>
+            <Ellipse Canvas.Left="210" Canvas.Top="60" Width="2" Height="2" Fill="#50FFFFFF"/>
+            <TextBlock Canvas.Right="20" Canvas.Top="16" Text="🌙" FontSize="14" Opacity="0.8"/>
+        </Canvas>
+
+        <!-- Main Content Grid -->
+        <Grid Margin="14,12,14,12">
+            <Grid.RowDefinitions>
+                <!-- Row 0: Header with Name, State Pill, Hardware Badge, Quick Actions -->
+                <RowDefinition Height="Auto"/>
+                <!-- Row 1: Status & Dialogue Marquee Banner -->
+                <RowDefinition Height="Auto"/>
+                <!-- Row 2: Living Room / Cyber Playground Stage -->
+                <RowDefinition Height="*"/>
+                <!-- Row 3: Bottom Stats & Care Dock -->
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 1. Header Bar -->
+            <Grid Grid.Row="0" Margin="0,0,0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left: Pet Name & State Pill -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding PetDisplayName, FallbackValue='Капи'}"
+                               FontWeight="Bold" FontSize="13" Foreground="#F8FAFC"
+                               VerticalAlignment="Center" Margin="0,0,8,0"/>
+
+                    <!-- State Pill Badge -->
+                    <Border CornerRadius="8" Padding="6,2" VerticalAlignment="Center"
+                            Background="#2238BDF8" BorderBrush="#4038BDF8" BorderThickness="1">
+                        <TextBlock Text="{Binding PetStateBadge, FallbackValue='✨ Active'}"
+                                   FontSize="10" FontWeight="SemiBold" Foreground="#38BDF8"/>
+                    </Border>
+                </StackPanel>
+
+                <!-- Right: Hardware Load Badge, Sleep Toggle & Pet Switch -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <!-- Hardware Load Badge (CPU/GPU) -->
+                    <Border Visibility="{Binding StatsVisibility, FallbackValue=Visible}"
+                            CornerRadius="8" Padding="6,2" Margin="0,0,6,0"
+                            Background="#18FFFFFF" BorderBrush="#20FFFFFF" BorderThickness="1"
+                            ToolTip="Нагрузка процессора и видеокарты">
+                        <TextBlock Text="{Binding HardwareBadgeText, FallbackValue='CPU 15% | GPU 22%'}"
+                                   FontSize="10" Foreground="#CBD5E1"/>
+                    </Border>
+
+                    <!-- Toggle Sleep Button -->
+                    <Button Command="{Binding ToggleSleepCommand}" Width="24" Height="24" Margin="0,0,4,0"
+                            Cursor="Hand" ToolTip="Переключить режим сна / бодрствования">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="bd" CornerRadius="6" Background="#15FFFFFF" BorderBrush="#20FFFFFF" BorderThickness="1">
+                                    <TextBlock Text="💤" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="bd" Property="Background" Value="#3038BDF8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Switch Pet Type Button -->
+                    <Button Command="{Binding SwitchPetTypeCommand}" Width="24" Height="24"
+                            Cursor="Hand" ToolTip="Сменить персонажа (Капибара / Котик / Кибер-Бот)">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="bd" CornerRadius="6" Background="#15FFFFFF" BorderBrush="#20FFFFFF" BorderThickness="1">
+                                    <TextBlock Text="🔄" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="bd" Property="Background" Value="#3038BDF8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- 2. Status & Dialogue Banner -->
+            <Border Grid.Row="1" CornerRadius="8" Background="#12FFFFFF" BorderBrush="#15FFFFFF" BorderThickness="1"
+                    Padding="8,4" Margin="0,0,0,6" ClipToBounds="True">
+                <TextBlock Text="{Binding StatusText, FallbackValue='Исследует рабочий стол...'}"
+                           FontSize="11" Foreground="#94A3B8" FontWeight="Medium"
+                           controls:MarqueeBehavior.EnableMarquee="True"/>
+            </Border>
+
+            <!-- 3. Living Room Playground Stage (Strictly Clipped with Centered Transforms) -->
+            <Grid Grid.Row="2" ClipToBounds="True" Margin="0,0,0,4">
+                <!-- Cyber Floor Line -->
+                <Border VerticalAlignment="Bottom" Height="2" Margin="16,0,16,4"
+                        Background="#2538BDF8" CornerRadius="1"/>
+
+                <!-- Interactive Pet Character Container (Click to Pet) -->
+                <!-- RenderTransformOrigin="0.5, 0.5" ensures flipping left/right rotates around sprite center without escaping borders! -->
+                <Button Command="{Binding PetCommand}" Cursor="Hand"
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,4"
+                        RenderTransformOrigin="0.5, 0.5">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="Transparent" Width="100" Height="104" RenderTransformOrigin="0.5, 0.5">
+                                <Grid.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="{Binding PetPositionX, FallbackValue=0}"/>
+                                        <ScaleTransform ScaleX="{Binding PetScaleX, FallbackValue=1.0}"/>
+                                    </TransformGroup>
+                                </Grid.RenderTransform>
+
+                                <!-- Floating Action Speech Bubble -->
+                                <Border Visibility="{Binding BubbleVisibility, FallbackValue=Collapsed}"
+                                        HorizontalAlignment="Center" VerticalAlignment="Top"
+                                        Margin="0,0,0,0" CornerRadius="8" Padding="8,3"
+                                        Background="#F8FAFC" BorderBrush="#CBD5E1" BorderThickness="1">
+                                    <TextBlock Text="{Binding ActionBubbleText, FallbackValue='❤️ Мурр!'}"
+                                               FontSize="10" FontWeight="Bold" Foreground="#0F172A"/>
+                                </Border>
+
+                                <!-- Floating Heart Reactions (Petting) -->
+                                <Canvas Visibility="{Binding PettingVisibility, FallbackValue=Collapsed}"
+                                        Width="100" Height="104" IsHitTestVisible="False">
+                                    <TextBlock Text="❤️" FontSize="14" Canvas.Left="15" Canvas.Top="14">
+                                        <TextBlock.RenderTransform>
+                                            <TranslateTransform Y="{Binding HeartBobOffset, FallbackValue=-5}"/>
+                                        </TextBlock.RenderTransform>
+                                    </TextBlock>
+                                    <TextBlock Text="💕" FontSize="16" Canvas.Right="15" Canvas.Top="10">
+                                        <TextBlock.RenderTransform>
+                                            <TranslateTransform Y="{Binding HeartBobOffset, FallbackValue=-5}"/>
+                                        </TextBlock.RenderTransform>
+                                    </TextBlock>
+                                </Canvas>
+
+                                <!-- Floating Food Snack (Feeding) -->
+                                <Canvas Visibility="{Binding FeedingVisibility, FallbackValue=Collapsed}"
+                                        Width="100" Height="104" IsHitTestVisible="False">
+                                    <TextBlock Text="{Binding FeedItemEmoji, FallbackValue='🍎'}" FontSize="18"
+                                               Canvas.Left="8" Canvas.Top="42">
+                                        <TextBlock.RenderTransform>
+                                            <TranslateTransform Y="{Binding HeadBobOffset, FallbackValue=0}"/>
+                                        </TextBlock.RenderTransform>
+                                    </TextBlock>
+                                </Canvas>
+
+                                <!-- Crisp Retro Pixel Art Character Sprite (Scaled 3x with Nearest Neighbor) -->
+                                <Image Source="{Binding CurrentSprite}"
+                                       Width="96" Height="96"
+                                       RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                       SnapsToDevicePixels="True"
+                                       UseLayoutRounding="True"
+                                       Stretch="Uniform"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Bottom"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+            <!-- 4. Bottom Care Stats & Action Dock -->
+            <Grid Grid.Row="3" Margin="0,4,0,0">
+                <Grid.ColumnDefinitions>
+                    <!-- Column 0: Care Bars (Happiness & Energy) -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Column 1: Action Buttons Dock -->
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left: Care Bars -->
+                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
+                    <!-- Happiness Bar -->
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="💖" FontSize="10" Margin="0,0,4,0"/>
+                        <ProgressBar Grid.Column="1" Value="{Binding Happiness, FallbackValue=85}"
+                                     Minimum="0" Maximum="100" Height="5" VerticalAlignment="Center"
+                                     Foreground="#EC4899" Background="#20EC4899" BorderThickness="0"/>
+                        <TextBlock Grid.Column="2" Text="{Binding HappinessDisplay, FallbackValue='85%'}"
+                                   FontSize="9" FontWeight="Bold" Foreground="#EC4899" Margin="6,0,0,0"/>
+                    </Grid>
+
+                    <!-- Energy Bar -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="⚡" FontSize="10" Margin="0,0,4,0"/>
+                        <ProgressBar Grid.Column="1" Value="{Binding Energy, FallbackValue=90}"
+                                     Minimum="0" Maximum="100" Height="5" VerticalAlignment="Center"
+                                     Foreground="#38BDF8" Background="#2038BDF8" BorderThickness="0"/>
+                        <TextBlock Grid.Column="2" Text="{Binding EnergyDisplay, FallbackValue='90%'}"
+                                   FontSize="9" FontWeight="Bold" Foreground="#38BDF8" Margin="6,0,0,0"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- Right: Action Buttons Dock -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <!-- Pet Button -->
+                    <Button Command="{Binding PetCommand}" Height="28" Padding="8,0" Margin="0,0,6,0" Cursor="Hand"
+                            ToolTip="Погладить питомца">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="bd" CornerRadius="8" Background="#18EC4899" BorderBrush="#35EC4899" BorderThickness="1">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="🐾" FontSize="11" Margin="0,0,4,0"/>
+                                        <TextBlock Text="Ласка" FontSize="11" FontWeight="SemiBold" Foreground="#F472B6"/>
+                                    </StackPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="bd" Property="Background" Value="#35EC4899"/>
+                                        <Setter TargetName="bd" Property="BorderBrush" Value="#80EC4899"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Feed Button -->
+                    <Button Command="{Binding FeedCommand}" Height="28" Padding="8,0" Cursor="Hand"
+                            ToolTip="Покормить питомца">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="bd" CornerRadius="8" Background="#1838BDF8" BorderBrush="#3538BDF8" BorderThickness="1">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Text="🍎" FontSize="11" Margin="0,0,4,0"/>
+                                        <TextBlock Text="Еда" FontSize="11" FontWeight="SemiBold" Foreground="#38BDF8"/>
+                                    </StackPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="bd" Property="Background" Value="#3538BDF8"/>
+                                        <Setter TargetName="bd" Property="BorderBrush" Value="#8038BDF8"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Border>
